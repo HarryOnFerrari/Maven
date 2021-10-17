@@ -27,40 +27,42 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
-            SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
-            message.setChatId(update.getMessage().getChatId().toString());
-            // setChatId - id клиента, обратившегося к боту
-            //message.setText(update.getMessage().getText());
-            //message.setText("Хорошего дня, реальный кабан!");
-
             switch (update.getMessage().getText()){
                 case ("/start"):
-                    message.setText("Привет, работяга!");
+                    setMessage(update.getMessage().getChatId(),
+                            "Привет, работяга!");
                     break;
 
                 case ("/test"):
-                    message.setText("И тут начинаются тесты");
+                    Test.makeTest(update);
                     break;
 
                 case ("/help"):
-                    message.setText(HELP);
+                    setMessage(update.getMessage().getChatId(), HELP);
                     break;
 
                 case ("/stop"):
-                    message.setText("Эта функция будет реализована в будущих версиях :)))");
+                    setMessage(update.getMessage().getChatId(),
+                            "Эта функция будет реализована в будущих версиях :)))");
                     break;
 
                 default:
-                    message.setText("Такой команды пока не существует, или Вы допустили ошибку в написании. " +
+                    setMessage(update.getMessage().getChatId(),
+                            "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
                             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                     break;
             }
+        }
+    }
 
-            try {
-                execute(message); // Call method to send the message
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+    public void setMessage(Long chatId, String text){
+        SendMessage message = new SendMessage();
+        message.setChatId(chatId.toString());
+        message.setText(text);
+        try {
+            execute(message); // Call method to send the message
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 }
