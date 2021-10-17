@@ -4,6 +4,10 @@ import java.io.*;
 import java.util.Scanner;
 
 public class Testing {
+    public boolean cheakNull(String s){
+        return s == null;
+    }
+
     public void makeTest() {
         try {
             File file = new File("Tests.txt");
@@ -22,10 +26,24 @@ public class Testing {
                     if (line == null) break;
                     System.out.println(line);
                     stroka = s.next();
-                    if (stroka.equals(reader.readLine()))
+                    if (stroka.equals(reader.readLine())) {
                         System.out.println("Верно!!!");
-                    else
+                        if (cheakNull(reader.readLine())){
+                            System.out.println("Вопросов больше нет");
+                            break;
+                        }
+                    }
+                    else {
                         System.out.println("Ошибка");
+                        if (cheakNull(reader.readLine())){
+                            System.out.println("Вопросов больше нет");
+                            break;
+                        }
+                    }
+                    stroka = s.next();
+                    if (line != null && stroka.equals("/next")) {
+                        continue;
+                    }
                 }
                 catch (IOException e) {
                     e.printStackTrace();
