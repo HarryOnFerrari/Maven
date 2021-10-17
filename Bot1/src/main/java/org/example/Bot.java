@@ -8,8 +8,9 @@ public class Bot {
         File file = new File("Tests.txt");
         Scanner s = new Scanner(System.in);
         String stroka = s.next();
-        while (stroka != "/stop"){
-            switch (stroka.toString()){
+        while (true){
+            if (stroka.equals("/stop")) break;
+            switch (stroka){
                 case("/start"):
                     System.out.println("Hello, I am Bot, if you want to get information go to /help");
                     break;
@@ -18,7 +19,6 @@ public class Bot {
                                         "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
                                         "Просто используй: \n" +
                                         "/test - для запуска теста \n" +
-                                        "/next - для перехода к следующему вопросу \n" +
                                         "/stop - для завершения работы");
                     break;
                 case("/test"):
