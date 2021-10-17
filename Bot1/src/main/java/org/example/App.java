@@ -1,12 +1,17 @@
 package org.example;
 
 /**
- * Hello world!
- *
+ * Запуск бота.
+ * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class App 
 {
-    public static void main( String[] args )
+    /**
+     * Основной метод запуска.
+     * @see Bot#run()
+     * @params args Параметры командной строки
+     */
+    public static void main(String[] args)
     {
         Bot bot = new Bot();
         bot.run();

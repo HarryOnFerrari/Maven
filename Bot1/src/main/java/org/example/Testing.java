@@ -3,47 +3,67 @@ package org.example;
 import java.io.*;
 import java.util.Scanner;
 
+/**
+ * Класс Бота, который создает тесты для пользователя.
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class Testing {
-    public boolean cheakNull(String s){
+    /**
+     * Метод проверяет, является ли строка пустой.
+     * @param s Это входящая строка.
+     * @return истину, если строка пустая и наоборот.
+     */
+    public boolean checkNull(String s){
         return s == null;
     }
 
+    /**
+     * Метод читает вопрос из файла Tests.txt, запрашивает ответ пользователя и сравнивает его с верным ответом.
+     * В случае совпадения, оценивает ответ пользователя как верный и наоборот.
+     *
+     * По команде /stop или если в файле Tests.txt закончились вопросы возвращается в класс Bot
+     *
+     * @exception FileNotFoundException
+     * @exception IOException
+     */
     public void makeTest() {
         try {
             File file = new File("Tests.txt");
             //создаем объект FileReader для объекта File
-            FileReader fr = new FileReader(file);
+            FileReader filereader = new FileReader(file);
             //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(fr);
-            // считаем сначала первую строку
+            BufferedReader reader = new BufferedReader(filereader);
             String line;
-            Scanner s = new Scanner(System.in);
-            String stroka ="";
+            Scanner console = new Scanner(System.in);
+            String commandLine ="";
             while (true){
-                if (stroka.equals("/stop")) break;
+                if (commandLine.equals("/stop")) {
+                    System.out.println("Вы вышли из режима /test");
+                    break;
+                }
                 try {
                     line = reader.readLine();
                     if (line == null) break;
                     System.out.println(line);
-                    stroka = s.next();
-                    if (stroka.equals(reader.readLine())) {
+                    commandLine = console.next();
+                    if (commandLine.equals(reader.readLine())) {
                         System.out.println("Верно!!!");
-                        if (cheakNull(reader.readLine())){
+                        if (checkNull(reader.readLine())){
                             System.out.println("Вопросов больше нет");
                             break;
                         }
                     }
                     else {
                         System.out.println("Ошибка");
-                        if (cheakNull(reader.readLine())){
+                        if (checkNull(reader.readLine())){
                             System.out.println("Вопросов больше нет");
                             break;
                         }
                     }
-                    stroka = s.next();
-                    if (line != null && stroka.equals("/next")) {
+                    commandLine = console.next();
+                    if (line != null & commandLine.equals("/next"))
                         continue;
-                    }
                 }
                 catch (IOException e) {
                     e.printStackTrace();
