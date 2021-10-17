@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 public class Bot {
     public void run(){
-        File file = new File("Tests.txt");
         Scanner s = new Scanner(System.in);
         String stroka = s.next();
         while (true){
@@ -22,7 +21,8 @@ public class Bot {
                                         "/stop - для завершения работы");
                     break;
                 case("/test"):
-                    System.out.println("Test");
+                    Testing test = new Testing();
+                    test.makeTest();
                     break;
                 default:
                     System.out.println("Такой команды пока не существует, или Вы допустили ошибку в написании. " +
@@ -32,4 +32,6 @@ public class Bot {
             stroka = s.next();
         }
     }
+
+
 }
