@@ -2,8 +2,15 @@ package org.example;
 
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Chat;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import java.nio.file.Files;
+
+import java.io.IOException;
+import java.io.*;
+import java.nio.file.Path;
+import java.util.List;
 
 public class Bot extends TelegramLongPollingBot {
 
@@ -25,7 +32,7 @@ public class Bot extends TelegramLongPollingBot {
     }
 
     @Override
-    public void onUpdateReceived(Update update) {
+    public void onUpdateReceived(Update update){
         if (update.hasMessage() && update.getMessage().hasText()) {
             SendMessage message = new SendMessage(); // Create a SendMessage object with mandatory fields
             message.setChatId(update.getMessage().getChatId().toString());
@@ -40,6 +47,19 @@ public class Bot extends TelegramLongPollingBot {
 
                 case ("/test"):
                     message.setText("И тут начинаются тесты");
+                    Testing test = new Testing();
+                    //test.makeTest(update);
+                    try {
+                        Path path = Path.of("C:\\Users\\Даша\\Desktop\\BOT\\Maven\\src\\main\\java\\org\\example\\Tests.txt");
+                        List<String> list = Files.readAllLines(path);
+
+                        for (String str : list) {
+                            message.setText(str);
+                        }
+                    }
+                    catch (IOException e) {
+                        e.printStackTrace();
+                    }
                     break;
 
                 case ("/help"):
