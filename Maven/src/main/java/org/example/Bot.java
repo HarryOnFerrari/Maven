@@ -52,10 +52,10 @@ public class Bot extends TelegramLongPollingBot {
                     try {
                         Path path = Path.of("C:\\Users\\Даша\\Desktop\\BOT\\Maven\\src\\main\\java\\org\\example\\Tests.txt");
                         List<String> list = Files.readAllLines(path);
-
-                        for (String str : list) {
-                            message.setText(str);
-                        }
+                        String stroka = "";
+                        for (int i=0; i<list.size();i++)
+                            stroka += list.get(i) +"\n";
+                        message.setText(stroka);
                     }
                     catch (IOException e) {
                         e.printStackTrace();
