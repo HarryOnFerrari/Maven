@@ -47,7 +47,7 @@ public class Testing {
                     if (line == null) break;
                     System.out.println(line);
                     commandLine = console.next();
-                    if (commandLine.equals(reader.readLine())) {
+                    if (commandLine.equalsIgnoreCase(reader.readLine())) {
                         System.out.println("Верно!!!");
                         if (checkNull(reader.readLine())){
                             System.out.println("Вопросов больше нет");
