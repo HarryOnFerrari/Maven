@@ -2,12 +2,12 @@
 Пользователь отправляет первое сообщение командой /start. Бот приветствует пользователя и ждёт следующей команды. 
 Когда поступает команда /test, то бот задаёт вопрос и ожидает ответа. Далее, когда ответ от пользователя получен, то со стороны бота приходит его оценка (верно/неверно)
 
-Пример: \n
-User: /start
-Bot: Hello!
-User: /test
-Bot: *some question*
-User: *answer*
-Bot: Good job! 
-Или 
-Bot: Wrong answer.
+Пример:  
+User: /start  
+Bot: Hello!  
+User: /test  
+Bot: *some question*  
+User: *answer*  
+Bot: Good job!   
+Или   
+Bot: Wrong answer.  
