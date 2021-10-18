@@ -5,10 +5,10 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.example</groupId>
-  <artifactId>Maven</artifactId>
+  <artifactId>BotConsole</artifactId>
   <version>1.0-SNAPSHOT</version>
 
-  <name>Maven</name>
+  <name>BotConsole</name>
   <!-- FIXME change it to the project's website -->
   <url>http://www.example.com</url>
 
@@ -24,11 +24,6 @@
       <artifactId>junit</artifactId>
       <version>4.11</version>
       <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.telegram</groupId>
-      <artifactId>telegrambots</artifactId>
-      <version>5.3.0</version>
     </dependency>
   </dependencies>
 
@@ -76,15 +71,5 @@
         </plugin>
       </plugins>
     </pluginManagement>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <configuration>
-          <source>10</source>
-          <target>10</target>
-        </configuration>
-      </plugin>
-    </plugins>
   </build>
 </project>
