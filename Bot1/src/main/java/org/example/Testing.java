@@ -32,42 +32,41 @@ public class Testing {
      * @exception FileNotFoundException
      * @exception IOException
      */
-    public void makeTest() {
+    public void makeTest(Scanner input, PrintStream output) {
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
             Queue queue = fileResourcesUtils.read_files();
             Iterator iterator = queue.iterator();
             String line;
-            Scanner console = new Scanner(System.in);
             String commandLine ="";
             while (iterator.hasNext()){
                 if (commandLine.equals("/stop")) {
-                    System.out.println("Вы вышли из режима /test");
+                    output.println("Вы вышли из режима /test");
                     break;
                 }
                 line = iterator.next().toString();
                 if (line == null) break;
-                System.out.println(line);
-                commandLine = console.next();
+                output.println(line);
+                commandLine = input.next();
                 if (commandLine.equalsIgnoreCase(iterator.next().toString())) {
-                    System.out.println("Верно!!!");
+                    output.println("Верно!!!");
                     if (!iterator.hasNext()){
-                        System.out.println("Вопросов больше нет");
+                        output.println("Вопросов больше нет");
                         break;
                     }
                 }
                 else {
-                    System.out.println("Ошибка");
+                    output.println("Ошибка");
                     if (!iterator.hasNext()){
-                        System.out.println("Вопросов больше нет");
+                        output.println("Вопросов больше нет");
                         break;
                     }
                 }
-                commandLine = console.next();
+                commandLine = input.next();
                 if (line != null & commandLine.equals("/next"))
                     continue;
                 else
-                    System.out.println("Введена неверная команда");
+                    output.println("Введена неверная команда");
             }
         } catch (IOException e) {
             e.printStackTrace();
