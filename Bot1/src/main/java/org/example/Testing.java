@@ -1,6 +1,11 @@
 package org.example;
 
+import org.example.utils.FileResourcesUtils;
+
 import java.io.*;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -29,48 +34,45 @@ public class Testing {
      */
     public void makeTest() {
         try {
-            File file = new File("src/main/resources/Tests.txt");
-            //создаем объект FileReader для объекта File
-            FileReader filereader = new FileReader(file);
-            //создаем BufferedReader с существующего FileReader для построчного считывания
-            BufferedReader reader = new BufferedReader(filereader);
+            FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
+            Queue queue = fileResourcesUtils.read_files();
+            Iterator iterator = queue.iterator();
             String line;
             Scanner console = new Scanner(System.in);
             String commandLine ="";
-            while (true){
+            while (iterator.hasNext()){
                 if (commandLine.equals("/stop")) {
                     System.out.println("Вы вышли из режима /test");
                     break;
                 }
-                try {
-                    line = reader.readLine();
-                    if (line == null) break;
-                    System.out.println(line);
-                    commandLine = console.next();
-                    if (commandLine.equalsIgnoreCase(reader.readLine())) {
-                        System.out.println("Верно!!!");
-                        if (checkNull(reader.readLine())){
-                            System.out.println("Вопросов больше нет");
-                            break;
-                        }
+                line = iterator.next().toString();
+                if (line == null) break;
+                System.out.println(line);
+                commandLine = console.next();
+                if (commandLine.equalsIgnoreCase(iterator.next().toString())) {
+                    System.out.println("Верно!!!");
+                    if (!iterator.hasNext()){
+                        System.out.println("Вопросов больше нет");
+                        break;
                     }
-                    else {
-                        System.out.println("Ошибка");
-                        if (checkNull(reader.readLine())){
-                            System.out.println("Вопросов больше нет");
-                            break;
-                        }
+                }
+                else {
+                    System.out.println("Ошибка");
+                    if (!iterator.hasNext()){
+                        System.out.println("Вопросов больше нет");
+                        break;
                     }
-                    commandLine = console.next();
-                    if (line != null & commandLine.equals("/next"))
-                        continue;
                 }
-                catch (IOException e) {
-                    e.printStackTrace();
-                }
+                commandLine = console.next();
+                if (line != null & commandLine.equals("/next"))
+                    continue;
+                else
+                    System.out.println("Введена неверная команда");
             }
         }
         catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
             e.printStackTrace();
         }
     }
