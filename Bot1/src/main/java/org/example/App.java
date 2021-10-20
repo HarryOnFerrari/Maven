@@ -8,12 +8,12 @@ public class App
 {
     /**
      * Основной метод запуска.
-     * @see Bot#run()
+     * @see ConsoleBot#run()
      * @params args Параметры командной строки
      */
     public static void main(String[] args)
     {
-        Bot bot = new Bot();
-        bot.run();
+        ConsoleBot consoleBot = new ConsoleBot();
+        consoleBot.run();
     }
 }

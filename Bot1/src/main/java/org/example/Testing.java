@@ -29,7 +29,7 @@ public class Testing {
      */
     public void makeTest() {
         try {
-            File file = new File("Tests.txt");
+            File file = new File("src/main/resources/Tests.txt");
             //создаем объект FileReader для объекта File
             FileReader filereader = new FileReader(file);
             //создаем BufferedReader с существующего FileReader для построчного считывания
