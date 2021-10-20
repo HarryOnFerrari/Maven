@@ -33,7 +33,7 @@ public class ConsoleBot {
                     break;
                 case("/test"):
                     Testing test = new Testing();
-                    test.makeTest();
+                    test.makeTest(new Scanner(System.in), System.out);
                     break;
                 default:
                     System.out.println("Такой команды пока не существует, или Вы допустили ошибку в написании. " +

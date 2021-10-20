@@ -27,7 +27,7 @@ public class Testing {
      * @exception FileNotFoundException
      * @exception IOException
      */
-    public void makeTest() {
+    public void makeTest(Scanner input, PrintStream output) {
         try {
             File file = new File("src/main/resources/Tests.txt");
             //создаем объект FileReader для объекта File
@@ -35,33 +35,33 @@ public class Testing {
             //создаем BufferedReader с существующего FileReader для построчного считывания
             BufferedReader reader = new BufferedReader(filereader);
             String line;
-            Scanner console = new Scanner(System.in);
+            //Scanner console = new Scanner(System.in);
             String commandLine ="";
             while (true){
                 if (commandLine.equals("/stop")) {
-                    System.out.println("Вы вышли из режима /test");
+                    output.println("Вы вышли из режима /test");
                     break;
                 }
                 try {
                     line = reader.readLine();
                     if (line == null) break;
-                    System.out.println(line);
-                    commandLine = console.next();
+                    output.println(line);
+                    commandLine = input.next();
                     if (commandLine.equalsIgnoreCase(reader.readLine())) {
-                        System.out.println("Верно!!!");
+                        output.println("Верно!!!");
                         if (checkNull(reader.readLine())){
-                            System.out.println("Вопросов больше нет");
+                            output.println("Вопросов больше нет");
                             break;
                         }
                     }
                     else {
-                        System.out.println("Ошибка");
+                        output.println("Ошибка");
                         if (checkNull(reader.readLine())){
-                            System.out.println("Вопросов больше нет");
+                            output.println("Вопросов больше нет");
                             break;
                         }
                     }
-                    commandLine = console.next();
+                    commandLine = input.next();
                     if (line != null & commandLine.equals("/next"))
                         continue;
                 }
