@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.utils.FileResourcesUtils;
+
 import java.io.*;
 import java.util.Iterator;
 import java.util.List;
@@ -67,9 +69,6 @@ public class Testing {
                 else
                     System.out.println("Введена неверная команда");
             }
-        }
-        catch (FileNotFoundException e) {
-            e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();
         }
