@@ -13,7 +13,7 @@ import java.util.Queue;
  */
 public class FileResourcesUtils {
     /*
-     *
+     * Конструктор считывающий содержание файла
      */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Tests.txt");
