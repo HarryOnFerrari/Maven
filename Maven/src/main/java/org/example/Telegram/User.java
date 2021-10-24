@@ -1,4 +1,4 @@
-package org.example;
+package Telegram;
 
 public class User {
 
