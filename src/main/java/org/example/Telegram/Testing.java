@@ -1,4 +1,4 @@
-package org.example.Telegram;
+package Telegram;
 
 import java.io.*;
 import java.util.Iterator;
