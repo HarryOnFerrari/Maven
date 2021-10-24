@@ -9,7 +9,7 @@ import java.util.Queue;
 
 /**
  * Чтение файла.
- * @author 
+ * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
     /*
