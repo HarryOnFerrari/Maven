@@ -1,3 +1,2 @@
 .idea/
-/Bot1/target/
-target/
+target/**
