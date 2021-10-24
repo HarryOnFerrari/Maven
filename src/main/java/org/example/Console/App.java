@@ -1,4 +1,4 @@
-package org.example.Console;
+package Console;
 
 /**
  * Запуск бота.
