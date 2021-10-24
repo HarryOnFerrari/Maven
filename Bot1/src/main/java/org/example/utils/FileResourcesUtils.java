@@ -7,10 +7,22 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.Queue;
 
+/**
+ * Чтение файла.
+ * @author 
+ */
 public class FileResourcesUtils {
+    /*
+     *
+     */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Tests.txt");
-
+    
+    /**
+     * Чтение файла и добавление полученных строк в очередь
+     *
+     * @exception IOException
+     */
     public Queue read_files() throws IOException {
         BufferedReader br = null;
         Queue queue = new LinkedList();
