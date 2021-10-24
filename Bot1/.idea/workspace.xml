@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="6172fe20-675a-4afd-9b7d-5d207a79b7cc" name="Changes" comment="Тесты заработали">
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/ConsoleBot.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/ConsoleBot.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/org/example/Testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/org/example/Testing.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/org/example/TestingTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/org/example/TestingTest.java" afterDir="false" />
-    </list>
+    <list default="true" id="6172fe20-675a-4afd-9b7d-5d207a79b7cc" name="Changes" comment="gitignore update" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -119,6 +114,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Тесты заработали" />
