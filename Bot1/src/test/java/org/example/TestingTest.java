@@ -5,6 +5,7 @@ import static org.junit.Assert.assertEquals;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 /**
  * junit тестирование класса Testing
@@ -31,8 +32,8 @@ public class TestingTest {
         }
         str += "/stop";
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
-        System.setIn(in);
-        test.makeTest();
+        //System.setIn(in);
+        test.makeTest(new Scanner(in), new PrintStream(outContent));
         String[] result = outContent.toString().split("\n");
         assertEquals("Вопросов больше нет\r", result[result.length-1]);
         System.setOut(null);
@@ -47,13 +48,13 @@ public class TestingTest {
     public void checkRegister()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
+        //System.setOut(new PrintStream(outContent));
         Testing test = new Testing();
         ByteArrayInputStream in = new ByteArrayInputStream("Да /stop".getBytes());
-        System.setIn(in);
-        test.makeTest();
+        //System.setIn(in);
+        test.makeTest(new Scanner(in), new PrintStream(outContent));
         assertEquals("Верно!!!\r", outContent.toString().split("\n")[1]);
-        System.setOut(null);
+        //System.setOut(null);
     }
 }
 
