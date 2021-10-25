@@ -32,8 +32,8 @@ public class Testing {
     }
 
     /**
-     * Функция получения значения поля {@link Testing#size}
-     * @return возвращает текущий размер очереди вопросов
+     * Функция получения значения поля {@link Testing#answer}
+     * @return возвращает ответ на текущий вопрос теста
      */
     public String getAnswer(){
         return answer;
