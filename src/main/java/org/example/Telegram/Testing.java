@@ -19,13 +19,22 @@ public class Testing {
     private Queue<String> queue;
     /** Поле размер очереди */
     private Integer size = 0;
+    /** Поле правильного ответа на текущий вопрос */
+    private String answer;
 
     /**
      * Функция получения значения поля {@link Testing#size}
-     * @return возвращает название производителя
+     * @return возвращает текущий размер очереди
      */
     public Integer getSize(){
         return size;
+    }
+    /**
+     * Функция получения значения поля {@link Testing#answer}
+     * @return возвращает правильный ответ на последний просмотренный вопрос
+     */
+    public String getAnswer() {
+        return answer;
     }
 
     /**
@@ -43,8 +52,14 @@ public class Testing {
         size = queue.size();
     }
 
+    /**
+     * Функция для построчной отпраки вопросов пользователю
+     * @return возвращает строку с новым вопросом
+     */
     public String newLine(){
         size--;
-        return queue.poll();
+        String question = queue.poll();
+        answer = queue.poll();
+        return question;
     }
 }

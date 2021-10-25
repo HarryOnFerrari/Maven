@@ -107,7 +107,7 @@ public class Bot extends TelegramLongPollingBot {
                             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
         }
         else {
-            if (update.getMessage().getText().equalsIgnoreCase(user.testes.newLine())){
+            if (update.getMessage().getText().equalsIgnoreCase(user.testes.getAnswer())){
                 setMessage(user.chatId, "Правильный ответ!");
             }
             else {
