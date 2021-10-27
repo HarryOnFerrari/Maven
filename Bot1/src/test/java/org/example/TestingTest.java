@@ -35,7 +35,6 @@ public class TestingTest {
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         String[] result = outContent.toString().split("\n");
         assertEquals("Вопросов больше нет\r", result[result.length-1]);
-        System.setOut(null);
     }
 
     /**
