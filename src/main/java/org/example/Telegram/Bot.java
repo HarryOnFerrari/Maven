@@ -22,7 +22,7 @@ public class Bot extends TelegramLongPollingBot {
             "/stop - для завершения работы";
 
     /** Поле списка пользователей */
-    private HashMap<Long, User> users = new HashMap<>(); // поменять object
+    private HashMap<Long, User> users = new HashMap<>();
 
     /**
      * Функция получения значения пользовательского имени бота.
@@ -60,7 +60,6 @@ public class Bot extends TelegramLongPollingBot {
                 case ("/test"):
                     User newUser = new User(update.getMessage().getChatId());
                     newUser.setCondition("/test");
-                    // в будущем добавить проверку на наличие в мапе, пока пофиг
                     users.put(newUser.chatId, newUser);
                     setMessage(newUser.chatId, newUser.testes.newLine());
                     break;
@@ -126,7 +125,7 @@ public class Bot extends TelegramLongPollingBot {
         message.setChatId(chatId.toString());
         message.setText(text);
         try {
-            execute(message); // Call method to send the message
+            execute(message);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
