@@ -18,15 +18,6 @@ import java.util.Scanner;
  */
 public class Testing {
     /**
-     * Метод проверяет, является ли строка пустой.
-     * @param s Это входящая строка.
-     * @return истину, если строка пустая и наоборот.
-     */
-    public boolean checkNull(String s){
-        return s == null;
-    }
-
-    /**
      * Метод читает вопрос из файла Tests.txt, запрашивает ответ пользователя и сравнивает его с верным ответом.
      * В случае совпадения, оценивает ответ пользователя как верный и наоборот.
      *
@@ -38,10 +29,10 @@ public class Testing {
     public void makeTest(Scanner input, PrintStream output) {
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            LinkedList<String> queue = fileResourcesUtils.read_files();
+            LinkedList<String> list = fileResourcesUtils.readFiles();
             String line;
             String commandLine ="/next";
-            while (queue.size() != 0){
+            while (list.size() != 0){
                 if (commandLine.equals("/stop")) {
                     output.println("Вы вышли из режима /test");
                     break;
@@ -53,20 +44,20 @@ public class Testing {
                     commandLine = input.next();
                     continue;
                 }
-                line = queue.pollFirst();
+                line = list.pollFirst();
                 if (line == null) break;
                 output.println(line);
                 commandLine = input.next();
                 if (commandLine.equalsIgnoreCase(queue.pollFirst())) {
                     output.println("Верно!!!");
-                    if (queue.size() == 0){
+                    if (list.size() == 0){
                         output.println("Вопросов больше нет");
                         break;
                     }
                 }
                 else {
                     output.println("Ошибка");
-                    if (queue.size() == 0){
+                    if (list.size() == 0){
                         output.println("Вопросов больше нет");
                         break;
                     }
