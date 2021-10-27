@@ -23,7 +23,7 @@ public class FileResourcesUtils {
      *
      * @exception IOException
      */
-    public LinkedList<String> read_files() throws IOException {
+    public LinkedList<String> readFiles() throws IOException {
         BufferedReader br = null;
         LinkedList<String> list = new LinkedList<>();
         try {
