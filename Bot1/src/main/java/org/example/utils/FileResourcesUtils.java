@@ -23,9 +23,9 @@ public class FileResourcesUtils {
      *
      * @exception IOException
      */
-    public Queue read_files() throws IOException {
+    public LinkedList<String> read_files() throws IOException {
         BufferedReader br = null;
-        Queue queue = new LinkedList();
+        LinkedList<String> queue = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
             String str = null;

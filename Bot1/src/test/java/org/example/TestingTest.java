@@ -26,16 +26,13 @@ public class TestingTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         Testing test = new Testing();
         String str = "";
-        for (Integer i=0; i<10; i++){
-            if (i%2 == 1) str += " /next";
-            else str += "answer";
+        for (Integer i=0; i<20; i++){
+            str += "/next ";
         }
-        str += "/stop";
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         String[] result = outContent.toString().split("\n");
         assertEquals("Вопросов больше нет\r", result[result.length-1]);
-        System.setOut(null);
     }
 
     /**

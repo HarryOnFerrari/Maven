@@ -7,6 +7,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Scanner;
 
@@ -37,38 +38,40 @@ public class Testing {
     public void makeTest(Scanner input, PrintStream output) {
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            Queue queue = fileResourcesUtils.read_files();
-            Iterator iterator = queue.iterator();
+            LinkedList<String> queue = fileResourcesUtils.read_files();
             String line;
-            String commandLine ="";
-            while (iterator.hasNext()){
+            String commandLine ="/next";
+            while (queue.size() != 0){
                 if (commandLine.equals("/stop")) {
                     output.println("Вы вышли из режима /test");
                     break;
                 }
-                line = iterator.next().toString();
+                if (!commandLine.equals("/next")){
+                    output.println("Введена неверная команда. В режиме /test доступны следующие команды:\n" +
+                            "/next - перейти к следующему вопросу\n" +
+                            "/stop - выйти из режима тестирования");
+                    commandLine = input.next();
+                    continue;
+                }
+                line = queue.pollFirst();
                 if (line == null) break;
                 output.println(line);
                 commandLine = input.next();
-                if (commandLine.equalsIgnoreCase(iterator.next().toString())) {
+                if (commandLine.equalsIgnoreCase(queue.pollFirst())) {
                     output.println("Верно!!!");
-                    if (!iterator.hasNext()){
+                    if (queue.size() == 0){
                         output.println("Вопросов больше нет");
                         break;
                     }
                 }
                 else {
                     output.println("Ошибка");
-                    if (!iterator.hasNext()){
+                    if (queue.size() == 0){
                         output.println("Вопросов больше нет");
                         break;
                     }
                 }
                 commandLine = input.next();
-                if (line != null & commandLine.equals("/next"))
-                    continue;
-                else
-                    output.println("Введена неверная команда");
             }
         } catch (IOException e) {
             e.printStackTrace();
