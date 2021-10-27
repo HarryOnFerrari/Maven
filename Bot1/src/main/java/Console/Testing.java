@@ -48,7 +48,7 @@ public class Testing {
                 if (line == null) break;
                 output.println(line);
                 commandLine = input.next();
-                if (commandLine.equalsIgnoreCase(queue.pollFirst())) {
+                if (commandLine.equalsIgnoreCase(list.pollFirst())) {
                     output.println("Верно!!!");
                     if (list.size() == 0){
                         output.println("Вопросов больше нет");
