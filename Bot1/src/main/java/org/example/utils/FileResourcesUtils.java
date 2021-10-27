@@ -12,7 +12,7 @@ import java.util.Queue;
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
-    /*
+    /**
      * Конструктор считывающий содержание файла
      */
     public final InputStream INPUTSTREAM = this.getClass()
@@ -23,14 +23,14 @@ public class FileResourcesUtils {
      *
      * @exception IOException
      */
-    public Queue read_files() throws IOException {
+    public LinkedList<String> read_files() throws IOException {
         BufferedReader br = null;
-        Queue queue = new LinkedList();
+        LinkedList<String> list = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
             String str = null;
             while ((str = br.readLine()) != null) {
-                queue.add(str);
+                list.add(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +43,6 @@ public class FileResourcesUtils {
                 e.printStackTrace();
             }
         }
-        return queue;
+        return list;
     }
 }
