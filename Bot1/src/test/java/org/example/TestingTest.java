@@ -24,7 +24,6 @@ public class TestingTest {
     public void repeatingTests()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
         Testing test = new Testing();
         String str = "";
         for (Integer i=0; i<10; i++){
@@ -33,7 +32,6 @@ public class TestingTest {
         }
         str += "/stop";
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
-        //System.setIn(in);
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         String[] result = outContent.toString().split("\n");
         assertEquals("Вопросов больше нет\r", result[result.length-1]);
@@ -49,13 +47,10 @@ public class TestingTest {
     public void checkRegister()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        //System.setOut(new PrintStream(outContent));
         Testing test = new Testing();
         ByteArrayInputStream in = new ByteArrayInputStream("Да /stop".getBytes());
-        //System.setIn(in);
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         assertEquals("Верно!!!\r", outContent.toString().split("\n")[1]);
-        //System.setOut(null);
     }
 }
 
