@@ -37,8 +37,8 @@ public class Testing {
     public void makeTest(Scanner input, PrintStream output) {
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            Queue queue = fileResourcesUtils.read_files();
-            Iterator iterator = queue.iterator();
+            LinkedList<String> list = fileResourcesUtils.read_files();
+            Iterator iterator = list.iterator();
             String line;
             String commandLine ="";
             while (iterator.hasNext()){
