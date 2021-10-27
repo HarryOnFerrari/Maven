@@ -25,12 +25,12 @@ public class FileResourcesUtils {
      */
     public LinkedList<String> read_files() throws IOException {
         BufferedReader br = null;
-        LinkedList<String> queue = new LinkedList<>();
+        LinkedList<String> list = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
             String str = null;
             while ((str = br.readLine()) != null) {
-                queue.add(str);
+                list.add(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +43,6 @@ public class FileResourcesUtils {
                 e.printStackTrace();
             }
         }
-        return queue;
+        return list;
     }
 }
