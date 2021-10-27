@@ -12,7 +12,7 @@ import java.util.Queue;
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
-    /*
+    /**
      * Конструктор считывающий содержание файла
      */
     public final InputStream INPUTSTREAM = this.getClass()
