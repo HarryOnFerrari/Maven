@@ -1,14 +1,12 @@
 package Console;
 
+import utils.FileHTMLUtils;
 import utils.FileResourcesUtils;
 
-import java.io.Console;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintStream;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 import java.util.Scanner;
 
 /**
@@ -27,45 +25,41 @@ public class Testing {
      * @exception IOException
      */
     public void makeTest(Scanner input, PrintStream output) {
-        try {
-            FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            LinkedList<String> list = fileResourcesUtils.readFiles();
-            String line;
-            String commandLine ="/next";
-            while (list.size() != 0){
-                if (commandLine.equals("/stop")) {
-                    output.println("Вы вышли из режима /test");
+        FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
+        LinkedList<String> list = fileHTMLUtils.makeList();
+        String line;
+        String commandLine ="/next";
+        while (list.size() != 0){
+            if (commandLine.equals("/stop")) {
+                output.println("Вы вышли из режима /test");
+                break;
+            }
+            if (!commandLine.equals("/next")){
+                output.println("Введена неверная команда. В режиме /test доступны следующие команды:\n" +
+                        "/next - перейти к следующему вопросу\n" +
+                        "/stop - выйти из режима тестирования");
+                commandLine = input.next();
+                continue;
+            }
+            line = list.pollFirst();
+            if (line == null) break;
+            output.println(line);
+            commandLine = input.next();
+            if (commandLine.equalsIgnoreCase(list.pollFirst())) {
+                output.println("Верно!!!");
+                if (list.size() == 0){
+                    output.println("Вопросов больше нет");
                     break;
                 }
-                if (!commandLine.equals("/next")){
-                    output.println("Введена неверная команда. В режиме /test доступны следующие команды:\n" +
-                            "/next - перейти к следующему вопросу\n" +
-                            "/stop - выйти из режима тестирования");
-                    commandLine = input.next();
-                    continue;
-                }
-                line = list.pollFirst();
-                if (line == null) break;
-                output.println(line);
-                commandLine = input.next();
-                if (commandLine.equalsIgnoreCase(list.pollFirst())) {
-                    output.println("Верно!!!");
-                    if (list.size() == 0){
-                        output.println("Вопросов больше нет");
-                        break;
-                    }
-                }
-                else {
-                    output.println("Ошибка");
-                    if (list.size() == 0){
-                        output.println("Вопросов больше нет");
-                        break;
-                    }
-                }
-                commandLine = input.next();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+            else {
+                output.println("Ошибка");
+                if (list.size() == 0){
+                    output.println("Вопросов больше нет");
+                    break;
+                }
+            }
+            commandLine = input.next();
         }
     }
 }

@@ -2,7 +2,6 @@ package Telegram;
 
 import java.io.*;
 import java.util.LinkedList;
-
 import utils.FileResourcesUtils;
 
 /**

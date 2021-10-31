@@ -19,6 +19,14 @@ public class User {
      */
     public void setCondition(String str){
         condition = str;
+        /*switch (str) {
+            case ("/repeat"):
+                User();
+            case ("/test"):
+                condition = str;
+            default:
+                return Error;
+        }*/
     }
 
     /**
