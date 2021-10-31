@@ -46,7 +46,7 @@ public class Testing {
     public Testing(){
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            queue = fileResourcesUtils.read_files();
+            queue = fileResourcesUtils.readFiles();
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -1,5 +1,7 @@
 package Console;
 
+import Console.Testing;
+
 import java.util.Scanner;
 
 /**
@@ -12,7 +14,7 @@ public class ConsoleBot {
      * Метод запускает бота.
      *
      * Прописаны действия бота при получении команд: /start, /help, /test и /stop.
-     * @see Testing# makeTest()
+     * @see Testing#makeTest()
      */
     public void run(){
         Scanner console = new Scanner(System.in);

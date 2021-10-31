@@ -5,15 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Чтение файла.
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
-    /*
-     *
+    /**
+     * Конструктор, считывающий содержание файла Tests.txt
      */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Tests.txt");
@@ -23,14 +22,14 @@ public class FileResourcesUtils {
      *
      * @exception IOException
      */
-    public Queue read_files() throws IOException {
+    public LinkedList<String> readFiles() throws IOException {
         BufferedReader br = null;
-        Queue queue = new LinkedList();
+        LinkedList<String> list = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
             String str = null;
             while ((str = br.readLine()) != null) {
-                queue.add(str);
+                list.add(str);
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -43,6 +42,6 @@ public class FileResourcesUtils {
                 e.printStackTrace();
             }
         }
-        return queue;
+        return list;
     }
 }
