@@ -1,7 +1,6 @@
 package Console;
 
 import utils.FileHTMLUtils;
-import utils.FileResourcesUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,6 +22,7 @@ public class Testing {
      *
      * @exception FileNotFoundException
      * @exception IOException
+     * @see FileHTMLUtils#makeList()
      */
     public void makeTest(Scanner input, PrintStream output) {
         FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();

@@ -1,6 +1,5 @@
 package Console;
 
-import utils.FileHTMLUtils;
 
 /**
  * Запуск бота.

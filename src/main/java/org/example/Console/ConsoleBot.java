@@ -1,6 +1,5 @@
 package Console;
 
-import Console.Testing;
 import java.util.Scanner;
 
 /**
