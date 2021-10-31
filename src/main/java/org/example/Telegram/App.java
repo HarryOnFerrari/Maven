@@ -17,7 +17,6 @@ public class App
      * @params args - параметры командной строки
      */
     public static void main( String[] args ){
-       // System.out.print("Hello dog");
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new Bot());

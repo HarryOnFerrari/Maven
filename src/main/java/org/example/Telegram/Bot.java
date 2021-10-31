@@ -114,7 +114,7 @@ public class Bot extends TelegramLongPollingBot {
             }
             else {
                 user.testes.saveQuestion();
-                setMessage(user.chatId, "Вы ошиблись");
+                setMessage(user.chatId, "Вы ошиблись, верный ответ: " + user.testes.getAnswer());
             }
         }
     }

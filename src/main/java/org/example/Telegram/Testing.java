@@ -75,7 +75,7 @@ public class Testing {
         }
         else if (wrongUsersList != null && !wrongUsersList.isEmpty()){
             question = wrongUsersList.keySet().iterator().next();
-            answer = wrongUsersList.get(answer);
+            answer = wrongUsersList.get(question);
             wrongUsersList.remove(question);
         }
         else
