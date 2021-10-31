@@ -3,7 +3,6 @@ package Telegram;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
-
 import utils.FileResourcesUtils;
 
 /**
@@ -56,6 +55,10 @@ public class Testing {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            if (!wrongList.isEmpty())
+                listQuestions.add("Вопросы закончились\n" +
+                        "Если хотите выйти из режима теста, введите /stop\n" +
+                        "Если хотите отработать вопросы с ошибкой, то введите /next");
         }
         size += (wrongList != null && !wrongList.isEmpty())? wrongList.size() : 0;
     }
@@ -67,7 +70,6 @@ public class Testing {
     public String newLine(){
         size--;
         if (listQuestions != null && !listQuestions.isEmpty()) {
-            size --;
             question = listQuestions.poll();
             answer = listQuestions.poll();
         }
