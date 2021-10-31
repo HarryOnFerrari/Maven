@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
-import java.util.Queue;
 
 /**
  * Чтение файла.
@@ -13,7 +12,7 @@ import java.util.Queue;
  */
 public class FileResourcesUtils {
     /**
-     * Конструктор считывающий содержание файла
+     * Конструктор, считывающий содержание файла Tests.txt
      */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Tests.txt");
