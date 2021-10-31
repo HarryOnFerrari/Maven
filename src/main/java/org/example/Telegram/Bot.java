@@ -49,35 +49,38 @@ public class Bot extends TelegramLongPollingBot {
     @Override
     public void onUpdateReceived(Update update) {
         if (update.hasMessage() && update.getMessage().hasText()) {
+            if (!users.containsKey(update.getMessage().getChatId()))
+                users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
+            User user = users.get(update.getMessage().getChatId());
             switch (update.getMessage().getText()){
                 case ("/start"):
-                    setMessage(update.getMessage().getChatId(),
+                    setMessage(user.chatId,
                             "Привет, работяга!");
                     break;
                 case ("/help"):
-                    setMessage(update.getMessage().getChatId(), HELP);
+                    setMessage(user.chatId, HELP);
                     break;
                 case ("/test"):
-                    User newUser = new User(update.getMessage().getChatId());
-                    newUser.setCondition("/test");
-                    users.put(newUser.chatId, newUser);
-                    setMessage(newUser.chatId, newUser.testes.newLine());
+                    user.setCondition("/test");
+                    setMessage(user.chatId, user.testes.newLine());
+                    break;
+                case ("/repeat"):
+                    user.setCondition("/repeat");
+                    setMessage(user.chatId, user.testes.newLine());
                     break;
                 case ("/next"):
-                     User user = users.get(update.getMessage().getChatId());
-                     if (user == null || !user.getCondition().equals("/test")){
-                         setMessage(update.getMessage().getChatId(),
+                     if (!user.getCondition().equals("/test")){
+                         setMessage(user.chatId,
                                  "Чтобы начать тестирование, отправьте /test");
                      }
                      else {
-                        setMessage(update.getMessage().getChatId(),
+                        setMessage(user.chatId,
                                 users.get(update.getMessage().getChatId()).testes.newLine());
                      }
                      break;
                 case ("/stop"):
-                    user = users.get(update.getMessage().getChatId());
-                    if (user == null || !user.getCondition().equals("/test")){
-                        setMessage(update.getMessage().getChatId(),
+                    if (!user.getCondition().equals("/test")){
+                        setMessage(user.chatId,
                                 "Вы не начинали тестирование. " +
                                         "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                     }
@@ -101,7 +104,7 @@ public class Bot extends TelegramLongPollingBot {
     void checkFalseCommand(Update update){
         User user = users.get(update.getMessage().getChatId());
         if (user == null){
-            setMessage(update.getMessage().getChatId(),
+            setMessage(user.chatId,
                     "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
                             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
         }
@@ -110,6 +113,7 @@ public class Bot extends TelegramLongPollingBot {
                 setMessage(user.chatId, "Правильный ответ!");
             }
             else {
+                user.testes.saveQuestion();
                 setMessage(user.chatId, "Вы ошиблись");
             }
         }
