@@ -1,14 +1,19 @@
 package utils;
 
-import com.google.common.base.Charsets;
-import com.google.common.io.Files;
-
 import java.io.*;
-import java.util.Arrays;
 import java.util.LinkedList;
-import java.util.regex.Pattern;
 
+/**
+ * Чтение файла из файла с расширением .html
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class FileHTMLUtils {
+    /**
+     * Добавление полученных строк в лист с обработкой от лишних символов
+     *
+     * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
+     */
     public LinkedList<String> makeList() {
         String content = "";
         try {
@@ -35,12 +40,11 @@ public class FileHTMLUtils {
                 indexStart++;
             }
         }
-        //System.out.println(list);
         return list;
     }
 
     /**
-     * Конструктор, считывающий содержание файла Tests.txt
+     * Конструктор, считывающий содержание файла Карточки БЖД 1 _ Quizlet.html
      */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Карточки БЖД 1 _ Quizlet.html");

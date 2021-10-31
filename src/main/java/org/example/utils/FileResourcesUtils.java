@@ -7,7 +7,8 @@ import java.io.InputStreamReader;
 import java.util.LinkedList;
 
 /**
- * Чтение файла.
+ * Чтение файла из файла с расширением .txt
+ *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
@@ -18,9 +19,10 @@ public class FileResourcesUtils {
             .getClassLoader().getResourceAsStream("Tests.txt");
     
     /**
-     * Чтение файла и добавление полученных строк в очередь
+     * Чтение файла и добавление полученных строк в лист
      *
      * @exception IOException
+     * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
      */
     public LinkedList<String> readFiles() throws IOException {
         BufferedReader br = null;
