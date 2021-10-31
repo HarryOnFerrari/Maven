@@ -1,11 +1,8 @@
 package Telegram;
 
 import java.io.*;
-import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.Queue;
 
-import org.telegram.telegrambots.meta.api.objects.Update;
 import utils.FileResourcesUtils;
 
 /**
@@ -16,7 +13,7 @@ import utils.FileResourcesUtils;
 public class Testing {
 
     /** Поле очередь */
-    private Queue<String> queue;
+    private LinkedList<String> listQuestions;
     /** Поле размер очереди */
     private Integer size = 0;
 
@@ -46,12 +43,12 @@ public class Testing {
     public Testing(){
         try {
             FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-            queue = fileResourcesUtils.readFiles();
+            listQuestions = fileResourcesUtils.readFiles();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        queue.add("Вопросов больше нет");
-        size = queue.size();
+        listQuestions.add("Вопросов больше нет");
+        size = listQuestions.size();
     }
 
     /**
@@ -60,8 +57,8 @@ public class Testing {
      */
     public String newLine(){
         size--;
-        String question = queue.poll();
-        answer = queue.poll();
+        String question = listQuestions.poll();
+        answer = listQuestions.poll();
         return  question;
     }
 }
