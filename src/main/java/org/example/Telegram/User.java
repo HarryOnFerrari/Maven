@@ -1,5 +1,7 @@
 package Telegram;
 
+import java.util.HashMap;
+
 /**
  * Класс бота для обозначения пользователя со свойствами <b>chatId</b>, <b>testes</b>, <b>condition</b>.
  * @author Пономарева Дарья, Бабакова Анастасия.
@@ -13,11 +15,22 @@ public class User {
     /** Поле состояния пользователя */
     private String condition;
 
+    private HashMap<String, String> wrongList;
+
     /**
      * Процедура определения состояния пользователя {@link User#condition}
      * @param str - состояние
      */
     public void setCondition(String str){
+        switch (str) {
+            case ("/test"):
+                testes = new Testing(true, wrongList);
+                break;
+            case ("/repeat"):
+                testes = new Testing(false, wrongList);
+                str = "/test";
+                break;
+        }
         condition = str;
         /*switch (str) {
             case ("/repeat"):
@@ -46,7 +59,8 @@ public class User {
      */
     public User(Long chatId){
         this.chatId = chatId;
-        testes = new Testing();
+        wrongList = new HashMap<>();
+        condition = "";
     }
 
     /**
