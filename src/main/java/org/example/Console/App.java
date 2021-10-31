@@ -1,5 +1,7 @@
 package Console;
 
+import utils.FileHTMLUtils;
+
 /**
  * Запуск бота.
  * @author Бабакова Анастасия, Пономарева Дарья

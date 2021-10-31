@@ -32,6 +32,14 @@ public class User {
                 break;
         }
         condition = str;
+        /*switch (str) {
+            case ("/repeat"):
+                User();
+            case ("/test"):
+                condition = str;
+            default:
+                return Error;
+        }*/
     }
 
     /**
