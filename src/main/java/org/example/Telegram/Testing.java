@@ -3,6 +3,7 @@ package Telegram;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+
 import utils.FileResourcesUtils;
 
 /**
@@ -17,7 +18,7 @@ public class Testing {
     /** Поле вопросов, на которые пользователь ответил неправильно */
     private HashMap<String, String> wrongUsersList;
     /** Поле размер очереди */
-    private Integer size = 0;
+    private Integer size = 1;
 
     /** Поле правильного ответа на текущий вопрос теста */
     private String answer;
@@ -51,16 +52,12 @@ public class Testing {
             try {
                 FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
                 listQuestions = fileResourcesUtils.readFiles();
-                size = listQuestions.size();
+                size += listQuestions.size();
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            if (!wrongList.isEmpty())
-                listQuestions.add("Вопросы закончились\n" +
-                        "Если хотите выйти из режима теста, введите /stop\n" +
-                        "Если хотите отработать вопросы с ошибкой, то введите /next");
         }
-        size += wrongUsersList.size();
+        size += (wrongList != null && !wrongList.isEmpty())? wrongList.size() : 0;
     }
 
     /**
@@ -70,19 +67,31 @@ public class Testing {
     public String newLine(){
         size--;
         if (listQuestions != null && !listQuestions.isEmpty()) {
+            size --;
             question = listQuestions.poll();
             answer = listQuestions.poll();
         }
         else if (wrongUsersList != null && !wrongUsersList.isEmpty()){
-            question = wrongUsersList.keySet().iterator().next();
-            answer = wrongUsersList.get(answer);
-            wrongUsersList.remove(question);
+            if (size == 0){
+                question = "Вопросы закончились\n" +
+                        "Если хотите выйти из режима теста, введите /stop\n" +
+                        "Если хотите отработать вопросы с ошибкой, то введите /next";
+                size = wrongUsersList.size() + 1;
+            }
+            else {
+                question = wrongUsersList.keySet().iterator().next();
+                answer = wrongUsersList.get(question);
+                wrongUsersList.remove(question);
+            }
         }
         else
             question = "Вопросов нет.";
         return  question;
     }
 
+    /**
+     * Функция для сохранения вопроса и ответа на него
+     */
     public void saveQuestion(){
         wrongUsersList.put(question, answer);
     }
