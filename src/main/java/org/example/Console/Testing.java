@@ -22,11 +22,11 @@ public class Testing {
      *
      * @exception FileNotFoundException
      * @exception IOException
-     * @see FileHTMLUtils#makeList()
+     * @see FileHTMLUtils#makeListQuestions()
      */
     public void makeTest(Scanner input, PrintStream output) {
         FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
-        LinkedList<String> list = fileHTMLUtils.makeList();
+        LinkedList<String> list = fileHTMLUtils.makeListQuestions();
         String line;
         String commandLine ="/next";
         while (list.size() != 0){
