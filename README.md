@@ -8,8 +8,8 @@
 User: /start  
 Bot: Hello!  
 User: /test  
-Bot: [some question]
-User: *answer*  
+Bot: [some question]  
+User: [answer]    
 Bot: Good job!   
 Или   
 Bot: Wrong answer.  
@@ -22,34 +22,34 @@ Bot: Wrong answer.
 Пример 1. Допустим, в тесте 2 вопроса, тогда
 
 User: /test  
-Bot: *question1*  
-User: *wrong answer*  
-Bot: Ошибка, верный ответ: *верный ответ*  
+Bot: [question1]    
+User: [wrong answer]    
+Bot: Ошибка, верный ответ: [верный ответ]    
 User: /next  
-Bot: *question2*  
-User: *right answer*  
+Bot: [question2]    
+User: [right answer]    
 Bot: Верно!  
 Bot: Вопросы закончились, если хотите выйти из режима теста введите /stop, иначе если хотите отработать вопросы с ошибкой, то введите /next  
 User: /next  
-Bot: *question1*  
+Bot: [question1]    
 
-User: *right answer*  
-Bot: Верно! *вопрос удаляется из списка ошибочных*  
+User: [right answer]    
+Bot: Верно! [вопрос удаляется из списка ошибочных]    
 or  
-User: *wrong answer*  
-Bot: Ошибка! *оставляет вопрос в списке ошибочных*  
+User: [wrong answer]    
+Bot: Ошибка! [оставляет вопрос в списке ошибочных]    
 
 Если пользователь после прохождения теста совершил ошибки и вышел из режима тестирования командой /stop, а позже решил отработать вопросы с ошибкой, то:  
 
 Пример 2  
 User: /repeat  
-Bot: *answer1*  
+Bot: [answer1]    
 
-User: *right answer*  
-Bot: Верно! *вопрос удаляется из списка ошибочных*  
+User: [right answer]    
+Bot: Верно! [вопрос удаляется из списка ошибочных]    
 or  
-User: *wrong answer*  
-Bot: Ошибка! *оставляет вопрос в списке ошибочных*  
+User: [wrong answer]    
+Bot: Ошибка! [оставляет вопрос в списке ошибочных]    
 
 Если при прохождении теста пользователем не было совершено ошибок или тест ещё не был пройден, то:  
 
