@@ -1,5 +1,5 @@
 package org.example;
-import Console.Testing;
+import org.example.Console.Testing;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -20,7 +20,7 @@ public class TestingTest {
      * @result По завершению списка вопросов пользователь получает сообщение,
      *         ошибок не возникает.
      */
-    /*@Test
+    @Test
     public void repeatingTests()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -36,14 +36,14 @@ public class TestingTest {
         String[] result = outContent.toString().split("\n");
         assertEquals("Вопросов больше нет\r", result[result.length-1]);
         System.setOut(null);
-    }*/
+    }
 
     /**
      * Проверка на то, что правильный ответ будет принят с любым регистром написания.
      *
      * @result Корректная оценка ботом ответа пользователя.
      */
-    /*@Test
+    @Test
     public void checkRegister()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
@@ -51,5 +51,5 @@ public class TestingTest {
         ByteArrayInputStream in = new ByteArrayInputStream("ПрОсТоЙ /stop".getBytes());
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         assertEquals("Верно!!!\r", outContent.toString().split("\n")[1]);
-    }*/
+    }
 }

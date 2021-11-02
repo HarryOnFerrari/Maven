@@ -1,4 +1,4 @@
-package Console;
+package org.example.Console;
 
 import utils.FileHTMLUtils;
 
@@ -41,11 +41,11 @@ public class Testing {
                 commandLine = input.next();
                 continue;
             }
-            line = list.pollFirst();
+            line = list.remove();
             if (line == null) break;
-            output.println(line);
+            output.println("Переведите на русский: " + line);
             commandLine = input.next();
-            if (commandLine.equalsIgnoreCase(list.pollFirst())) {
+            if (commandLine.equalsIgnoreCase(list.remove())) {
                 output.println("Верно!!!");
                 if (list.size() == 0){
                     output.println("Вопросов больше нет");
