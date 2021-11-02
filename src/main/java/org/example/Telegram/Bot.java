@@ -5,6 +5,7 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 
@@ -40,7 +41,19 @@ public class Bot extends TelegramLongPollingBot {
      */
     @Override
     public String getBotToken() {
-        return "2079838287:AAEdcvZtKJc8_zF2Ej8YJa94IDVuXAs25zY";
+        String token = null;
+        Properties prop = new Properties();
+        try {
+            //load a properties file from class path, inside static method
+            prop.load(Bot.class.getClassLoader().getResourceAsStream("config.properties"));
+
+            //get the property value and print it out
+            token = prop.getProperty("token");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return token;
     }
 
     /**
