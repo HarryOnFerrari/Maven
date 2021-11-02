@@ -24,7 +24,7 @@ public class FileHTMLUtils {
         LinkedList<String> list = new LinkedList<>();
         String start = "\"TermText notranslate lang-ru\">";
         String end = "</span>";
-        long endOfTheEnd = content.indexOf("Отобразить больше",0);
+        long endOfTheEnd = content.indexOf("Модули из той же папки",0);
         int indexStart = content.indexOf(start, 0);
         int indexEnd = content.indexOf(end, indexStart);
         while (indexStart != -1){
@@ -47,7 +47,7 @@ public class FileHTMLUtils {
      * Конструктор, считывающий содержание файла Карточки БЖД 1 _ Quizlet.html
      */
     public final InputStream INPUTSTREAM = this.getClass()
-            .getClassLoader().getResourceAsStream("Карточки БЖД 1 _ Quizlet.html");
+            .getClassLoader().getResourceAsStream("Карточки английский _ Quizlet.html");
 
     /**
      * Чтение файла в формат String

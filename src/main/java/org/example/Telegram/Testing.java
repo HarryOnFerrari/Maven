@@ -3,6 +3,8 @@ package Telegram;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+
+import utils.FileHTMLUtils;
 import utils.FileResourcesUtils;
 
 /**
@@ -48,13 +50,9 @@ public class Testing {
     public Testing(Boolean flag, HashMap<String, String> wrongList){
         wrongUsersList = wrongList;
         if (flag){
-            try {
-                FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
-                listQuestions = fileResourcesUtils.readFiles();
-                size += listQuestions.size();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
+            listQuestions = fileHTMLUtils.makeList();
+            size += listQuestions.size();
             if (!wrongList.isEmpty())
                 listQuestions.add("Вопросы закончились\n" +
                         "Если хотите выйти из режима теста, введите /stop\n" +
@@ -70,8 +68,8 @@ public class Testing {
     public String newLine(){
         size--;
         if (listQuestions != null && !listQuestions.isEmpty()) {
-            question = listQuestions.poll();
-            answer = listQuestions.poll();
+            question = "Переведите на русский: " + listQuestions.remove();
+            answer = listQuestions.remove();
         }
         else if (wrongUsersList != null && !wrongUsersList.isEmpty()){
             if (size == 0){
