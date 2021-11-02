@@ -8,7 +8,7 @@
 User: /start  
 Bot: Hello!  
 User: /test  
-Bot: *some question*  
+Bot: [some question]
 User: *answer*  
 Bot: Good job!   
 Или   
