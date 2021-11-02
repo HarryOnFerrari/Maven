@@ -43,7 +43,7 @@ public class Testing {
             }
             line = list.pollFirst();
             if (line == null) break;
-            output.println(line);
+            output.println("Переведите на русский: " + line);
             commandLine = input.next();
             if (commandLine.equalsIgnoreCase(list.pollFirst())) {
                 output.println("Верно!!!");
