@@ -1,6 +1,6 @@
 package org.example.Console;
 
-import utils.FileHTMLUtils;
+import org.example.utils.FileHTMLUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;

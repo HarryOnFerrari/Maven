@@ -1,10 +1,11 @@
-package Telegram;
+package org.example.Telegram;
 
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
 
-import utils.FileHTMLUtils;
+import org.example.utils.FileHTMLUtils;
+
 
 /**
  * Класс Бота, который формирует тесты для пользователя.
