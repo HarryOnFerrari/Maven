@@ -38,11 +38,11 @@ public class BotTest {
         update.setMessage(message);
         Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
         bot.onUpdateReceived(update);
-        /**
+        /*
         Mockito.when(message.getText()).thenReturn("Я уеду жить в Лондон");
         update.setMessage(message);
         bot.onUpdateReceived(update); **/ // это можно было бы использовать, чтоб заполнить мап с неправильными ответами
-        for (Integer i=0; i<6; i++){
+        for (Integer i=0; i<149; i++){
             bot.onUpdateReceived(update);
         }
         Mockito.verify(bot).setMessage(chatId, "Вопросов нет."); // сама цель теста

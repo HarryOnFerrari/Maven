@@ -25,10 +25,10 @@ public class TestingTest {
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         Testing test = new Testing();
-        String str = "";
-        for (Integer i=0; i<50; i++){
+        String str = "answer";
+        for (Integer i=1; i<298; i++){
             if (i%2 == 1) str += " /next";
-            else str += "answer";
+            else str += " answer";
         }
         str += "/stop";
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
@@ -48,7 +48,7 @@ public class TestingTest {
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         Testing test = new Testing();
-        ByteArrayInputStream in = new ByteArrayInputStream("Да /stop".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("ПрОсТоЙ /stop".getBytes());
         test.makeTest(new Scanner(in), new PrintStream(outContent));
         assertEquals("Верно!!!\r", outContent.toString().split("\n")[1]);
     }
