@@ -7,17 +7,30 @@ import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
-import java.io.IOException;
-
+/**
+ * junit тестирование класса Bot
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class BotTest {
+    /** Поле mock бота */
     private Bot bot;
+    /** Поле id чата */
     private Long chatId = 138239293L;
 
+    /**
+     * Инициализация нового бота
+     */
     @BeforeEach
     public void init(){
         bot = Mockito.spy(new Bot());
     }
 
+    /**
+     * Проверка бота на получение update
+     *
+     * @result Сообщения новых пользователей принимаются корректно
+     */
     @Test
     public void checkMessage(){
         Update startUpdate = new Update();
@@ -28,6 +41,11 @@ public class BotTest {
         bot.onUpdateReceived(startUpdate);
     }
 
+    /**
+     * Проверка оповещения о завершении тестирования
+     *
+     * @result Выводится сообщение об отсутствии вопросов к тестированию
+     */
     @Test
     public void checkMessageAfterTest(){
         Update update = new Update();
@@ -38,10 +56,6 @@ public class BotTest {
         update.setMessage(message);
         Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
         bot.onUpdateReceived(update);
-        /*
-        Mockito.when(message.getText()).thenReturn("Я уеду жить в Лондон");
-        update.setMessage(message);
-        bot.onUpdateReceived(update); **/ // это можно было бы использовать, чтоб заполнить мап с неправильными ответами
         for (Integer i=0; i<149; i++){
             bot.onUpdateReceived(update);
         }
