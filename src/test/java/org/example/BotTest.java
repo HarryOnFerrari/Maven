@@ -36,6 +36,7 @@ public class BotTest {
         Mockito.when(message.getChatId()).thenReturn(chatId);
         Mockito.when(message.getText()).thenReturn("/test").thenReturn("/next");
         update.setMessage(message);
+        Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
         bot.onUpdateReceived(update);
         /**
         Mockito.when(message.getText()).thenReturn("Я уеду жить в Лондон");
