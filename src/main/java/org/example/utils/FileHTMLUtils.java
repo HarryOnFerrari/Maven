@@ -4,7 +4,7 @@ import java.io.*;
 import java.util.LinkedList;
 
 /**
- * Чтение файла из файла с расширением .html
+ * Чтение из ресурсов файла с расширением .html
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
@@ -14,7 +14,7 @@ public class FileHTMLUtils {
      *
      * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
      */
-    public LinkedList<String> makeList() {
+    public LinkedList<String> makeListQuestions() {
         String content = "";
         try {
             content = readFiles();
@@ -44,7 +44,7 @@ public class FileHTMLUtils {
     }
 
     /**
-     * Конструктор, считывающий содержание файла Карточки БЖД 1 _ Quizlet.html
+     * Конструктор, считывающий содержание файла Карточки английский _ Quizlet.html
      */
     public final InputStream INPUTSTREAM = this.getClass()
             .getClassLoader().getResourceAsStream("Карточки английский _ Quizlet.html");

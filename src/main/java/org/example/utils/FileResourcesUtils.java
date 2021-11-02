@@ -24,7 +24,7 @@ public class FileResourcesUtils {
      * @exception IOException
      * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
      */
-    public LinkedList<String> readFiles() throws IOException {
+    public LinkedList<String> makeListQuestions() {
         BufferedReader br = null;
         LinkedList<String> list = new LinkedList<>();
         try {

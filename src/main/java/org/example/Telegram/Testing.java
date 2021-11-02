@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 
 import utils.FileHTMLUtils;
-import utils.FileResourcesUtils;
 
 /**
  * Класс Бота, который формирует тесты для пользователя.
@@ -51,7 +50,7 @@ public class Testing {
         wrongUsersList = wrongList;
         if (flag){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
-            listQuestions = fileHTMLUtils.makeList();
+            listQuestions = fileHTMLUtils.makeListQuestions();
             size += listQuestions.size();
             if (!wrongList.isEmpty())
                 listQuestions.add("Вопросы закончились\n" +
