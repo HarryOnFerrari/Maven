@@ -44,10 +44,7 @@ public class Bot extends TelegramLongPollingBot {
         String token = null;
         Properties prop = new Properties();
         try {
-            //load a properties file from class path, inside static method
             prop.load(Bot.class.getClassLoader().getResourceAsStream("config.properties"));
-
-            //get the property value and print it out
             token = prop.getProperty("token");
         }
         catch (IOException ex) {
