@@ -1,5 +1,4 @@
 package org.example;
-import org.example.Telegram.Bot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
@@ -11,9 +10,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class BotTest {
+public class TelegramBotTest {
     /** Поле mock бота */
-    private Bot bot;
+    private TelegramBot bot;
     /** Поле id чата */
     private Long chatId = 138239293L;
 
@@ -22,7 +21,7 @@ public class BotTest {
      */
     @BeforeEach
     public void init(){
-        bot = Mockito.spy(new Bot());
+        bot = Mockito.spy(new TelegramBot());
     }
 
     /**
