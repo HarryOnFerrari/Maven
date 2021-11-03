@@ -2,3 +2,4 @@
 target/**
 /Maven.iml
 config.properties
+src/main/resources/config.properties
