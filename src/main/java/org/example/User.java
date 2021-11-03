@@ -1,4 +1,4 @@
-package  org.example.Telegram;
+package org.example;
 
 import java.util.HashMap;
 

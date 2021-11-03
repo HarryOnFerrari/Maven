@@ -1,5 +1,4 @@
 package org.example;
-import org.example.Console.Testing;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
@@ -9,11 +8,11 @@ import java.io.PrintStream;
 import java.util.Scanner;
 
 /**
- * junit тестирование класса Testing
+ * junit тестирование класса ConsoleBot
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class TestingTest {
+public class ConsoleBotTest {
     /**
      * Проверка бота на корректный выход из режима тестов.
      *
@@ -24,17 +23,16 @@ public class TestingTest {
     public void repeatingTests()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        Testing test = new Testing();
-        String str = "answer";
-        for (Integer i=1; i<298; i++){
-            if (i%2 == 1) str += " /next";
-            else str += " answer";
+        String str = "/test";
+        for (Integer i=0; i<=149; i++){
+            str += "\n/next";
         }
-        str += "/stop";
+        //str += "/stop";
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
-        test.makeTest(new Scanner(in), new PrintStream(outContent));
-        String[] result = outContent.toString().split("\n");
-        assertEquals("Вопросов больше нет\r", result[result.length-1]);
+        ConsoleBot bot = new ConsoleBot(new Scanner(in), new PrintStream(outContent));
+        bot.run();
+        String[] result = outContent.toString().split("\r\n");
+        assertEquals("Вопросов нет.", result[result.length-1]);
         System.setOut(null);
     }
 
@@ -47,9 +45,9 @@ public class TestingTest {
     public void checkRegister()
     {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        Testing test = new Testing();
-        ByteArrayInputStream in = new ByteArrayInputStream("ПрОсТоЙ /stop".getBytes());
-        test.makeTest(new Scanner(in), new PrintStream(outContent));
-        assertEquals("Верно!!!\r", outContent.toString().split("\n")[1]);
+        ByteArrayInputStream in = new ByteArrayInputStream("/test\nПрОсТоЙ".getBytes());
+        ConsoleBot bot = new ConsoleBot(new Scanner(in), new PrintStream(outContent));
+        bot.run();
+        assertEquals("Правильный ответ!", outContent.toString().split("\r\n")[1]);
     }
 }
