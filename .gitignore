@@ -1,2 +1,4 @@
 .idea/
 target/**
+/Maven.iml
+config.property

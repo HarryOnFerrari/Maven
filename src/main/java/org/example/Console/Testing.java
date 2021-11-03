@@ -1,6 +1,6 @@
-package Console;
+package org.example.Console;
 
-import utils.FileHTMLUtils;
+import org.example.utils.FileHTMLUtils;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -22,11 +22,11 @@ public class Testing {
      *
      * @exception FileNotFoundException
      * @exception IOException
-     * @see FileHTMLUtils#makeList()
+     * @see FileHTMLUtils#makeListQuestions()
      */
     public void makeTest(Scanner input, PrintStream output) {
         FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
-        LinkedList<String> list = fileHTMLUtils.makeList();
+        LinkedList<String> list = fileHTMLUtils.makeListQuestions();
         String line;
         String commandLine ="/next";
         while (list.size() != 0){
@@ -41,11 +41,11 @@ public class Testing {
                 commandLine = input.next();
                 continue;
             }
-            line = list.pollFirst();
+            line = list.remove();
             if (line == null) break;
-            output.println(line);
+            output.println("Переведите на русский: " + line);
             commandLine = input.next();
-            if (commandLine.equalsIgnoreCase(list.pollFirst())) {
+            if (commandLine.equalsIgnoreCase(list.remove())) {
                 output.println("Верно!!!");
                 if (list.size() == 0){
                     output.println("Вопросов больше нет");

@@ -1,4 +1,4 @@
-package utils;
+package org.example.utils;
 
 import java.io.*;
 import java.util.LinkedList;
@@ -35,8 +35,6 @@ public class FileHTMLUtils {
             if (indexStart != -1) {
                 indexEnd = content.indexOf(end, indexStart);
                 list.add(content.substring(indexStart + start.length(), indexEnd).replace("<br>", "\n"));
-                //list.add("\n"); //из-за этой строки кажется, что каждый вывод обрамлён запятыми,
-                                // но это не проблема, это чисто для самопроверки вывода, можно удалить
                 indexStart++;
             }
         }

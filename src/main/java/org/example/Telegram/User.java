@@ -1,4 +1,4 @@
-package Telegram;
+package  org.example.Telegram;
 
 import java.util.HashMap;
 

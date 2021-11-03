@@ -1,9 +1,8 @@
 package org.example;
-import Telegram.Bot;
+import org.example.Telegram.Bot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;
-import org.mockito.Spy;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 
