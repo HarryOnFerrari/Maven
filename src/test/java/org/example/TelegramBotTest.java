@@ -37,6 +37,7 @@ public class TelegramBotTest {
         Mockito.when(startMessage.getText()).thenReturn("/test");
         startUpdate.setMessage(startMessage);
         bot.onUpdateReceived(startUpdate);
+        Mockito.verify(bot).onUpdateReceived(startUpdate);
     }
 
     /**
