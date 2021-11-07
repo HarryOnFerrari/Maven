@@ -15,11 +15,11 @@ public class User {
     public Testing testes;
     /** Поле состояния пользователя */
     private String condition;
-
+    /** Поле ошибочных вопросов польхователя */
     private HashMap<String, String> wrongList;
-
+    /** Поле ссылка на ресурс предмета */
     private String link;
-
+    /** Поле предметов с ошибочными вопросами пользователя*/
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
 
     /**
@@ -62,7 +62,6 @@ public class User {
      */
     public User(Long chatId){
         this.chatId = chatId;
-        // wrongList = new HashMap<>();
         condition = "";
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {

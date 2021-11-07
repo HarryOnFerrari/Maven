@@ -13,11 +13,8 @@ import java.util.LinkedList;
  */
 public class FileResourcesUtils {
     /**
-     * Конструктор, считывающий содержание файла Tests.txt
+     * Конструктор, считывающий содержание файла Subjects.txt
      */
-    public final InputStream INPUTSTREAM_TEST = this.getClass()
-            .getClassLoader().getResourceAsStream("Tests.txt");
-
     public final InputStream INPUTSTREAM_SUBJECT = this.getClass()
             .getClassLoader().getResourceAsStream("Subjects.txt");
     
@@ -25,7 +22,7 @@ public class FileResourcesUtils {
      * Чтение файла и добавление полученных строк в лист
      *
      * @exception IOException
-     * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
+     * @return лист доступных учебных предметов
      */
     public LinkedList<String> makeListWords() {
         BufferedReader br = null;
