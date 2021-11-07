@@ -26,6 +26,11 @@ public class ConsoleBot implements IBot {
         }
     }
 
+    @Override
+    public void setMessage(Long id, String message, String flag) {
+
+    }
+
     /**
      * Функция для отправки сообщения пользователю.
      *

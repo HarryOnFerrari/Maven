@@ -1,12 +1,5 @@
 package org.example;
 
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
-import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
-
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * Интерфейс Бота со списком его возможностей.
  *
@@ -21,6 +14,7 @@ public interface IBot {
             "/next - для перехода к следующему вопросу \n" +
             "/stop - для завершения работы";
 
+
     /**
      * Функция для обработки сообщений пользователя
      *
@@ -32,7 +26,6 @@ public interface IBot {
             case ("/start"):
                 setMessage(user.chatId,
                         "Привет, работяга!");
-                sendInlineKeyBoardMessage(user.chatId);
                 break;
             case ("/help"):
                 setMessage(user.chatId, HELP);
@@ -89,11 +82,12 @@ public interface IBot {
         }
         else {
             if (command.equalsIgnoreCase(user.testes.getAnswer())){
-                setMessage(user.chatId, "Правильный ответ!");
+                setMessage(user.chatId, "Правильный ответ!", "TEST");
             }
             else {
                 user.testes.saveQuestion();
-                setMessage(user.chatId, "Вы ошиблись, верный ответ: " + user.testes.getAnswer());
+                setMessage(user.chatId,
+                        "Вы ошиблись, верный ответ: " + user.testes.getAnswer(), "TEST");
             }
         }
     }
@@ -105,29 +99,5 @@ public interface IBot {
      * @param message - текст сообщения
      */
     void setMessage(Long id, String message);
-
-    public default SendMessage sendInlineKeyBoardMessage(long chatId) {
-        InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
-        InlineKeyboardButton inlineKeyboardButton1 = new InlineKeyboardButton();
-        InlineKeyboardButton inlineKeyboardButton2 = new InlineKeyboardButton();
-        inlineKeyboardButton1.setText("Тык");
-        inlineKeyboardButton1.setCallbackData("Button \"Тык\" has been pressed");
-        inlineKeyboardButton2.setText("Тык2");
-        inlineKeyboardButton2.setCallbackData("Button \"Тык2\" has been pressed");
-        List<InlineKeyboardButton> keyboardButtonsRow1 = new ArrayList<>();
-        List<InlineKeyboardButton> keyboardButtonsRow2 = new ArrayList<>();
-        keyboardButtonsRow1.add(inlineKeyboardButton1);
-        //keyboardButtonsRow1.add(new InlineKeyboardButton().setText("Fi4a").setCallbackData("CallFi4a"));
-        keyboardButtonsRow2.add(inlineKeyboardButton2);
-        List<List<InlineKeyboardButton>> rowList = new ArrayList<>();
-        rowList.add(keyboardButtonsRow1);
-        rowList.add(keyboardButtonsRow2);
-        inlineKeyboardMarkup.setKeyboard(rowList);
-        //setMessage(user.chatId, "Пример").setReplyMarkup(inlineKeyboardMarkup);
-        SendMessage sendMessage = new SendMessage();
-        sendMessage.setChatId(String.valueOf(chatId));
-        sendMessage.setText("Example");
-        sendMessage.setReplyMarkup(inlineKeyboardMarkup);
-        return sendMessage;
-    }
+    void setMessage(Long id, String message, String flag);
 }

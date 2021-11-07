@@ -3,6 +3,8 @@ package org.example;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
@@ -56,6 +58,23 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot {
                 users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
             User user = users.get(update.getMessage().getChatId());
             readCommands(user, update.getMessage().getText());
+        }
+        else if (update.hasCallbackQuery()){
+            User user = users.get(update.getCallbackQuery().getMessage().getChatId());
+            readCommands(user, update.getCallbackQuery().getData());
+        }
+    }
+
+    @Override
+    public void setMessage(Long id, String message, String flag) {
+        SendMessage newMessage = new SendMessage();
+        newMessage.setChatId(id.toString());
+        newMessage.setText(message);
+        newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(flag).value());
+        try {
+            execute(newMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
     }
 
