@@ -84,12 +84,14 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot {
      * @see IBot#setMessage(Long, String)
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
+     * @return
      */
     @Override
     public void setMessage(Long id, String message){
         SendMessage newMessage = new SendMessage();
         newMessage.setChatId(id.toString());
         newMessage.setText(message);
+
         try {
             execute(newMessage);
         } catch (TelegramApiException e) {

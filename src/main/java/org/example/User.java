@@ -39,6 +39,8 @@ public class User {
                 link = subjects.get(str).getFirst();
                 wrongList = subjects.get(str).getSecond();
                 break;
+            case ("/back"):
+                str = "";
         }
         condition = str;
     }

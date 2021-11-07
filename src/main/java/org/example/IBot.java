@@ -26,6 +26,7 @@ public interface IBot {
             case ("/start"):
                 setMessage(user.chatId,
                         "Привет, работяга!");
+                setMessage(user.chatId, "Выберите предмет:", "CHOOSE");
                 break;
             case ("/help"):
                 setMessage(user.chatId, HELP);
@@ -55,11 +56,17 @@ public interface IBot {
                 }
                 else {
                     setMessage(user.chatId, "Тест завершен");
+                    setMessage(user.chatId, "Выберите режим:", "MODE");
                     user.setCondition("");
                 }
                 break;
             case ("ENGLISH"): case("MATHS"): case ("RUSSIAN"):
                 user.setCondition(command);
+                setMessage(user.chatId, "Выберите режим:", "MODE");
+                break;
+            case ("/back"):
+                user.setCondition(command);
+                setMessage(user.chatId, "Выберите предмет:", "CHOOSE");
                 break;
 
             default:
