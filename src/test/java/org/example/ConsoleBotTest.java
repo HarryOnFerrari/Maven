@@ -24,7 +24,7 @@ public class ConsoleBotTest {
     @Test
     public void repeatingTests() throws IOException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        String str = "/test";
+        String str = "ENGLISH\n/test";
         for (Integer i=0; i<=149; i++){
             str += "\n/next";
         }
@@ -45,10 +45,10 @@ public class ConsoleBotTest {
     @Test
     public void checkRegister() throws IOException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        ByteArrayInputStream in = new ByteArrayInputStream("/test\nПрОсТоЙ".getBytes());
+        ByteArrayInputStream in = new ByteArrayInputStream("ENGLISH\n/test\nПрОсТоЙ".getBytes());
         ConsoleBot bot = new ConsoleBot(new Scanner(in), new PrintStream(outContent));
         bot.run();
         in.close();
-        assertEquals("Правильный ответ!", outContent.toString().split("\r\n")[1]);
+        assertEquals("Правильный ответ!", outContent.toString().split("\r\n")[2]);
     }
 }

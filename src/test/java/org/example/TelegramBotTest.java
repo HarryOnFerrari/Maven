@@ -22,6 +22,9 @@ public class TelegramBotTest {
     @BeforeEach
     public void init(){
         bot = Mockito.spy(new TelegramBot());
+        Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
+        Mockito.doNothing().when(bot).setMessage(
+                Mockito.any(Long.class), Mockito.anyString(), Mockito.anyString());
     }
 
     /**
@@ -51,13 +54,26 @@ public class TelegramBotTest {
         Message message = Mockito.mock(Message.class);
         Mockito.when(message.hasText()).thenReturn(true);
         Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn("/test").thenReturn("/next");
+        Mockito.when(message.getText()).thenReturn("ENGLISH").thenReturn("/test").thenReturn("/next");
         update.setMessage(message);
-        Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
-        bot.onUpdateReceived(update);
-        for (Integer i=0; i<149; i++){
+        for (Integer i=0; i<151; i++){
             bot.onUpdateReceived(update);
         }
         Mockito.verify(bot).setMessage(chatId, "Вопросов нет."); // сама цель теста
+    }
+
+    @Test
+    public void savingWhenChanging(){
+        Update update = new Update();
+        Message message = Mockito.mock(Message.class);
+        Mockito.when(message.hasText()).thenReturn(true);
+        Mockito.when(message.getChatId()).thenReturn(chatId);
+        Mockito.when(message.getText()).thenReturn("MATHS").thenReturn("/test").thenReturn("la-la-la").
+                thenReturn("/stop").thenReturn("ENGLISH").thenReturn("MATHS").thenReturn("/repeat");
+        update.setMessage(message);
+        for (int i=0; i<7; i++)
+            bot.onUpdateReceived(update);
+        Mockito.verify(bot, Mockito.times(2))
+                .setMessage(chatId, "Переведите на русский: 10^2");
     }
 }

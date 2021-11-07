@@ -43,6 +43,8 @@ public class Testing {
         return answer;
     }
 
+    String key;
+
     /**
      * Конструктор - создание нового теста
      * @exception IOException
@@ -60,6 +62,7 @@ public class Testing {
                         "Если хотите отработать вопросы с ошибкой, то введите /next");
         }
         size += (wrongList != null && !wrongList.isEmpty())? wrongList.size() : 0;
+        key = Subjects.getKey(link);
     }
 
     /**
@@ -69,7 +72,7 @@ public class Testing {
     public String newLine(){
         size--;
         if (listQuestions != null && !listQuestions.isEmpty()) {
-            question = "Переведите на русский: " + listQuestions.remove();
+            question = key + listQuestions.remove();
             answer = listQuestions.remove();
         }
         else if (wrongUsersList != null && !wrongUsersList.isEmpty()){

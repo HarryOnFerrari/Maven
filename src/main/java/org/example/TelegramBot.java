@@ -94,6 +94,8 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot {
 
         try {
             execute(newMessage);
+            if (message.equals("Вопросов нет."))
+                setMessage(id, "", "MODE");
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
