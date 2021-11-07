@@ -62,7 +62,6 @@ public class User {
      */
     public User(Long chatId){
         this.chatId = chatId;
-        // wrongList = new HashMap<>();
         condition = "";
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {

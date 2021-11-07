@@ -7,23 +7,37 @@ import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKe
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Состояния бота
+ */
+
 public enum ButtonsForTelegram {
-
+    /** Состояние тестирования */
     TEST (keyboardForTestes()),
+    /** Состояние выбора учебного предмета */
     CHOOSE (keyboardForChooseSubject()),
+    /** Состояние выбора режима */
     MODE (keyboardForChooseMode());
-    // добавить остальные
 
+    /** Поле текущей расстановки кнопок*/
     InlineKeyboardMarkup current;
 
+    /** */
     ButtonsForTelegram(InlineKeyboardMarkup currentKeyboard) {
         current = currentKeyboard;
     }
-
+     /**
+      * Функци для получения ресурса раксладки кнопок
+      * @return ссылка на ресурс
+      */
     public InlineKeyboardMarkup value(){
         return current;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для режима тестирования и повторения
+     * @return итоговая расстановка
+     */
     private static InlineKeyboardMarkup keyboardForTestes(){
         List<InlineKeyboardButton> buttons = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
@@ -40,6 +54,11 @@ public enum ButtonsForTelegram {
         keyboard.setKeyboard(rowList);
         return keyboard;
     }
+
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для выбора предметов
+     * @return итоговая расстановка
+     */
     private static InlineKeyboardMarkup keyboardForChooseSubject(){
         FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
         List<String> listSubjects = fileResourcesUtils.makeListWords();
@@ -47,8 +66,8 @@ public enum ButtonsForTelegram {
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
         for (String subject : listSubjects){
             InlineKeyboardButton button = new InlineKeyboardButton();
-            button.setText(subject.split(" ")[0]);
-            button.setCallbackData(subject.split(" ")[1]);
+            button.setText(subject.split(",")[0]);
+            button.setCallbackData(subject.split(",")[1]);
             List<InlineKeyboardButton> buttons = new ArrayList<>();
             buttons.add(button);
             rowList.add(buttons);
@@ -57,6 +76,10 @@ public enum ButtonsForTelegram {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для выбора режима
+     * @return итоговая расстановка
+     */
     private static InlineKeyboardMarkup keyboardForChooseMode() {
         List<InlineKeyboardButton> buttons1 = new ArrayList<>();
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
