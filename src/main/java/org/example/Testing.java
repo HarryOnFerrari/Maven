@@ -47,10 +47,11 @@ public class Testing {
      * Конструктор - создание нового теста
      * @exception IOException
      */
-    public Testing(Boolean flag, HashMap<String, String> wrongList){
+    public Testing(Boolean flag, HashMap<String, String> wrongList, String link){
         wrongUsersList = wrongList;
         if (flag){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
+            fileHTMLUtils.setINPUTSTREAM(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
             size += listQuestions.size();
             if (!wrongList.isEmpty())

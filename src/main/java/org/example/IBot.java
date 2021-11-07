@@ -57,6 +57,9 @@ public interface IBot {
                     user.setCondition("");
                 }
                 break;
+            case ("ENGLISH"): case("MATHS"): case ("RUSSIAN"):
+                user.setCondition(command);
+                break;
 
             default:
                 checkFalseCommand(user, command);

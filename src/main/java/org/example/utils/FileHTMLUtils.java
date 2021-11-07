@@ -41,11 +41,16 @@ public class FileHTMLUtils {
         return list;
     }
 
+    public void setINPUTSTREAM(String link) {
+        this.INPUTSTREAM = this.getClass()
+                .getClassLoader().getResourceAsStream(link);
+    }
+
     /**
      * Конструктор, считывающий содержание файла Карточки английский _ Quizlet.html
      */
-    public final InputStream INPUTSTREAM = this.getClass()
-            .getClassLoader().getResourceAsStream("Карточки английский _ Quizlet.html");
+    private InputStream INPUTSTREAM; // = this.getClass()
+          //  .getClassLoader().getResourceAsStream("Карточки английский _ Quizlet.html");
 
     /**
      * Чтение файла в формат String

@@ -1,5 +1,7 @@
 package org.example;
 
+import org.glassfish.grizzly.utils.Pair;
+
 import java.util.HashMap;
 
 /**
@@ -11,11 +13,14 @@ public class User {
     public Long chatId;
     /** Поле текущего теста пользователя */
     public Testing testes;
-    // добавится че-нить еще
     /** Поле состояния пользователя */
     private String condition;
 
     private HashMap<String, String> wrongList;
+
+    private String link;
+
+    private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -24,11 +29,15 @@ public class User {
     public void setCondition(String str){
         switch (str) {
             case ("/test"):
-                testes = new Testing(true, wrongList);
+                testes = new Testing(true, wrongList, link);
                 break;
             case ("/repeat"):
-                testes = new Testing(false, wrongList);
+                testes = new Testing(false, wrongList, link);
                 str = "/test";
+                break;
+            case ("MATHS"): case ("RUSSIAN"): case("ENGLISH"):
+                link = subjects.get(str).getFirst();
+                wrongList = subjects.get(str).getSecond();
                 break;
         }
         condition = str;
@@ -51,8 +60,15 @@ public class User {
      */
     public User(Long chatId){
         this.chatId = chatId;
-        wrongList = new HashMap<>();
+        // wrongList = new HashMap<>();
         condition = "";
+        subjects = new HashMap<>();
+        for (Subjects sub: Subjects.values()) {
+            subjects.put(sub.toString(), new Pair<>(
+                    sub.value(),
+                    new HashMap<>()
+            ));
+        }
     }
 
     /**
