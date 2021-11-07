@@ -62,6 +62,11 @@ public class TelegramBotTest {
         Mockito.verify(bot).setMessage(chatId, "Вопросов нет."); // сама цель теста
     }
 
+    /**
+     * Проверка сохранения списка вопросов к повторению для каждого предмета
+     *
+     * @result при смене предмета сохранился вопрос, на который был дан неправильный ответ
+     */
     @Test
     public void savingWhenChanging(){
         Update update = new Update();
@@ -74,6 +79,6 @@ public class TelegramBotTest {
         for (int i=0; i<7; i++)
             bot.onUpdateReceived(update);
         Mockito.verify(bot, Mockito.times(2))
-                .setMessage(chatId, "Переведите на русский: 10^2");
+                .setMessage(chatId, "Вычислите степень: 10^2");
     }
 }
