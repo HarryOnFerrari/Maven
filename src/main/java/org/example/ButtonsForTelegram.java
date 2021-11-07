@@ -22,7 +22,7 @@ public enum ButtonsForTelegram {
     /** Поле текущей расстановки кнопок*/
     InlineKeyboardMarkup current;
 
-    /** */
+    /** Метод инициализации current */
     ButtonsForTelegram(InlineKeyboardMarkup currentKeyboard) {
         current = currentKeyboard;
     }
