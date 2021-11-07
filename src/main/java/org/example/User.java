@@ -15,11 +15,11 @@ public class User {
     public Testing testes;
     /** Поле состояния пользователя */
     private String condition;
-    /** Поле ошибочных вопросов польхователя */
+    /** Поле вопросов по текущему предмету, на которые пользователь ответил неправильно */
     private HashMap<String, String> wrongList;
-    /** Поле ссылка на ресурс предмета */
+    /** Поле ссылка на ресурс текущего предмета */
     private String link;
-    /** Поле предметов с ошибочными вопросами пользователя*/
+    /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
 
     /**

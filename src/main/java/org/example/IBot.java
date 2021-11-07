@@ -106,5 +106,13 @@ public interface IBot {
      * @param message - текст сообщения
      */
     void setMessage(Long id, String message);
+
+    /**
+     * Функция для отправки сообщения с кнопками пользователю.
+     *
+     * @param id - адрес отправки
+     * @param message - сообщение
+     * @param flag - вариант шаблона клавиатуры
+     */
     void setMessage(Long id, String message, String flag);
 }

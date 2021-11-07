@@ -63,6 +63,15 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot {
         }
     }
 
+    /**
+     * Функция для отправки сообщения с кнопками пользователю.
+     *
+     * @see IBot#setMessage(Long, String, String)
+     * @see ButtonsForTelegram
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     * @param flag - вариант шаблона клавиатуры
+     */
     @Override
     public void setMessage(Long id, String message, String flag) {
         SendMessage newMessage = new SendMessage();
@@ -82,7 +91,6 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot {
      * @see IBot#setMessage(Long, String)
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
-     * @return
      */
     @Override
     public void setMessage(Long id, String message){
