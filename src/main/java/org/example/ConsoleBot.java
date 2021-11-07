@@ -26,6 +26,14 @@ public class ConsoleBot implements IBot {
         }
     }
 
+    /**
+     * Функция для отправки сообщений пользователю.
+     *
+     * @see IBot#setMessage(Long, String, String)
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     * @param flag - не используется
+     */
     @Override
     public void setMessage(Long id, String message, String flag) {
         printer.println(message);

@@ -43,6 +43,7 @@ public class Testing {
         return answer;
     }
 
+    /** Поле формулировки задания */
     String key;
 
     /**
