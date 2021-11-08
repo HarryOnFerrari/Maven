@@ -42,10 +42,18 @@ public class FileHTMLUtils {
     }
 
     /**
-     * Конструктор, считывающий содержание файла Карточки английский _ Quizlet.html
+     * Процедура определения файла для чтения
+     * @param link - ключевое слово, определяющее через enum ссылку из ресурсов
      */
-    public final InputStream INPUTSTREAM = this.getClass()
-            .getClassLoader().getResourceAsStream("Карточки английский _ Quizlet.html");
+    public void setINPUTSTREAM(String link) {
+        this.INPUTSTREAM = this.getClass()
+                .getClassLoader().getResourceAsStream(link);
+    }
+
+    /**
+     * Конструктор, считывающий содержание файла *.html
+     */
+    private InputStream INPUTSTREAM;
 
     /**
      * Чтение файла в формат String

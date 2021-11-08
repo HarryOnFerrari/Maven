@@ -13,22 +13,22 @@ import java.util.LinkedList;
  */
 public class FileResourcesUtils {
     /**
-     * Конструктор, считывающий содержание файла Tests.txt
+     * Конструктор, считывающий содержание файла Subjects.txt
      */
-    public final InputStream INPUTSTREAM = this.getClass()
-            .getClassLoader().getResourceAsStream("Tests.txt");
+    public final InputStream INPUTSTREAM_SUBJECT = this.getClass()
+            .getClassLoader().getResourceAsStream("Subjects.txt");
     
     /**
      * Чтение файла и добавление полученных строк в лист
      *
      * @exception IOException
-     * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
+     * @return лист доступных учебных предметов
      */
-    public LinkedList<String> makeListQuestions() {
+    public LinkedList<String> makeListWords() {
         BufferedReader br = null;
         LinkedList<String> list = new LinkedList<>();
         try {
-            br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
+            br = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
             String str = null;
             while ((str = br.readLine()) != null) {
                 list.add(str);
