@@ -90,7 +90,7 @@ public class Testing {
             }
         }
         else
-            question = "Вопросов нет.";
+            question = "Вопросов нет. \nДля продолжения отправьте /start";
         return  question;
     }
 

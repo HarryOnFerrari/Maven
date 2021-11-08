@@ -11,7 +11,7 @@ import java.util.NoSuchElementException;
 public enum Subjects {
     MATHS ("Карточки математика ЕГЭ квадраты _ Quizlet.html"),
     ENGLISH ("Карточки английский _ Quizlet.html"),
-    RUSSIAN ("Карточки Егэ русский язык _ Quizlet.html");
+    RUSSIAN ("Карточки русский язык егэ словарные слова _ Quizlet.html");
 
     /** Поле доступ к ресурсу предмета из enum */
     String currentSubject;
@@ -20,7 +20,7 @@ public enum Subjects {
     private static Map<Subjects, String> keys = Map.of(
             MATHS, "Вычислите степень: ",
             ENGLISH, "Переведите на русский: ",
-            RUSSIAN, "Поставьте ударение: "
+            RUSSIAN, "Введите пропущенную букву: "
     );
 
     /**
