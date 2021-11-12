@@ -33,7 +33,7 @@ public class ConsoleBotTest {
         bot.run();
         in.close();
         String[] result = outContent.toString().split("\r\n");
-        assertEquals("Вопросов нет.", result[result.length-1]);
+        assertEquals("Вопросов нет. \nДля продолжения отправьте /start", result[result.length-1]);
     }
 
     /**
