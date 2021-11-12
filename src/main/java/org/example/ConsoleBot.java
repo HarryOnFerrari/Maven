@@ -8,9 +8,36 @@ import java.util.Scanner;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class ConsoleBot implements IBot {
+public class ConsoleBot {
     private Scanner console;
     private PrintStream printer;
+    public Behavior b = new Behavior() {
+
+        /**
+         * Функция для отправки сообщения пользователю.
+         *
+         * @see IBot#setMessage(Long, String)
+         * @param id - id чата, в который требуется отправить сообщение
+         * @param message - текст сообщения
+         */
+        @Override
+        public void setMessage(Long id, String message) {
+            printer.println(message);
+        }
+
+        /**
+         * Функция для отправки сообщений пользователю.
+         *
+         * @see IBot#setMessage(Long, String, String)
+         * @param id - id чата, в который требуется отправить сообщение
+         * @param message - текст сообщения
+         * @param flag - не используется
+         */
+        @Override
+        public void setMessage(Long id, String message, String flag) {
+            printer.println(message);
+        }
+    };
     public ConsoleBot(Scanner input, PrintStream output){
         console = input;
         console.useDelimiter("\n");
@@ -22,32 +49,7 @@ public class ConsoleBot implements IBot {
     public void run(){
         User user = new User(666L);
         while (console.hasNext()){
-            readCommands(user, console.next());
+            b.readCommands(user, console.next());
         }
-    }
-
-    /**
-     * Функция для отправки сообщений пользователю.
-     *
-     * @see IBot#setMessage(Long, String, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     * @param flag - не используется
-     */
-    @Override
-    public void setMessage(Long id, String message, String flag) {
-        printer.println(message);
-    }
-
-    /**
-     * Функция для отправки сообщения пользователю.
-     *
-     * @see IBot#setMessage(Long, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     */
-    @Override
-    public void setMessage(Long id, String message) {
-        printer.println(message);
     }
 }
