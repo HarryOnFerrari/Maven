@@ -22,7 +22,6 @@ public abstract class Behavior implements IBot{
             case (TEST):
                 user.setCondition(TEST);
                 setMessage(user.chatId, user.testes.newLine());
-                checkTestAnswer(user, command);
                 break;
             case (REPEAT):
                 user.setCondition(REPEAT);
@@ -71,7 +70,11 @@ public abstract class Behavior implements IBot{
      * @param command - сообщение от пользователя
      */
     public void checkFalseCommand(User user, String command){
-        setMessage(user.chatId, WRONG_COMMAND);
+        if (command.equalsIgnoreCase(TEST)) {
+            setMessage(user.chatId, WRONG_COMMAND);
+        } else {
+            checkTestAnswer(user, command);
+        }
     }
 
     /**
