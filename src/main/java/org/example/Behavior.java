@@ -1,16 +1,8 @@
 package org.example;
 
-import static org.example.constants.CommandConstants.START;
+import static org.example.constants.CommandConstants.*;
 
 public abstract class Behavior implements IBot{
-    /** Поле текст инструкции */
-    String HELP = "Це бот для обучения. " +
-            "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
-            "Просто используй: \n" +
-            "/test - для запуска теста \n" +
-            "/next - для перехода к следующему вопросу \n" +
-            "/stop - для завершения работы";
-
     /**
      * Функция для обработки сообщений пользователя
      *
@@ -22,36 +14,36 @@ public abstract class Behavior implements IBot{
             case (START):
                 setMessage(user.chatId,
                         "Привет, работяга!");
-                setMessage(user.chatId, "Выберите предмет:", "CHOOSE");
+                setMessage(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
                 break;
-            case ("/help"):
-                setMessage(user.chatId, HELP);
+            case (HELP):
+                setMessage(user.chatId, HELP_INFO);
                 break;
-            case ("/test"):
-                user.setCondition("/test");
+            case (TEST):
+                user.setCondition(TEST);
                 setMessage(user.chatId, user.testes.newLine());
                 checkTestAnswer(user, command);
                 break;
-            case ("/repeat"):
-                user.setCondition("/repeat");
+            case (REPEAT):
+                user.setCondition(REPEAT);
                 setMessage(user.chatId, user.testes.newLine());
                 break;
-            case ("/next"):
-                if (!user.getCondition().equals("/test")) {
+            case (NEXT):
+                if (!user.getCondition().equals(TEST)) {
                     setMessage(user.chatId,
                             "Чтобы начать тестирование, отправьте /test");
                 } else {
                     setMessage(user.chatId, user.testes.newLine());
                 }
                 break;
-            case ("/stop"):
-                if (!user.getCondition().equals("/test")) {
+            case (STOP):
+                if (!user.getCondition().equals(TEST)) {
                     setMessage(user.chatId,
                             "Вы не начинали тестирование. " +
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
                     setMessage(user.chatId, "Тест завершен");
-                    setMessage(user.chatId, "Выберите режим:", "MODE");
+                    setMessage(user.chatId, CHOOSE_MODE, "MODE");
                     user.setCondition("");
                 }
                 break;
@@ -59,11 +51,11 @@ public abstract class Behavior implements IBot{
             case ("MATHS"):
             case ("RUSSIAN"):
                 user.setCondition(command);
-                setMessage(user.chatId, "Выберите режим:", "MODE");
+                setMessage(user.chatId, CHOOSE_MODE, "MODE");
                 break;
-            case ("/back"):
+            case (BACK):
                 user.setCondition(command);
-                setMessage(user.chatId, "Выберите предмет:", "CHOOSE");
+                setMessage(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
                 break;
 
             default:
@@ -79,9 +71,7 @@ public abstract class Behavior implements IBot{
      * @param command - сообщение от пользователя
      */
     public void checkFalseCommand(User user, String command){
-        setMessage(user.chatId,
-            "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
-                    "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
+        setMessage(user.chatId, WRONG_COMMAND);
     }
 
     /**
@@ -92,16 +82,15 @@ public abstract class Behavior implements IBot{
      */
     private void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())){
-            setMessage(user.chatId, "Правильный ответ!", "TEST");
+            setMessage(user.chatId, RIGHT_ANSWER, "TEST");
         }
         else {
             user.testes.saveQuestion();
-            setMessage(user.chatId,
-                    "Вы ошиблись, верный ответ: " + user.testes.getAnswer(), "TEST");
+            setMessage(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST");
         }
     }
 
     public abstract void setMessage(Long id, String message);
 
-    public abstract void setMessage(Long id, String message, String flag);
+    public abstract void setMessage(Long id, String message, String keyboardLayout);
 }

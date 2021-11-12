@@ -21,6 +21,7 @@ public class TelegramBot extends TelegramLongPollingBot{
         /**
          * Функция для отправки сообщения пользователю.
          *
+         * @see IBot#setMessage(Long, String)
          * @param id - id чата, в который требуется отправить сообщение
          * @param message - текст сообщения
          */
@@ -45,14 +46,14 @@ public class TelegramBot extends TelegramLongPollingBot{
          * @see ButtonsForTelegram
          * @param id - id чата, в который требуется отправить сообщение
          * @param message - текст сообщения
-         * @param flag - вариант шаблона клавиатуры
+         * @param keyboardLayout - вариант шаблона клавиатуры
          */
         @Override
-        public void setMessage(Long id, String message, String flag) {
+        public void setMessage(Long id, String message, String keyboardLayout) {
             SendMessage newMessage = new SendMessage();
             newMessage.setChatId(id.toString());
             newMessage.setText(message);
-            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(flag).value());
+            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
             try {
                 execute(newMessage);
             } catch (TelegramApiException e) {
@@ -60,16 +61,11 @@ public class TelegramBot extends TelegramLongPollingBot{
             }
         }
     };
+
     /**
-     * Функция для отправки сообщения пользователю.
-     *
-     * @see IBot#setMessage(Long, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
+     * Функция, возвращающая имя бота
+     * @return имя бота
      */
-
-
-    /** */
     @Override
     public String getBotUsername() {
         return "giveme100poinrsinbrs_bot";

@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 import org.example.utils.FileHTMLUtils;
 
+import static org.example.constants.CommandConstants.TEST_END;
+
 
 /**
  * Класс Бота, который формирует тесты для пользователя.
@@ -62,10 +64,7 @@ public class Testing {
         if (listQuestions != null){
             if (listQuestions.isEmpty()) {
                 listQuestions = null;
-                question = (!wrongUsersList.isEmpty()) ? "Вопросы закончились\n" +
-                        "Если хотите выйти из режима теста, введите /stop\n" +
-                        "Если хотите отработать вопросы с ошибкой, то введите /next"
-                    : newLine();
+                question = (!wrongUsersList.isEmpty()) ? TEST_END : newLine();
             }
             else{
                     question = key + listQuestions.remove();

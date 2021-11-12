@@ -33,7 +33,7 @@ public interface IBot {
      *
      * @param id - адрес отправки
      * @param message - сообщение
-     * @param flag - вариант шаблона клавиатуры
+     * @param keyboardLayout - вариант шаблона клавиатуры
      */
-    void setMessage(Long id, String message, String flag);
+    void setMessage(Long id, String message, String keyboardLayout);
 }
