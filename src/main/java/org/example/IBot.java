@@ -35,5 +35,5 @@ public interface IBot {
      * @param message - сообщение
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
-    void setMessage(Long id, String message, String keyboardLayout);
+    void setMessageWithButtons(Long id, String message, String keyboardLayout);
 }
