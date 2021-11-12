@@ -80,7 +80,7 @@ public abstract class Behavior implements IBot{
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    private void checkTestAnswer(User user, String command){
+    public void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())){
             setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST");
         }
@@ -90,7 +90,20 @@ public abstract class Behavior implements IBot{
         }
     }
 
+    /**
+     * Функция для отправки сообщения пользователю.
+     *
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     */
     public abstract void setMessage(Long id, String message);
 
+    /**
+     * Функция для отправки сообщения с кнопками пользователю.
+     *
+     * @param id - адрес отправки
+     * @param message - сообщение
+     * @param keyboardLayout - вариант шаблона клавиатуры
+     */
     public abstract void setMessageWithButtons(Long id, String message, String keyboardLayout);
 }

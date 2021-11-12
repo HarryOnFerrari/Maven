@@ -4,6 +4,8 @@ import org.glassfish.grizzly.utils.Pair;
 
 import java.util.HashMap;
 
+import static org.example.constants.CommandConstants.*;
+
 /**
  * Класс бота для обозначения пользователя со свойствами <b>chatId</b>, <b>testes</b>, <b>condition</b>.
  * @author Пономарева Дарья, Бабакова Анастасия.
@@ -28,18 +30,18 @@ public class User {
      */
     public void setCondition(String str){
         switch (str) {
-            case ("/test"):
+            case (TEST):
                 testes = new Testing(true, wrongList, link);
                 break;
-            case ("/repeat"):
+            case (REPEAT):
                 testes = new Testing(false, wrongList, link);
-                str = "/test";
+                str = TEST;
                 break;
             case ("MATHS"): case ("RUSSIAN"): case("ENGLISH"):
                 link = subjects.get(str).getFirst();
                 wrongList = subjects.get(str).getSecond();
                 break;
-            case ("/back"):
+            case (BACK):
                 str = "";
         }
         condition = str;

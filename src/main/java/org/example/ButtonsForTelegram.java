@@ -15,7 +15,7 @@ public enum ButtonsForTelegram {
     /** Состояние тестирования */
     TEST (keyboardForTestes()),
     /** Состояние выбора учебного предмета */
-    SUBJECT(keyboardForChooseSubject()),
+    SUBJECT (keyboardForChooseSubject()),
     /** Состояние выбора режима */
     MODE (keyboardForChooseMode());
 

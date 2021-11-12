@@ -13,6 +13,15 @@ public interface IBot {
      * @param command - сообщение от пользователя
      */
     void checkFalseCommand(User user, String command);
+
+    /**
+     * Функция для проверки ответов пользователя.
+     *
+     * @param user - пользователь
+     * @param command - сообщение от пользователя
+     */
+    void checkTestAnswer(User user, String command);
+
     /**
      * Функция для обработки сообщений пользователя
      *
@@ -20,6 +29,7 @@ public interface IBot {
      * @param command - сообщение пользователя
      */
     void readCommands(User user, String command);
+
     /**
      * Функция для отправки сообщения пользователю.
      *
