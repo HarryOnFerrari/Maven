@@ -1,5 +1,7 @@
 package org.example;
 
+import static org.example.constants.CommandConstants.START;
+
 public abstract class Behavior implements IBot{
     /** Поле текст инструкции */
     String HELP = "Це бот для обучения. " +
@@ -17,7 +19,7 @@ public abstract class Behavior implements IBot{
      */
     public void readCommands(User user, String command){
         switch (command) {
-            case ("/start"):
+            case (START):
                 setMessage(user.chatId,
                         "Привет, работяга!");
                 setMessage(user.chatId, "Выберите предмет:", "CHOOSE");
@@ -28,6 +30,7 @@ public abstract class Behavior implements IBot{
             case ("/test"):
                 user.setCondition("/test");
                 setMessage(user.chatId, user.testes.newLine());
+                checkTestAnswer(user, command);
                 break;
             case ("/repeat"):
                 user.setCondition("/repeat");
@@ -66,6 +69,35 @@ public abstract class Behavior implements IBot{
             default:
                 checkFalseCommand(user, command);
                 break;
+        }
+    }
+
+    /**
+     * Функция для проверки команд, не являющихся базовыми.
+     *
+     * @param user - пользователь
+     * @param command - сообщение от пользователя
+     */
+    public void checkFalseCommand(User user, String command){
+        setMessage(user.chatId,
+            "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
+                    "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
+    }
+
+    /**
+     * Функция для проверки ответов пользователя.
+     *
+     * @param user - пользователь
+     * @param command - сообщение от пользователя
+     */
+    private void checkTestAnswer(User user, String command){
+        if (command.equalsIgnoreCase(user.testes.getAnswer())){
+            setMessage(user.chatId, "Правильный ответ!", "TEST");
+        }
+        else {
+            user.testes.saveQuestion();
+            setMessage(user.chatId,
+                    "Вы ошиблись, верный ответ: " + user.testes.getAnswer(), "TEST");
         }
     }
 

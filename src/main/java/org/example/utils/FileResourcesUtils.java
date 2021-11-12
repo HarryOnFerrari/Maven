@@ -21,7 +21,6 @@ public class FileResourcesUtils {
     /**
      * Чтение файла и добавление полученных строк в лист
      *
-     * @exception IOException
      * @return лист доступных учебных предметов
      */
     public LinkedList<String> makeListWords() {
@@ -29,7 +28,7 @@ public class FileResourcesUtils {
         LinkedList<String> list = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
-            String str = null;
+            String str;
             while ((str = br.readLine()) != null) {
                 list.add(str);
             }

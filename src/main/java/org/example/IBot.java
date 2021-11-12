@@ -12,24 +12,14 @@ public interface IBot {
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    default void checkFalseCommand(User user, String command){
-        if (!user.getCondition().equals("/test")){
-            setMessage(user.chatId,
-                    "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
-                            "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
-        }
-        else {
-            if (command.equalsIgnoreCase(user.testes.getAnswer())){
-                setMessage(user.chatId, "Правильный ответ!", "TEST");
-            }
-            else {
-                user.testes.saveQuestion();
-                setMessage(user.chatId,
-                        "Вы ошиблись, верный ответ: " + user.testes.getAnswer(), "TEST");
-            }
-        }
-    }
-
+    void checkFalseCommand(User user, String command);
+    /**
+     * Функция для обработки сообщений пользователя
+     *
+     * @param user - текущий пользователь
+     * @param command - сообщение пользователя
+     */
+    void readCommands(User user, String command);
     /**
      * Функция для отправки сообщения пользователю.
      *
