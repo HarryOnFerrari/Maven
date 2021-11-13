@@ -1,7 +1,6 @@
 package org.example;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.HashMap;
@@ -15,7 +14,7 @@ public class TelegramBot extends Behavior{
     /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
     /** Поле, реализующее функционал Telegram */
-    Registration telegram = new Registration(this);
+    RegistrationTelegram telegram = new RegistrationTelegram(this);
     /**
      * Функция для отправки сообщения пользователю.
      *
@@ -38,14 +37,14 @@ public class TelegramBot extends Behavior{
     /**
      * Функция для отправки сообщения с кнопками пользователю.
      *
-     * @see IBot#setMessage(Long, String, String)
+     * @see IBot#setMessageWithButtons(Long, String, String)
      * @see ButtonsForTelegram
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
     @Override
-    public void setMessage(Long id, String message, String keyboardLayout) {
+    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
         SendMessage newMessage = new SendMessage();
         newMessage.setChatId(id.toString());
         newMessage.setText(message);

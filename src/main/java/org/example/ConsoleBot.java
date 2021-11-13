@@ -27,13 +27,13 @@ public class ConsoleBot extends Behavior{
     /**
      * Функция для отправки сообщений пользователю.
      *
-     * @see IBot#setMessage(Long, String, String)
+     * @see IBot#setMessageWithButtons(Long, String, String)
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
      * @param keyboardLayout - не используется
      */
     @Override
-    public void setMessage(Long id, String message, String keyboardLayout) {
+    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
         setMessage(id, message);
     }
 

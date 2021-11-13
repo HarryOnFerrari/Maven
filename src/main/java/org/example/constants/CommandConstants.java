@@ -1,5 +1,10 @@
 package org.example.constants;
 
+/**
+ * Класс Бота, который хранит текстовые константы.
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class CommandConstants {
     public static final String START = "/start";
     public static final String BACK = "/back";

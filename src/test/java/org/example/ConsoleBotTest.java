@@ -1,5 +1,7 @@
 package org.example;
 import org.junit.Test;
+
+import static org.example.constants.CommandConstants.RIGHT_ANSWER;
 import static org.junit.Assert.assertEquals;
 
 import java.io.ByteArrayInputStream;
@@ -49,6 +51,6 @@ public class ConsoleBotTest {
         ConsoleBot bot = new ConsoleBot(new Scanner(in), new PrintStream(outContent));
         bot.run();
         in.close();
-        assertEquals("Правильный ответ!", outContent.toString().split("\r\n")[2]);
+        assertEquals(RIGHT_ANSWER, outContent.toString().split("\r\n")[2]);
     }
 }

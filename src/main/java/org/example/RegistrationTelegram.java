@@ -5,13 +5,23 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 import java.io.IOException;
 import java.util.Properties;
-
-public class Registration extends TelegramLongPollingBot {
+/**
+ * Класс Бота для регистрации его в Telegram.
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
+public class RegistrationTelegram extends TelegramLongPollingBot {
+    /** Поле экземпляра класса TelegramBot*/
     TelegramBot bot;
-    public Registration(TelegramBot bot){
+    /** Конструктор класса*/
+    public RegistrationTelegram(TelegramBot bot){
         this.bot = bot;
     }
 
+    /**
+     * Функция получения имени бота.
+     * @return имя бота
+     */
     @Override
     public String getBotUsername() {
         return "giveme100poinrsinbrs_bot";

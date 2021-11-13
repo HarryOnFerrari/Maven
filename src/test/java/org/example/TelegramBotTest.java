@@ -7,6 +7,9 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import static org.example.constants.CommandConstants.*;
+
+
 /**
  * junit тестирование класса Bot
  *
@@ -24,10 +27,10 @@ public class TelegramBotTest {
     @BeforeEach
     public void init() throws TelegramApiException {
         bot = Mockito.spy(new TelegramBot());
-        bot.telegram = Mockito.spy(new Registration(bot));
+        bot.telegram = Mockito.spy(new RegistrationTelegram(bot));
         Mockito.doReturn(null).when(bot.telegram).execute(Mockito.any(SendMessage.class));
         Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
-        Mockito.doNothing().when(bot).setMessage(
+        Mockito.doNothing().when(bot).setMessageWithButtons(
                 Mockito.any(Long.class), Mockito.anyString(), Mockito.anyString());
     }
 
@@ -41,7 +44,7 @@ public class TelegramBotTest {
         Update startUpdate = new Update();
         Message startMessage = Mockito.mock(Message.class);
         Mockito.when(startMessage.getChatId()).thenReturn(chatId);
-        Mockito.when(startMessage.getText()).thenReturn("/test");
+        Mockito.when(startMessage.getText()).thenReturn(TEST);
         startUpdate.setMessage(startMessage);
         bot.telegram.onUpdateReceived(startUpdate);
         Mockito.verify(bot.telegram).onUpdateReceived(startUpdate);
@@ -58,7 +61,7 @@ public class TelegramBotTest {
         Message message = Mockito.mock(Message.class);
         Mockito.when(message.hasText()).thenReturn(true);
         Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn("ENGLISH").thenReturn("/test").thenReturn("/next");
+        Mockito.when(message.getText()).thenReturn("ENGLISH").thenReturn(TEST).thenReturn(NEXT);
         update.setMessage(message);
         for (Integer i=0; i<151; i++){
             bot.telegram.onUpdateReceived(update);
@@ -77,8 +80,8 @@ public class TelegramBotTest {
         Message message = Mockito.mock(Message.class);
         Mockito.when(message.hasText()).thenReturn(true);
         Mockito.when(message.getChatId()).thenReturn(chatId);
-        Mockito.when(message.getText()).thenReturn("MATHS").thenReturn("/test").thenReturn("la-la-la").
-                thenReturn("/stop").thenReturn("ENGLISH").thenReturn("MATHS").thenReturn("/repeat");
+        Mockito.when(message.getText()).thenReturn("MATHS").thenReturn(TEST).thenReturn("la-la-la").
+                thenReturn(STOP).thenReturn("ENGLISH").thenReturn("MATHS").thenReturn(REPEAT);
         update.setMessage(message);
         for (int i=0; i<7; i++)
             bot.telegram.onUpdateReceived(update);

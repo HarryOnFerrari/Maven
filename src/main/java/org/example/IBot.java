@@ -13,13 +13,23 @@ public interface IBot {
      * @param command - сообщение от пользователя
      */
     void checkFalseCommand(User user, String command);
+
     /**
-     * Функция для обработки сообщений пользователя
+     * Функция для проверки ответов пользователя.
+     *
+     * @param user - пользователь
+     * @param command - сообщение от пользователя
+     */
+    void checkTestAnswer(User user, String command);
+
+    /**
+     * Функция для обработки сообщений пользователя.
      *
      * @param user - текущий пользователь
      * @param command - сообщение пользователя
      */
     void readCommands(User user, String command);
+
     /**
      * Функция для отправки сообщения пользователю.
      *
@@ -35,5 +45,5 @@ public interface IBot {
      * @param message - сообщение
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
-    void setMessage(Long id, String message, String keyboardLayout);
+    void setMessageWithButtons(Long id, String message, String keyboardLayout);
 }
