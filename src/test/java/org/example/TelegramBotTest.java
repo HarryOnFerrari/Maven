@@ -18,23 +18,13 @@ public class TelegramBotTest {
     /** Поле id чата */
     private Long chatId = 138239293L;
 
-    public void overrideUpdateReceived(Update update) {
-        if (update.hasMessage() && update.getMessage().hasText()) {
-            if (!bot.users.containsKey(update.getMessage().getChatId())) {
-                bot.users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
-            }
-            User user = bot.users.get(update.getMessage().getChatId());
-            bot.readCommands(user, update.getMessage().getText());
-        }
-    }
-
     /**
      * Инициализация нового бота
      */
     @BeforeEach
     public void init() throws TelegramApiException {
         bot = Mockito.spy(new TelegramBot());
-        bot.telegram = Mockito.spy(new Registration());
+        bot.telegram = Mockito.spy(new Registration(bot));
         Mockito.doReturn(null).when(bot.telegram).execute(Mockito.any(SendMessage.class));
         Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
         Mockito.doNothing().when(bot).setMessage(
@@ -71,7 +61,7 @@ public class TelegramBotTest {
         Mockito.when(message.getText()).thenReturn("ENGLISH").thenReturn("/test").thenReturn("/next");
         update.setMessage(message);
         for (Integer i=0; i<151; i++){
-            overrideUpdateReceived(update);
+            bot.telegram.onUpdateReceived(update);
         }
         Mockito.verify(bot).setMessage(chatId, "Вопросов нет. \nДля продолжения отправьте /start");
     }
@@ -91,7 +81,7 @@ public class TelegramBotTest {
                 thenReturn("/stop").thenReturn("ENGLISH").thenReturn("MATHS").thenReturn("/repeat");
         update.setMessage(message);
         for (int i=0; i<7; i++)
-            overrideUpdateReceived(update);
+            bot.telegram.onUpdateReceived(update);
         Mockito.verify(bot, Mockito.times(2))
                 .setMessage(chatId, "Вычислите степень: 10^2");
     }

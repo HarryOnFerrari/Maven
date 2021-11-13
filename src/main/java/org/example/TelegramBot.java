@@ -15,27 +15,7 @@ public class TelegramBot extends Behavior{
     /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
     /** Поле, реализующее функционал Telegram */
-    Registration telegram = new Registration() {
-        /**
-         * Функция, которая принимает и обрабатывает обновления состояния бота.
-         *
-         * @param update - состояние отдельного пользователя
-         */
-        @Override
-        public void onUpdateReceived(Update update) {
-            if (update.hasMessage() && update.getMessage().hasText()) {
-                if (!users.containsKey(update.getMessage().getChatId())) {
-                    users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
-                }
-                User user = users.get(update.getMessage().getChatId());
-                readCommands(user, update.getMessage().getText());
-            } else if (update.hasCallbackQuery()) {
-                User user = users.get(update.getCallbackQuery().getMessage().getChatId());
-                readCommands(user, update.getCallbackQuery().getData());
-            }
-        }
-    };
-
+    Registration telegram = new Registration(this);
     /**
      * Функция для отправки сообщения пользователю.
      *
