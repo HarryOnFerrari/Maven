@@ -50,9 +50,6 @@ public class User {
      * @return возвращает значение состояния
      */
     public String getCondition() {
-        if (condition.equals("/test") && testes.getSize()==0){
-            condition = "";
-        }
         return condition;
     }
 

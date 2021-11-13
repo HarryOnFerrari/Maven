@@ -8,9 +8,35 @@ import java.util.Scanner;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class ConsoleBot implements IBot {
+public class ConsoleBot extends Behavior{
     private Scanner console;
     private PrintStream printer;
+
+    /**
+     * Функция для отправки сообщения пользователю.
+     *
+     * @see IBot#setMessage(Long, String)
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     */
+    @Override
+    public void setMessage(Long id, String message) {
+            printer.println(message);
+        }
+
+    /**
+     * Функция для отправки сообщений пользователю.
+     *
+     * @see IBot#setMessageWithButtons(Long, String, String)
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     * @param keyboardLayout - не используется
+     */
+    @Override
+    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+        setMessage(id, message);
+    }
+
     public ConsoleBot(Scanner input, PrintStream output){
         console = input;
         console.useDelimiter("\n");
@@ -24,30 +50,5 @@ public class ConsoleBot implements IBot {
         while (console.hasNext()){
             readCommands(user, console.next());
         }
-    }
-
-    /**
-     * Функция для отправки сообщений пользователю.
-     *
-     * @see IBot#setMessage(Long, String, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     * @param flag - не используется
-     */
-    @Override
-    public void setMessage(Long id, String message, String flag) {
-        printer.println(message);
-    }
-
-    /**
-     * Функция для отправки сообщения пользователю.
-     *
-     * @see IBot#setMessage(Long, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     */
-    @Override
-    public void setMessage(Long id, String message) {
-        printer.println(message);
     }
 }

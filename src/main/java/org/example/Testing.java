@@ -6,6 +6,8 @@ import java.util.LinkedList;
 
 import org.example.utils.FileHTMLUtils;
 
+import static org.example.constants.CommandConstants.TEST_END;
+
 
 /**
  * Класс Бота, который формирует тесты для пользователя.
@@ -18,22 +20,12 @@ public class Testing {
     private LinkedList<String> listQuestions;
     /** Поле вопросов, на которые пользователь ответил неправильно */
     private HashMap<String, String> wrongUsersList;
-    /** Поле размер очереди */
-    private Integer size = 1;
 
     /** Поле правильного ответа на текущий вопрос теста */
     private String answer;
 
     /** Поле последнего заданного вопроса */
     private String question;
-
-    /**
-     * Функция получения значения поля {@link Testing#size}
-     * @return возвращает текущий размер очереди вопросов
-     */
-    public Integer getSize(){
-        return size;
-    }
 
     /**
      * Функция получения значения поля {@link Testing#answer}
@@ -56,13 +48,7 @@ public class Testing {
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
             fileHTMLUtils.setINPUTSTREAM(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
-            size += listQuestions.size();
-            if (!wrongList.isEmpty())
-                listQuestions.add("Вопросы закончились\n" +
-                        "Если хотите выйти из режима теста, введите /stop\n" +
-                        "Если хотите отработать вопросы с ошибкой, то введите /next");
         }
-        size += (wrongList != null && !wrongList.isEmpty())? wrongList.size() : 0;
         key = Subjects.getKey(link);
     }
 
@@ -71,23 +57,21 @@ public class Testing {
      * @return возвращает новый вопрос теста
      */
     public String newLine(){
-        size--;
-        if (listQuestions != null && !listQuestions.isEmpty()) {
-            question = key + listQuestions.remove();
-            answer = listQuestions.remove();
+        if (listQuestions != null){
+            if (listQuestions.isEmpty()) {
+                listQuestions = null;
+                question = (!wrongUsersList.isEmpty()) ? TEST_END : newLine();
+            }
+            else{
+                    question = key + listQuestions.remove();
+                    if (listQuestions.size() != 0)
+                        answer = listQuestions.remove();
+                }
         }
-        else if (wrongUsersList != null && !wrongUsersList.isEmpty()){
-            if (size == 0){
-                question = "Вопросы закончились\n" +
-                        "Если хотите выйти из режима теста, введите /stop\n" +
-                        "Если хотите отработать вопросы с ошибкой, то введите /next";
-                size = wrongUsersList.size() + 1;
-            }
-            else {
-                question = wrongUsersList.keySet().iterator().next();
-                answer = wrongUsersList.get(question);
-                wrongUsersList.remove(question);
-            }
+        else if (wrongUsersList != null && wrongUsersList.size() != 0) {
+            question = wrongUsersList.keySet().iterator().next();
+            answer = wrongUsersList.get(question);
+            wrongUsersList.remove(question);
         }
         else
             question = "Вопросов нет. \nДля продолжения отправьте /start";
