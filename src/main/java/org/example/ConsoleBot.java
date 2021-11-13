@@ -48,6 +48,7 @@ public class ConsoleBot extends Behavior{
     public void run(){
         User user = new User(666L);
         while (console.hasNext()){
+            user.setReminder(this);
             readCommands(user, console.next());
         }
     }

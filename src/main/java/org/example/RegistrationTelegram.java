@@ -57,9 +57,11 @@ public class RegistrationTelegram extends TelegramLongPollingBot {
                 bot.users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
             }
             User user = bot.users.get(update.getMessage().getChatId());
+            user.setReminder(bot);
             bot.readCommands(user, update.getMessage().getText());
         } else if (update.hasCallbackQuery()) {
             User user = bot.users.get(update.getCallbackQuery().getMessage().getChatId());
+            user.setReminder(bot);
             bot.readCommands(user, update.getCallbackQuery().getData());
         }
     }
