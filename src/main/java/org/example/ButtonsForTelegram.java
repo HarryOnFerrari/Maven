@@ -72,6 +72,12 @@ public enum ButtonsForTelegram {
             buttons.add(button);
             rowList.add(buttons);
         }
+        InlineKeyboardButton buttonMenu = new InlineKeyboardButton();
+        buttonMenu.setText("меню");
+        buttonMenu.setCallbackData("/menu");
+        List<InlineKeyboardButton> buttons = new ArrayList<>();
+        buttons.add(buttonMenu);
+        rowList.add(buttons);
         keyboard.setKeyboard(rowList);
         return keyboard;
     }
