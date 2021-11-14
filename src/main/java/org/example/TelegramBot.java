@@ -2,6 +2,7 @@ package org.example;
 
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
+import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.net.URL;
 import java.util.HashMap;
@@ -60,7 +61,7 @@ public class TelegramBot extends Behavior{
     public void setPicture(Long id, URL photo){
         SendPhoto picture = new SendPhoto();
         picture.setChatId(id.toString());
-        //picture.setPhoto(photo.toString());
+        picture.setPhoto(new InputFile(photo.toString())); // вряд ли заработает
         try {
             telegram.execute(picture);
         } catch (TelegramApiException e) {
