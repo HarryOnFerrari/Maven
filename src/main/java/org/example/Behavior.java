@@ -19,16 +19,16 @@ public abstract class Behavior implements IBot{
             case (START):
                 setMessage(user.chatId,
                         "Привет, работяга!");
-                setMessageWithButtons(user.chatId, MENU_MODE, "MENU");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
             case("SUBJECT"):
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case("/menu"):
-                setMessageWithButtons(user.chatId, MENU_MODE, "MENU");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
-            case (SETTING):
-                setMessageWithButtons(user.chatId, TIMER_SETTING, "TIMER");
+            case(SETTING):
+                setMessageWithButtons(user.chatId, TIMER_SETTING, "SETTING_BOARD");
                 break;
             case (HELP):
                 setMessage(user.chatId, HELP_INFO);
@@ -56,7 +56,7 @@ public abstract class Behavior implements IBot{
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
                     setMessage(user.chatId, "Тест завершен");
-                    setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                    setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                     user.setCondition("");
                 }
                 break;
@@ -64,11 +64,11 @@ public abstract class Behavior implements IBot{
             case ("MATHS"):
             case ("RUSSIAN"):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                 break;
             case (BACK):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case (TIMER_OFF):
                 user.reminderFlag = false;
@@ -108,11 +108,11 @@ public abstract class Behavior implements IBot{
      */
     public void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())){
-            setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST");
+            setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
         }
         else {
             user.testes.saveQuestion();
-            setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST");
+            setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
         }
     }
 

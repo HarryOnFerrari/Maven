@@ -17,6 +17,6 @@ public class Reminder extends TimerTask {
 
     @Override
     public void run() {
-        bot.setMessageWithButtons(user, REMINDER, "SUBJECT");
+        bot.setMessageWithButtons(user, REMINDER, "SUBJECT_BOARD");
     }
 }
