@@ -1,17 +1,24 @@
 package org.example.utils;
 
 import org.example.*;
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
 
 //@EnableScheduling
-public class ScheduledTasks extends TelegramBot{
+public class ScheduledTasks implements Job {
+    @Override
+    public void execute(JobExecutionContext jobExecutionContext) throws JobExecutionException {
+        System.out.println("Yo!");
+    }
 
-    TelegramBot telegramBot;
+    //TelegramBot telegramBot;
 
     //@Scheduled(cron = "*/1 * * * * ")
-    public URL sendPicture(){
+    /*public URL sendPicture(){
         URL picture = null;
         //picture = getClass().getClassLoader().getResourceAsStream("канашка.png");
         try {
@@ -27,5 +34,5 @@ public class ScheduledTasks extends TelegramBot{
         //}
         //setPicture(picture);
         return picture;
-    }
+    }*/
 }

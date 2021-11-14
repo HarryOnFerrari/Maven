@@ -1,5 +1,7 @@
 package org.example;
 
+import org.example.utils.Quartz;
+import org.quartz.SchedulerException;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
@@ -12,7 +14,8 @@ public class Start {
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
             botsApi.registerBot(new TelegramBot().telegram);
-        } catch (TelegramApiException e) {
+            Quartz.quartzRun();
+        } catch (TelegramApiException | SchedulerException e) {
             e.printStackTrace();
         }
 
