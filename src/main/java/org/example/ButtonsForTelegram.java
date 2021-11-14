@@ -18,9 +18,9 @@ public enum ButtonsForTelegram {
     TEST_BOARD(keyboardForTestes()),
     /** Состояние выбора учебного предмета */
     SUBJECT_BOARD(keyboardForChooseSubject()),
-    /** Состояние выбора режима */
+    /** Состояние выбора режима внутри предмета*/
     MODE_BOARD (keyboardForChooseMode()),
-    /** Состояние выбора режима */
+    /** Состояние настроек */
     SETTING_BOARD (keyboardForChooseTimerSetting()),
     /** Состояние меню */
     MENU_BOARD (keyboardForMenu());
@@ -90,7 +90,7 @@ public enum ButtonsForTelegram {
     }
 
     /**
-     * Метод создания шаблона расстановки и функционала кнопок для выбора режима
+     * Метод создания шаблона расстановки и функционала кнопок для выбора режима внутри предмета
      * @return итоговая расстановка
      */
     private static InlineKeyboardMarkup keyboardForChooseMode() {
@@ -116,6 +116,10 @@ public enum ButtonsForTelegram {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для настроек
+     * @return итоговая расстановка
+     */
     public static InlineKeyboardMarkup keyboardForChooseTimerSetting(){
         List<InlineKeyboardButton> buttons1 = new ArrayList<>();
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
@@ -135,6 +139,10 @@ public enum ButtonsForTelegram {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для меню
+     * @return итоговая расстановка
+     */
     public static InlineKeyboardMarkup keyboardForMenu() {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
