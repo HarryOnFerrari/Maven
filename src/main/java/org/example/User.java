@@ -1,8 +1,10 @@
 package org.example;
 
+import org.example.utils.Reminder;
 import org.glassfish.grizzly.utils.Pair;
 
 import java.util.HashMap;
+import java.util.Timer;
 
 /**
  * Класс бота для обозначения пользователя со свойствами <b>chatId</b>, <b>testes</b>, <b>condition</b>.
@@ -21,6 +23,17 @@ public class User {
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
+
+    public void setReminder(Behavior bot) {
+        if (reminder != null)
+            reminder.cancel();
+        reminder = new Timer();
+        reminder.schedule(new Reminder(bot, chatId), 30000, 30000);
+    }
+
+    private Timer reminder;
+
+
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}

@@ -31,5 +31,6 @@ public class CommandConstants {
     public static final String TEST_END = "Вопросы закончились\n" +
             "Если хотите выйти из режима теста, введите /stop\n" +
             "Если хотите отработать вопросы с ошибкой, то введите /next";
+    public static final String REMINDER = "Вас давно не было видно. Хотите пройти тест?";
 
 }
