@@ -121,10 +121,10 @@ public enum ButtonsForTelegram {
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("да");
-        button1.setCallbackData("timerOn");
+        button1.setCallbackData(TIMER_ON);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
-        button1.setText("нет");
-        button1.setCallbackData("timerOff");
+        button2.setText("нет");
+        button2.setCallbackData(TIMER_OFF);
         buttons1.add(button1);
         buttons2.add(button2);
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();

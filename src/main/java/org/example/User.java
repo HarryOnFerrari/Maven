@@ -27,12 +27,12 @@ public class User {
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
 
     public void setReminder(Behavior bot) {
-        if (!reminderFlag)
-            return;
         if (reminder != null)
             reminder.cancel();
-        reminder = new Timer();
-        reminder.schedule(new Reminder(bot, chatId), 30000, 30000);
+        if (reminderFlag) {
+            reminder = new Timer();
+            reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
+        }
     }
 
     private Timer reminder;
@@ -79,6 +79,7 @@ public class User {
     public User(Long chatId){
         this.chatId = chatId;
         condition = "";
+        reminderFlag = true;
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
