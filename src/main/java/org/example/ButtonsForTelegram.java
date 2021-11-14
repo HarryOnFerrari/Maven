@@ -15,15 +15,15 @@ import static org.example.constants.CommandConstants.*;
 
 public enum ButtonsForTelegram {
     /** Состояние тестирования */
-    TEST (keyboardForTestes()),
+    TEST_BOARD(keyboardForTestes()),
     /** Состояние выбора учебного предмета */
-    SUBJECT (keyboardForChooseSubject()),
+    SUBJECT_BOARD(keyboardForChooseSubject()),
     /** Состояние выбора режима */
-    MODE (keyboardForChooseMode()),
+    MODE_BOARD (keyboardForChooseMode()),
     /** Состояние выбора режима */
-    SETTING (keyboardForSetting()),
+    SETTING_BOARD (keyboardForSetting()),
     /** Состояние меню */
-    MENU (keyboardForMenu());
+    MENU_BOARD (keyboardForMenu());
 
 
     /** Поле текущей расстановки кнопок*/
@@ -49,10 +49,10 @@ public enum ButtonsForTelegram {
         List<InlineKeyboardButton> buttons = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("next");
-        button1.setCallbackData("/next");
+        button1.setCallbackData(NEXT);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         button2.setText("выйти из теста");
-        button2.setCallbackData("/stop");
+        button2.setCallbackData(STOP);
         buttons.add(button1);
         buttons.add(button2);
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
@@ -81,7 +81,7 @@ public enum ButtonsForTelegram {
         }
         InlineKeyboardButton buttonMenu = new InlineKeyboardButton();
         buttonMenu.setText("меню");
-        buttonMenu.setCallbackData("/menu");
+        buttonMenu.setCallbackData(MENU);
         List<InlineKeyboardButton> buttons = new ArrayList<>();
         buttons.add(buttonMenu);
         rowList.add(buttons);
@@ -98,13 +98,13 @@ public enum ButtonsForTelegram {
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("тестирование");
-        button1.setCallbackData("/test");
+        button1.setCallbackData(TEST);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         button2.setText("повторение");
-        button2.setCallbackData("/repeat");
+        button2.setCallbackData(REPEAT);
         InlineKeyboardButton button3 = new InlineKeyboardButton();
         button3.setText("вернуться к выбору предмета");
-        button3.setCallbackData("/back");
+        button3.setCallbackData(BACK);
         buttons1.add(button1);
         buttons1.add(button2);
         buttons2.add(button3);
@@ -123,10 +123,10 @@ public enum ButtonsForTelegram {
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("настройки");
-        button1.setCallbackData("/setting");
+        button1.setCallbackData(SETTING);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         button2.setText("выбор предмета");
-        button2.setCallbackData("SUBJECT");
+        button2.setCallbackData(SUBJECT);
         buttons1.add(button1);
         buttons2.add(button2);
         rowList.add(buttons1);

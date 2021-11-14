@@ -14,6 +14,8 @@ public class CommandConstants {
     public static final String NEXT = "/next";
     public static final String HELP = "/help";
     public static final String SETTING = "/setting";
+    public static final String SUBJECT = "SUBJECT";
+    public static final String MENU = "/menu";
     public static final String SETTING_MESSAGE = " Хотите получать уведомления?";
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
@@ -23,7 +25,9 @@ public class CommandConstants {
             "/stop - для завершения работы \n" +
             "/back - для возвращения к выбору предмета \n" +
             "/repeat - для перехода в режим повторения ошибоных вопросов \n" +
-            "/help - если тебе вдруг что-то стало непонятно";
+            "/help - если тебе вдруг что-то стало непонятно \n" +
+            "/menu - вернет вас к выбору между предметами и настройками \n" +
+            "/setting - для перехода в настройки";
     public static final String WRONG_COMMAND = "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.";
     public static final String WRONG_ANSWER = "Вы ошиблись, верный ответ: ";
