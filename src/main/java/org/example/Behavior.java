@@ -19,7 +19,13 @@ public abstract class Behavior implements IBot{
             case (START):
                 setMessage(user.chatId,
                         "Привет, работяга!");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU");
+                break;
+            case("SUBJECT"):
                 setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                break;
+            case(SETTING):
+                setMessageWithButtons(user.chatId, SETTING_MESSAGE, "SETTING");
                 break;
             case (HELP):
                 setMessage(user.chatId, HELP_INFO);
