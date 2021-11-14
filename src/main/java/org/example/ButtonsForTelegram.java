@@ -63,15 +63,21 @@ public enum ButtonsForTelegram {
         FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
         List<String> listSubjects = fileResourcesUtils.makeListWords();
         InlineKeyboardMarkup keyboard =new InlineKeyboardMarkup();
+        List<InlineKeyboardButton> buttons = new ArrayList<>();
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
         for (String subject : listSubjects){
             InlineKeyboardButton button = new InlineKeyboardButton();
             button.setText(subject.split(",")[0]);
             button.setCallbackData(subject.split(",")[1]);
-            List<InlineKeyboardButton> buttons = new ArrayList<>();
+
             buttons.add(button);
             rowList.add(buttons);
         }
+        InlineKeyboardButton buttonMenu = new InlineKeyboardButton();
+        buttonMenu.setText("меню");
+        buttonMenu.setCallbackData("/menu");
+        buttons.add(buttonMenu);
+        rowList.add(buttons);
         keyboard.setKeyboard(rowList);
         return keyboard;
     }
