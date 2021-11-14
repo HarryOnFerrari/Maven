@@ -1,9 +1,5 @@
 package org.example;
 
-import org.example.utils.ScheduledTasks;
-
-import java.net.URL;
-
 import static org.example.constants.CommandConstants.*;
 
 /**
