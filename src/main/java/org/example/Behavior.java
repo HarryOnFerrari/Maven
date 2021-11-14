@@ -61,6 +61,12 @@ public abstract class Behavior implements IBot{
                 user.setCondition(command);
                 setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
                 break;
+            case (TIMER_OFF):
+                user.reminderFlag = false;
+            case (TIMER_ON):
+                user.reminderFlag = true;
+            case ("/setting"):
+                setMessageWithButtons(user.chatId, TIMER_SETTING, "TIMER");
             default:
                 checkFalseCommand(user, command);
                 break;

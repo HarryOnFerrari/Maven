@@ -13,6 +13,8 @@ public class CommandConstants {
     public static final String STOP = "/stop";
     public static final String NEXT = "/next";
     public static final String HELP = "/help";
+    public static final String TIMER_ON = "timerOn";
+    public static final String TIMER_OFF = "timerOff";
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
             "Просто используй: \n" +
@@ -32,5 +34,6 @@ public class CommandConstants {
             "Если хотите выйти из режима теста, введите /stop\n" +
             "Если хотите отработать вопросы с ошибкой, то введите /next";
     public static final String REMINDER = "Вас давно не было видно. Хотите пройти тест?";
+    public static final String TIMER_SETTING = "Хотите получать уведомления?";
 
 }

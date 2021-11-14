@@ -25,6 +25,8 @@ public class User {
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
 
     public void setReminder(Behavior bot) {
+        if (!reminderFlag)
+            return;
         if (reminder != null)
             reminder.cancel();
         reminder = new Timer();
@@ -32,6 +34,8 @@ public class User {
     }
 
     private Timer reminder;
+
+    public Boolean reminderFlag;
 
 
 

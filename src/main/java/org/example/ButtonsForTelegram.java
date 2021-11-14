@@ -17,7 +17,9 @@ public enum ButtonsForTelegram {
     /** Состояние выбора учебного предмета */
     SUBJECT(keyboardForChooseSubject()),
     /** Состояние выбора режима */
-    MODE (keyboardForChooseMode());
+    MODE (keyboardForChooseMode()),
+
+    TIMER (keyboardForChooseTimerSetting());
 
     /** Поле текущей расстановки кнопок*/
     InlineKeyboardMarkup current;
@@ -101,6 +103,25 @@ public enum ButtonsForTelegram {
         buttons1.add(button1);
         buttons1.add(button2);
         buttons2.add(button3);
+        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        rowList.add(buttons1);
+        rowList.add(buttons2);
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
+        keyboard.setKeyboard(rowList);
+        return keyboard;
+    }
+
+    public static InlineKeyboardMarkup keyboardForChooseTimerSetting(){
+        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
+        List<InlineKeyboardButton> buttons2 = new ArrayList<>();
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        button1.setText("да");
+        button1.setCallbackData("timerOn");
+        InlineKeyboardButton button2 = new InlineKeyboardButton();
+        button1.setText("нет");
+        button1.setCallbackData("timerOff");
+        buttons1.add(button1);
+        buttons2.add(button2);
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
         rowList.add(buttons1);
         rowList.add(buttons2);
