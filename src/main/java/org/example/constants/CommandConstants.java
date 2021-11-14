@@ -16,7 +16,6 @@ public class CommandConstants {
     public static final String TIMER_ON = "timerOn";
     public static final String TIMER_OFF = "timerOff";
     public static final String SETTING = "/setting";
-    public static final String SETTING_MESSAGE = " Хотите получать уведомления?";
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
             "Просто используй: \n" +
