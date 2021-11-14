@@ -1,6 +1,7 @@
 package org.example;
 
 import java.io.PrintStream;
+import java.net.URL;
 import java.util.Scanner;
 
 /**
@@ -11,6 +12,13 @@ import java.util.Scanner;
 public class ConsoleBot extends Behavior{
     private Scanner console;
     private PrintStream printer;
+
+
+
+    @Override
+    protected void setPicture(URL photo) {
+
+    }
 
     /**
      * Функция для отправки сообщения пользователю.

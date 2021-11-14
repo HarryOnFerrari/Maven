@@ -1,5 +1,9 @@
 package org.example;
 
+import org.example.utils.ScheduledTasks;
+
+import java.net.URL;
+
 import static org.example.constants.CommandConstants.*;
 
 /**
@@ -61,12 +65,18 @@ public abstract class Behavior implements IBot{
                 user.setCondition(command);
                 setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
                 break;
+            case("/pict"):
+                ScheduledTasks s = new ScheduledTasks();
+                setPicture(s.sendPicture());
+                break;
 
             default:
                 checkFalseCommand(user, command);
                 break;
         }
     }
+
+    protected abstract void setPicture(URL photo);
 
     /**
      * Функция для проверки команд, не являющихся базовыми.

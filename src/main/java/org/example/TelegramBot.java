@@ -6,6 +6,7 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.Set;
 
 /**
  * Класс Бота для telegram.
@@ -57,15 +58,18 @@ public class TelegramBot extends Behavior{
             e.printStackTrace();
         }
     }
-
-    public void setPicture(Long id, URL photo){
-        SendPhoto picture = new SendPhoto();
-        picture.setChatId(id.toString());
-        picture.setPhoto(new InputFile(photo.toString())); // вряд ли заработает
-        try {
-            telegram.execute(picture);
-        } catch (TelegramApiException e) {
-            e.printStackTrace();
+    @Override
+    public void setPicture(URL photo){
+        String pict = "http://samp-stats.ru/web/userbar-15377.png";
+        for (Long id : users.keySet()) {
+            SendPhoto picture = new SendPhoto();
+            picture.setChatId(id.toString());
+            picture.setPhoto(new InputFile(photo.toString())); // вряд ли заработает
+            try {
+                telegram.execute(picture);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
         }
     }
 }
