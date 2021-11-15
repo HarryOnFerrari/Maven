@@ -30,7 +30,6 @@ public abstract class Behavior implements IBot{
             case(SETTING):
                 setMessageWithButtons(user.chatId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
                 setMessageWithButtons(user.chatId, TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
-
                 break;
             case (HELP):
                 setMessage(user.chatId, HELP_INFO);
@@ -84,6 +83,13 @@ public abstract class Behavior implements IBot{
                 setMessage(user.chatId, "Уведомления успешно включены");
                 setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
+            case (TIMER_OFF_1):
+            case (TIMER_OFF_2):
+            case (TIMER_OFF_3):
+                user.reminderFlagDays = Integer.parseInt(command.substring(command.length()-1));
+                user.setReminder(this);
+                setMessage(user.chatId, "Уведомления выключены");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
             default:
                 checkFalseCommand(user, command);
                 break;

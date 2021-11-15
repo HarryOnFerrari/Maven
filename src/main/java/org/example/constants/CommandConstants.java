@@ -42,4 +42,8 @@ public class CommandConstants {
     public static final String REMINDER = "Вас давно не было видно. Хотите пройти тест?";
     public static final String TIMER_SETTING_ON = "Хотите получать уведомления?";
     public static final String TIMER_SETTING_OFF = "Отключить уведомления на:";
+    public static final Integer ONE_DAY = 86400000;
+    public static final String TIMER_OFF_1 = "timer_off_1";
+    public static final String TIMER_OFF_2 = "timer_off_2";
+    public static final String TIMER_OFF_3 = "timer_off_3";
 }

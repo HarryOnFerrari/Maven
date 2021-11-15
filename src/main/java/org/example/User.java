@@ -1,9 +1,14 @@
 package org.example;
 
 import org.example.utils.Reminder;
+import org.example.utils.UpdateTimeNotification;
 import org.glassfish.grizzly.utils.Pair;
+import org.glassfish.jersey.internal.inject.UpdaterException;
 
+import javax.xml.crypto.Data;
+import javax.xml.datatype.XMLGregorianCalendar;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
 
@@ -30,14 +35,24 @@ public class User {
     private Timer reminder;
     /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
     public Boolean reminderFlag;
+    /** Поле, обозначающее отказ пользователя получать уведомление на выбранный период*/
+    public Integer reminderFlagDays;
 
     /** Функция активации ожидания напоминания */
     public void setReminder(Behavior bot) {
-        if (reminder != null)
+        if (reminder != null) {
             reminder.cancel();
+        }
         if (reminderFlag) {
             reminder = new Timer();
             reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
+        }
+        if (reminderFlagDays != null) {
+            UpdateTimeNotification r = new UpdateTimeNotification();
+            reminder = new Timer();
+            Date current = new Date();
+            Date newDay = r.timeUp(current, reminderFlagDays);
+            reminder.schedule(new Reminder(bot, chatId), newDay, 10000);
         }
     }
 

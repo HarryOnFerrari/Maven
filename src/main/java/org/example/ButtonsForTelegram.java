@@ -152,13 +152,13 @@ public enum ButtonsForTelegram {
         InlineKeyboardButton button3 = new InlineKeyboardButton();
         InlineKeyboardButton buttonForever = new InlineKeyboardButton();
         button1.setText("1 день");
-        button1.setCallbackData("out1");
+        button1.setCallbackData("timer_off_1"); //86400000
         buttons1.add(button1);
         button2.setText("2 дня");
-        button2.setCallbackData("out2");
+        button2.setCallbackData("timer_off_2"); //172800000
         buttons2.add(button2);
         button3.setText("3 дня");
-        button3.setCallbackData("out3");
+        button3.setCallbackData("timer_off_3"); //259200000
         buttons3.add(button3);
         buttonForever.setText("навсегда");
         buttonForever.setCallbackData(TIMER_OFF);
