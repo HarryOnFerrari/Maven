@@ -20,10 +20,13 @@ public enum ButtonsForTelegram {
     SUBJECT_BOARD(keyboardForChooseSubject()),
     /** Состояние выбора режима внутри предмета*/
     MODE_BOARD (keyboardForChooseMode()),
-    /** Состояние настроек */
-    SETTING_BOARD (keyboardForChooseTimerSetting()),
+    /** Состояние настроек включения уведомлений*/
+    SETTING_BOARD_ON (keyboardForChooseTimerSettingOn()),
+    SETTING_BOARD_OFF(keyboardForChooseTimerSettingOff()),
     /** Состояние меню */
     MENU_BOARD (keyboardForMenu());
+
+
 
 
     /** Поле текущей расстановки кнопок*/
@@ -120,20 +123,51 @@ public enum ButtonsForTelegram {
      * Метод создания шаблона расстановки и функционала кнопок для настроек
      * @return итоговая расстановка
      */
-    public static InlineKeyboardMarkup keyboardForChooseTimerSetting(){
+    public static InlineKeyboardMarkup keyboardForChooseTimerSettingOn(){
+        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
+        //List<InlineKeyboardButton> buttons2 = new ArrayList<>();
+        InlineKeyboardButton button1 = new InlineKeyboardButton();
+        button1.setText("включить уведомления");
+        button1.setCallbackData(TIMER_ON);
+        //InlineKeyboardButton button2 = new InlineKeyboardButton();
+        //button2.setText("нет");
+        //button2.setCallbackData(TIMER_OFF);
+        buttons1.add(button1);
+        //buttons2.add(button2);
+        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        rowList.add(buttons1);
+        //rowList.add(buttons2);
+        InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
+        keyboard.setKeyboard(rowList);
+        return keyboard;
+    }
+
+    public static InlineKeyboardMarkup keyboardForChooseTimerSettingOff() {
         List<InlineKeyboardButton> buttons1 = new ArrayList<>();
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();
+        List<InlineKeyboardButton> buttons3 = new ArrayList<>();
+        List<InlineKeyboardButton> buttonsForever = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
-        button1.setText("да");
-        button1.setCallbackData(TIMER_ON);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
-        button2.setText("нет");
-        button2.setCallbackData(TIMER_OFF);
+        InlineKeyboardButton button3 = new InlineKeyboardButton();
+        InlineKeyboardButton buttonForever = new InlineKeyboardButton();
+        button1.setText("1 день");
+        button1.setCallbackData("out1");
         buttons1.add(button1);
+        button2.setText("2 дня");
+        button2.setCallbackData("out2");
         buttons2.add(button2);
+        button3.setText("3 дня");
+        button3.setCallbackData("out3");
+        buttons3.add(button3);
+        buttonForever.setText("навсегда");
+        buttonForever.setCallbackData(TIMER_OFF);
+        buttonsForever.add(buttonForever);
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
         rowList.add(buttons1);
         rowList.add(buttons2);
+        rowList.add(buttons3);
+        rowList.add(buttonsForever);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         keyboard.setKeyboard(rowList);
         return keyboard;

@@ -40,6 +40,6 @@ public class CommandConstants {
             "Если хотите выйти из режима теста, введите /stop\n" +
             "Если хотите отработать вопросы с ошибкой, то введите /next";
     public static final String REMINDER = "Вас давно не было видно. Хотите пройти тест?";
-    public static final String TIMER_SETTING = "Хотите получать уведомления?";
-
+    public static final String TIMER_SETTING_ON = "Хотите получать уведомления?";
+    public static final String TIMER_SETTING_OFF = "Отключить уведомления на:";
 }
