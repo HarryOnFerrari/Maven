@@ -90,6 +90,7 @@ public abstract class Behavior implements IBot{
                 user.setReminder(this);
                 setMessage(user.chatId, "Уведомления выключены");
                 setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
             default:
                 checkFalseCommand(user, command);
                 break;
@@ -107,6 +108,7 @@ public abstract class Behavior implements IBot{
             checkTestAnswer(user, command);
         } else {
             setMessage(user.chatId, WRONG_COMMAND);
+            System.out.println(command);
         }
     }
 
