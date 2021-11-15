@@ -3,6 +3,7 @@ package org.example;
 import org.example.utils.Reminder;
 import org.glassfish.grizzly.utils.Pair;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Timer;
 
@@ -25,7 +26,12 @@ public class User {
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
     private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
+    /** Поле с таймером для отправки напоминаний */
+    private Timer reminder;
+    /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
+    public Boolean reminderFlag;
 
+    /** Функция активации ожидания напоминания */
     public void setReminder(Behavior bot) {
         if (reminder != null)
             reminder.cancel();
@@ -34,12 +40,6 @@ public class User {
             reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
         }
     }
-
-    private Timer reminder;
-
-    public Boolean reminderFlag;
-
-
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
