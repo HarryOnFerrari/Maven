@@ -22,6 +22,7 @@ public enum ButtonsForTelegram {
     MODE_BOARD (keyboardForChooseMode()),
     /** Состояние настроек включения уведомлений*/
     SETTING_BOARD_ON (keyboardForChooseTimerSettingOn()),
+    /** Состояние настроек выключения уведомлений */
     SETTING_BOARD_OFF(keyboardForChooseTimerSettingOff()),
     /** Состояние меню */
     MENU_BOARD (keyboardForMenu());
@@ -120,28 +121,26 @@ public enum ButtonsForTelegram {
     }
 
     /**
-     * Метод создания шаблона расстановки и функционала кнопок для настроек
+     * Метод создания шаблона расстановки и функционала кнопок для настроек получения уведомлений
      * @return итоговая расстановка
      */
     public static InlineKeyboardMarkup keyboardForChooseTimerSettingOn(){
         List<InlineKeyboardButton> buttons1 = new ArrayList<>();
-        //List<InlineKeyboardButton> buttons2 = new ArrayList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("включить уведомления");
         button1.setCallbackData(TIMER_ON);
-        //InlineKeyboardButton button2 = new InlineKeyboardButton();
-        //button2.setText("нет");
-        //button2.setCallbackData(TIMER_OFF);
         buttons1.add(button1);
-        //buttons2.add(button2);
         List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
         rowList.add(buttons1);
-        //rowList.add(buttons2);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         keyboard.setKeyboard(rowList);
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для настроек отказа от получения уведомлений
+     * @return итоговая расстановка
+     */
     public static InlineKeyboardMarkup keyboardForChooseTimerSettingOff() {
         List<InlineKeyboardButton> buttons1 = new ArrayList<>();
         List<InlineKeyboardButton> buttons2 = new ArrayList<>();

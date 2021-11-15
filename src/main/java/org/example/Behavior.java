@@ -73,6 +73,7 @@ public abstract class Behavior implements IBot{
                 break;
             case (TIMER_OFF):
                 user.reminderFlag = false;
+                user.reminderFlagDays = null;
                 user.setReminder(this);
                 setMessage(user.chatId, "Уведомления выключены");
                 setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
