@@ -7,6 +7,8 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.util.LinkedList;
+
 import static org.example.constants.CommandConstants.*;
 
 
@@ -87,5 +89,29 @@ public class TelegramBotTest {
             bot.telegram.onUpdateReceived(update);
         Mockito.verify(bot, Mockito.times(2))
                 .setMessage(chatId, "Вычислите степень: 10^2");
+    }
+
+    /**
+     * Проверка своевременной рассылки напоминания большому числу пользователей
+     * @throws InterruptedException
+     */
+    @Test
+    public void remind() throws InterruptedException {
+        Update update = new Update();
+        Message message = Mockito.mock(Message.class);
+        Mockito.when(message.hasText()).thenReturn(true);
+        Mockito.when(message.getText()).thenReturn("/start");
+        LinkedList<Long> fakeIds = new LinkedList<>();
+        for (Long i=0L; i<30; i++)
+            fakeIds.add(i);
+        for (Long fakeId : fakeIds) {
+            Mockito.when(message.getChatId()).thenReturn(fakeId);
+            update.setMessage(message);
+            bot.telegram.onUpdateReceived(update);
+        }
+        Thread.sleep(10000);
+        for (Long fakeId : fakeIds){
+            Mockito.verify(bot).setMessageWithButtons(fakeId, REMINDER, "SUBJECT_BOARD");
+        }
     }
 }

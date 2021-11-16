@@ -10,7 +10,7 @@ import java.util.HashMap;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class TelegramBot extends Behavior{
+public class TelegramBot extends Behavior {
     /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
     /** Поле, реализующее функционал Telegram */

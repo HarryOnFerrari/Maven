@@ -19,7 +19,17 @@ public abstract class Behavior implements IBot{
             case (START):
                 setMessage(user.chatId,
                         "Привет, работяга!");
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case(SUBJECT):
+                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                break;
+            case(MENU):
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case(SETTING):
+                setMessageWithButtons(user.chatId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
+                setMessageWithButtons(user.chatId, TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
                 break;
             case (HELP):
                 setMessage(user.chatId, HELP_INFO);
@@ -47,7 +57,7 @@ public abstract class Behavior implements IBot{
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
                     setMessage(user.chatId, "Тест завершен");
-                    setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                    setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                     user.setCondition("");
                 }
                 break;
@@ -55,13 +65,34 @@ public abstract class Behavior implements IBot{
             case ("MATHS"):
             case ("RUSSIAN"):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                 break;
             case (BACK):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
-
+            case (TIMER_OFF):
+                user.reminderFlag = false;
+                user.reminderFlagDays = null;
+                user.setReminder(this);
+                setMessage(user.chatId, "Уведомления выключены");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case (TIMER_ON):
+                user.reminderFlag = true;
+                user.reminderFlagDays = null;
+                user.setReminder(this);
+                setMessage(user.chatId, "Уведомления успешно включены");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case (TIMER_OFF_1):
+            case (TIMER_OFF_2):
+            case (TIMER_OFF_3):
+                user.reminderFlagDays = Integer.parseInt(command.substring(command.length()-1));
+                user.setReminder(this);
+                setMessage(user.chatId, "Уведомления выключены");
+                setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
             default:
                 checkFalseCommand(user, command);
                 break;
@@ -79,6 +110,7 @@ public abstract class Behavior implements IBot{
             checkTestAnswer(user, command);
         } else {
             setMessage(user.chatId, WRONG_COMMAND);
+            System.out.println(command);
         }
     }
 
@@ -90,11 +122,11 @@ public abstract class Behavior implements IBot{
      */
     public void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())){
-            setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST");
+            setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
         }
         else {
             user.testes.saveQuestion();
-            setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST");
+            setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
         }
     }
 

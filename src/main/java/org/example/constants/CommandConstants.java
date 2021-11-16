@@ -13,6 +13,11 @@ public class CommandConstants {
     public static final String STOP = "/stop";
     public static final String NEXT = "/next";
     public static final String HELP = "/help";
+    public static final String TIMER_ON = "timerOn";
+    public static final String TIMER_OFF = "timerOff";
+    public static final String SETTING = "/setting";
+    public static final String SUBJECT = "SUBJECT";
+    public static final String MENU = "/menu";
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
             "Просто используй: \n" +
@@ -21,15 +26,24 @@ public class CommandConstants {
             "/stop - для завершения работы \n" +
             "/back - для возвращения к выбору предмета \n" +
             "/repeat - для перехода в режим повторения ошибоных вопросов \n" +
-            "/help - если тебе вдруг что-то стало непонятно";
+            "/help - если тебе вдруг что-то стало непонятно \n" +
+            "/menu - вернет вас к выбору между предметами и настройками \n" +
+            "/setting - для перехода в настройки";
     public static final String WRONG_COMMAND = "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.";
     public static final String WRONG_ANSWER = "Вы ошиблись, верный ответ: ";
     public static final String RIGHT_ANSWER = "Правильный ответ!";
+    public static final String MENU_MODE = "Меню: ";
     public static final String CHOOSE_MODE = "Выберите режим:";
     public static final String CHOOSE_SUBJECT = "Выберите предмет:";
     public static final String TEST_END = "Вопросы закончились\n" +
             "Если хотите выйти из режима теста, введите /stop\n" +
             "Если хотите отработать вопросы с ошибкой, то введите /next";
-
+    public static final String REMINDER = "Вас давно не было видно. Хотите пройти тест?";
+    public static final String TIMER_SETTING_ON = "Хотите получать уведомления?";
+    public static final String TIMER_SETTING_OFF = "Отключить уведомления на:";
+    public static final Integer ONE_DAY = 86400000;
+    public static final String TIMER_OFF_1 = "timer_off_1";
+    public static final String TIMER_OFF_2 = "timer_off_2";
+    public static final String TIMER_OFF_3 = "timer_off_3";
 }
