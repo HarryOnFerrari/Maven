@@ -38,7 +38,7 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
         Properties prop = new Properties();
         try {
             prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
-            token = prop.getProperty("token");
+            token = prop.getProperty("tokenTelegram");
         }
         catch (IOException ex) {
             ex.printStackTrace();
