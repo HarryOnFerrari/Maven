@@ -2,47 +2,61 @@ package org.example;
 
 import static org.example.constants.CommandConstants.*;
 
-public abstract class Behavior implements IBot{
+public class Behavior{
+    private IBot bot;
+    public Behavior(IBot bot){
+        this.bot = bot;
+    }
     /**
      * Функция для обработки сообщений пользователя
      *
      * @param user - текущий пользователь
      * @param command - сообщение пользователя
      */
-    public void readCommands(User user, String command){
+    public final void readCommands(User user, String command){
         switch (command) {
             case (START):
-                setMessage(user.chatId,
+                bot.setMessage(user.chatId,
                         "Привет, работяга!");
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case(SUBJECT):
+                bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                break;
+            case(MENU):
+                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case(SETTING):
+                bot.setMessageWithButtons(user.chatId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
+                bot.setMessageWithButtons(user.chatId, TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
                 break;
             case (HELP):
-                setMessage(user.chatId, HELP_INFO);
+                bot.setMessage(user.chatId, HELP_INFO);
                 break;
             case (TEST):
                 user.setCondition(TEST);
-                setMessage(user.chatId, user.testes.newLine());
+                bot.setMessage(user.chatId, user.testes.newLine());
                 break;
             case (REPEAT):
                 user.setCondition(REPEAT);
-                setMessage(user.chatId, user.testes.newLine());
+                bot.setMessage(user.chatId, user.testes.newLine());
                 break;
             case (NEXT):
                 if (!user.getCondition().equals(TEST)) {
-                    setMessage(user.chatId,
+                    bot.setMessage(user.chatId,
                             "Чтобы начать тестирование, отправьте /test");
                 } else {
-                    setMessage(user.chatId, user.testes.newLine());
+                    bot.setMessage(user.chatId, user.testes.newLine());
                 }
                 break;
             case (STOP):
                 if (!user.getCondition().equals(TEST)) {
-                    setMessage(user.chatId,
+                    bot.setMessage(user.chatId,
                             "Вы не начинали тестирование. " +
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
-                    setMessage(user.chatId, "Тест завершен");
-                    setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                    bot.setMessage(user.chatId, "Тест завершен");
+                    bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                     user.setCondition("");
                 }
                 break;
@@ -50,13 +64,34 @@ public abstract class Behavior implements IBot{
             case ("MATHS"):
             case ("RUSSIAN"):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE");
+                bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
                 break;
             case (BACK):
                 user.setCondition(command);
-                setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT");
+                bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
-
+            case (TIMER_OFF):
+                user.reminderFlag = false;
+                user.reminderFlagDays = null;
+                user.setReminder(bot);
+                bot.setMessage(user.chatId, "Уведомления выключены");
+                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case (TIMER_ON):
+                user.reminderFlag = true;
+                user.reminderFlagDays = null;
+                user.setReminder(bot);
+                bot.setMessage(user.chatId, "Уведомления успешно включены");
+                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
+            case (TIMER_OFF_1):
+            case (TIMER_OFF_2):
+            case (TIMER_OFF_3):
+                user.reminderFlagDays = Integer.parseInt(command.substring(command.length()-1));
+                user.setReminder(bot);
+                bot.setMessage(user.chatId, "Уведомления выключены");
+                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                break;
             default:
                 checkFalseCommand(user, command);
                 break;
@@ -69,11 +104,11 @@ public abstract class Behavior implements IBot{
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    public void checkFalseCommand(User user, String command){
-        if (command.equalsIgnoreCase(TEST)) {
-            setMessage(user.chatId, WRONG_COMMAND);
-        } else {
+    public final void checkFalseCommand(User user, String command){
+        if (user.getCondition().equals(TEST)) {
             checkTestAnswer(user, command);
+        } else {
+            bot.setMessage(user.chatId, WRONG_COMMAND);
         }
     }
 
@@ -83,30 +118,14 @@ public abstract class Behavior implements IBot{
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    public void checkTestAnswer(User user, String command){
+    public final void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())){
-            setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST");
+            bot.setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
         }
         else {
             user.testes.saveQuestion();
-            setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST");
+            bot.setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
         }
     }
 
-    /**
-     * Функция для отправки сообщения пользователю.
-     *
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     */
-    public abstract void setMessage(Long id, String message);
-
-    /**
-     * Функция для отправки сообщения с кнопками пользователю.
-     *
-     * @param id - адрес отправки
-     * @param message - сообщение
-     * @param keyboardLayout - вариант шаблона клавиатуры
-     */
-    public abstract void setMessageWithButtons(Long id, String message, String keyboardLayout);
 }

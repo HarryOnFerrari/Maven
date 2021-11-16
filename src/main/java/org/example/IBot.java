@@ -5,31 +5,7 @@ package org.example;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public interface IBot {
-    /**
-     * Функция для проверки команд, не являющихся базовыми.
-     *
-     * @param user - пользователь
-     * @param command - сообщение от пользователя
-     */
-    void checkFalseCommand(User user, String command);
-
-    /**
-     * Функция для проверки ответов пользователя.
-     *
-     * @param user - пользователь
-     * @param command - сообщение от пользователя
-     */
-    void checkTestAnswer(User user, String command);
-
-    /**
-     * Функция для обработки сообщений пользователя
-     *
-     * @param user - текущий пользователь
-     * @param command - сообщение пользователя
-     */
-    void readCommands(User user, String command);
-
+public interface IBot{
     /**
      * Функция для отправки сообщения пользователю.
      *

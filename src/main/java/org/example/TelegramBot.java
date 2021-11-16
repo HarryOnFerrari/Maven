@@ -14,53 +14,10 @@ import java.util.Properties;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class TelegramBot extends TelegramLongPollingBot{
+public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
-    public Behavior behavior = new Behavior(){
-        /**
-         * Функция для отправки сообщения пользователю.
-         *
-         * @see IBot#setMessage(Long, String)
-         * @param id - id чата, в который требуется отправить сообщение
-         * @param message - текст сообщения
-         */
-        @Override
-        public void setMessage(Long id, String message) {
-            SendMessage newMessage = new SendMessage();
-            newMessage.setChatId(id.toString());
-            newMessage.setText(message);
-            try {
-                execute(newMessage);
-                if (message.equals("Вопросов нет."))
-                    setMessageWithButtons(id, "", "MODE");
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-
-        /**
-         * Функция для отправки сообщения с кнопками пользователю.
-         *
-         * @see IBot#setMessageWithButtons(Long, String, String)
-         * @see ButtonsForTelegram
-         * @param id - id чата, в который требуется отправить сообщение
-         * @param message - текст сообщения
-         * @param keyboardLayout - вариант шаблона клавиатуры
-         */
-        @Override
-        public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
-            SendMessage newMessage = new SendMessage();
-            newMessage.setChatId(id.toString());
-            newMessage.setText(message);
-            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
-            try {
-                execute(newMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
-        }
-    };
+    public Behavior behavior = new Behavior(this);
 
     /**
      * Функция, возвращающая имя бота
@@ -99,10 +56,55 @@ public class TelegramBot extends TelegramLongPollingBot{
                 users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
             }
             User user = users.get(update.getMessage().getChatId());
+            user.setReminder(this);
             behavior.readCommands(user, update.getMessage().getText());
         } else if (update.hasCallbackQuery()) {
             User user = users.get(update.getCallbackQuery().getMessage().getChatId());
+            user.setReminder(this);
             behavior.readCommands(user, update.getCallbackQuery().getData());
         }
     }
+
+    /**
+     * Функция для отправки сообщения пользователю.
+     *
+     * @see IBot#setMessage(Long, String)
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     */
+    @Override
+    public void setMessage(Long id, String message) {
+        SendMessage newMessage = new SendMessage();
+        newMessage.setChatId(id.toString());
+        newMessage.setText(message);
+        try {
+            execute(newMessage);
+            if (message.equals("Вопросов нет."))
+                setMessageWithButtons(id, "", "MODE");
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
+        }
+    }
+
+        /**
+         * Функция для отправки сообщения с кнопками пользователю.
+         *
+         * @see IBot#setMessageWithButtons(Long, String, String)
+         * @see ButtonsForTelegram
+         * @param id - id чата, в который требуется отправить сообщение
+         * @param message - текст сообщения
+         * @param keyboardLayout - вариант шаблона клавиатуры
+         */
+        @Override
+        public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+            SendMessage newMessage = new SendMessage();
+            newMessage.setChatId(id.toString());
+            newMessage.setText(message);
+            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
+            try {
+                execute(newMessage);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }
+        }
 }
