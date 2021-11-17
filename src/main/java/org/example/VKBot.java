@@ -20,6 +20,8 @@ import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static org.example.constants.CommandConstants.*;
+
 public class VKBot extends LongPollBot implements IBot{
     private TransportClient transportClient = new HttpTransportClient();
     private VkApiClient vk = new VkApiClient(transportClient);
@@ -53,6 +55,7 @@ public class VKBot extends LongPollBot implements IBot{
     public void onMessageNew(MessageNewEvent command) {
         Message message = command.getMessage();
         Long userId = (long)(message.getPeerId());
+        String commandText;
         if (!users.containsKey(userId)) {
             users.put(userId, new User(userId));
         }
@@ -61,11 +64,14 @@ public class VKBot extends LongPollBot implements IBot{
         if (message.getPayload() != null){
             Matcher textMatch = Pattern.compile("\\{.+?:\"\\\\?(.+?)\"}").matcher(message.getPayload());
             textMatch.find();
-            String text = textMatch.group(1);
-            behavior.readCommands(user, text);
+            commandText = textMatch.group(1);
         }
         else
-            behavior.readCommands(user, message.getText());
+            commandText = message.getText();
+        if (commandText.equals(SETTING))
+            setMessageWithButtons(userId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
+        else
+            behavior.readCommands(user, commandText);
     }
 
         /**

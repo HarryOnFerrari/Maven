@@ -45,7 +45,31 @@ public enum ButtonsForVK {
     }
 
     private static Keyboard keyboardForChooseTimerSettingOn() {
-        return new Keyboard();
+        Keyboard keyboard = new Keyboard().setOneTime(true);
+
+        List<List<KeyboardButton>> allKey = new ArrayList<>();
+        List<KeyboardButton> line1 = new ArrayList<>();
+        List<KeyboardButton> line2 = new ArrayList<>();
+        List<KeyboardButton> line3 = new ArrayList<>();
+        List<KeyboardButton> line4 = new ArrayList<>();
+        List<KeyboardButton> line5 = new ArrayList<>();
+        line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("да, всегда")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 1 день")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timer_off_1\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line3.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 2 дня")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timer_off_2\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line4.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 3 дня")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timer_off_3\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line5.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, никогда")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timerOff\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        allKey.add(line1);
+        allKey.add(line2);
+        allKey.add(line3);
+        allKey.add(line4);
+        allKey.add(line5);
+        keyboard.setButtons(allKey);
+        return keyboard;
     }
 
     private static Keyboard keyboardForChooseMode() {
