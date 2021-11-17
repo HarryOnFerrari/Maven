@@ -86,25 +86,25 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
         }
     }
 
-        /**
-         * Функция для отправки сообщения с кнопками пользователю.
-         *
-         * @see IBot#setMessageWithButtons(Long, String, String)
-         * @see ButtonsForTelegram
-         * @param id - id чата, в который требуется отправить сообщение
-         * @param message - текст сообщения
-         * @param keyboardLayout - вариант шаблона клавиатуры
-         */
-        @Override
-        public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
-            SendMessage newMessage = new SendMessage();
-            newMessage.setChatId(id.toString());
-            newMessage.setText(message);
-            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
-            try {
-                execute(newMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }
+    /**
+     * Функция для отправки сообщения с кнопками пользователю.
+     *
+     * @see IBot#setMessageWithButtons(Long, String, String)
+     * @see ButtonsForTelegram
+     * @param id - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     * @param keyboardLayout - вариант шаблона клавиатуры
+     */
+    @Override
+    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+        SendMessage newMessage = new SendMessage();
+        newMessage.setChatId(id.toString());
+        newMessage.setText(message);
+        newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
+        try {
+            execute(newMessage);
+        } catch (TelegramApiException e) {
+            e.printStackTrace();
         }
+    }
 }

@@ -7,14 +7,23 @@ import api.longpoll.bots.methods.messages.MessagesSend;
 import api.longpoll.bots.model.events.messages.MessageNewEvent;
 import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
-import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
-import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import com.vk.api.sdk.client.TransportClient;
+import com.vk.api.sdk.client.VkApiClient;
+import com.vk.api.sdk.client.actors.GroupActor;
+import com.vk.api.sdk.exceptions.ApiException;
+import com.vk.api.sdk.exceptions.ClientException;
+import com.vk.api.sdk.httpclient.HttpTransportClient;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
+import java.util.Random;
 
 public class VKBot extends LongPollBot implements IBot{
+    private TransportClient transportClient = new HttpTransportClient();
+    private VkApiClient vk = new VkApiClient(transportClient);
+    private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
+    private Random random = new Random();
     public HashMap<Long, User> users = new HashMap<>();
     private IBot bot;
     public Behavior behavior = new Behavior(this);
@@ -85,15 +94,21 @@ public class VKBot extends LongPollBot implements IBot{
      */
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
-        //TransportClient transportClient = new HttpTransportClient(); эти две штуки не подключаются, тк нужно добавить в Maven подключение к vk
-        //VkApiClient vk = new VkApiClient(transportClient);           но с ними будет работать .keyboard
         try {
-            new MessagesSend(this)
-                    .setPeerId(Math.toIntExact(id))
-                    .keyboard(ButtonsForVK.valueOf(keyboardLayout).value())
-                    .execute();
-        } catch ( BotsLongPollHttpException | BotsLongPollException e) {
+            vk.messages().send(actor).message(message).userId(Math.toIntExact(id)).randomId(random.nextInt(10000)).keyboard(ButtonsForVK.valueOf(keyboardLayout).value()).execute();
+        } catch (ClientException | ApiException e) {
             e.printStackTrace();
         }
+
+        /*
+        * SendMessage newMessage = new SendMessage();
+            newMessage.setChatId(id.toString());
+            newMessage.setText(message);
+            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
+            try {
+                execute(newMessage);
+            } catch (TelegramApiException e) {
+                e.printStackTrace();
+            }*/
     }
 }
