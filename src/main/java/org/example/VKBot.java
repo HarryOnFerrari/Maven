@@ -39,14 +39,20 @@ public class VKBot extends LongPollBot implements IBot{
     @Override
     public void onMessageNew(MessageNewEvent command) {
         Message message = command.getMessage();
-        try {
+        Long userId = (long)(message.getPeerId());
+        if (!users.containsKey(userId)) {
+            users.put(userId, new User(userId));
+        }
+        User user = users.get(userId);
+        behavior.readCommands(user, message.getText());
+        /*try {
             new MessagesSend(this)
                     .setPeerId(message.getPeerId())
                     .setMessage("В сообщении есть вложение!")
                     .execute();
         } catch ( BotsLongPollHttpException | BotsLongPollException e) {
             e.printStackTrace();
-        }
+        }*/
 
     }
 
@@ -57,7 +63,14 @@ public class VKBot extends LongPollBot implements IBot{
          */
     @Override
     public void setMessage(Long id, String message) {
-
+        try {
+            new MessagesSend(this)
+                    .setPeerId(Math.toIntExact(id))
+                    .setMessage(message)
+                    .execute();
+        } catch ( BotsLongPollHttpException | BotsLongPollException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -69,6 +82,13 @@ public class VKBot extends LongPollBot implements IBot{
      */
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
-
+        try {
+            new MessagesSend(this)
+                    .setPeerId(Math.toIntExact(id))
+                    .setMessage(message + " ~Тут должны быть кнопки =)")
+                    .execute();
+        } catch ( BotsLongPollHttpException | BotsLongPollException e) {
+            e.printStackTrace();
+        }
     }
 }
