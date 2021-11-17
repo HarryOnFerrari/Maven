@@ -5,7 +5,6 @@ import api.longpoll.bots.exceptions.BotsLongPollException;
 import api.longpoll.bots.exceptions.BotsLongPollHttpException;
 import api.longpoll.bots.methods.messages.MessagesSend;
 import api.longpoll.bots.model.events.messages.MessageNewEvent;
-import api.longpoll.bots.model.objects.additional.Keyboard;
 import api.longpoll.bots.model.objects.basic.Message;
 import com.vk.api.sdk.client.TransportClient;
 import com.vk.api.sdk.client.VkApiClient;
@@ -18,6 +17,8 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Properties;
 import java.util.Random;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VKBot extends LongPollBot implements IBot{
     private TransportClient transportClient = new HttpTransportClient();
@@ -56,16 +57,15 @@ public class VKBot extends LongPollBot implements IBot{
             users.put(userId, new User(userId));
         }
         User user = users.get(userId);
-        behavior.readCommands(user, message.getText());
-        /*try {
-            new MessagesSend(this)
-                    .setPeerId(message.getPeerId())
-                    .setMessage("В сообщении есть вложение!")
-                    .execute();
-        } catch ( BotsLongPollHttpException | BotsLongPollException e) {
-            e.printStackTrace();
-        }*/
-
+        user.setReminder(this);
+        if (message.getPayload() != null){
+            Matcher textMatch = Pattern.compile("\\{.+?:\"\\\\?(.+?)\"}").matcher(message.getPayload());
+            textMatch.find();
+            String text = textMatch.group(1);
+            behavior.readCommands(user, text);
+        }
+        else
+            behavior.readCommands(user, message.getText());
     }
 
         /**
@@ -95,20 +95,12 @@ public class VKBot extends LongPollBot implements IBot{
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
         try {
-            vk.messages().send(actor).message(message).userId(Math.toIntExact(id)).randomId(random.nextInt(10000)).keyboard(ButtonsForVK.valueOf(keyboardLayout).value()).execute();
+            vk.messages().send(actor).message(message)
+                    .userId(Math.toIntExact(id))
+                    .randomId(random.nextInt(10000))
+                    .keyboard(ButtonsForVK.valueOf(keyboardLayout).value()).execute();
         } catch (ClientException | ApiException e) {
             e.printStackTrace();
         }
-
-        /*
-        * SendMessage newMessage = new SendMessage();
-            newMessage.setChatId(id.toString());
-            newMessage.setText(message);
-            newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
-            try {
-                execute(newMessage);
-            } catch (TelegramApiException e) {
-                e.printStackTrace();
-            }*/
     }
 }

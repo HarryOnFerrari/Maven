@@ -27,14 +27,14 @@ public enum ButtonsForVK {
     }
 
     private static Keyboard keyboardForMenu() {
-        Keyboard keyboard = new Keyboard();
+        Keyboard keyboard = new Keyboard().setOneTime(true);
 
         List<List<KeyboardButton>> allKey = new ArrayList<>();
         List<KeyboardButton> line1 = new ArrayList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("настройки")
-                .setType(TemplateActionTypeNames.OPEN_LINK)).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/setting\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("выбор предмета")
-                .setType(TemplateActionTypeNames.OPEN_LINK)).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"SUBJECT\"}")).setColor(KeyboardButtonColor.DEFAULT));
         allKey.add(line1);
         keyboard.setButtons(allKey);
         return keyboard;
@@ -49,11 +49,25 @@ public enum ButtonsForVK {
     }
 
     private static Keyboard keyboardForChooseMode() {
-        return new Keyboard();
+        Keyboard keyboard = new Keyboard().setOneTime(true);
+
+        List<List<KeyboardButton>> allKey = new ArrayList<>();
+        List<KeyboardButton> line1 = new ArrayList<>();
+        List<KeyboardButton> line2 = new ArrayList<>();
+        line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("тестирование")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/test\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("повторение")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/repeat\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("вернуться к выбору предмета")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/back\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        allKey.add(line1);
+        allKey.add(line2);
+        keyboard.setButtons(allKey);
+        return keyboard;
     }
 
     private static Keyboard keyboardForChooseSubject() {
-        Keyboard keyboard = new Keyboard();
+        Keyboard keyboard = new Keyboard().setOneTime(true);
 
         List<List<KeyboardButton>> allKey = new ArrayList<>();
         List<KeyboardButton> line1 = new ArrayList<>();
@@ -61,13 +75,13 @@ public enum ButtonsForVK {
         List<KeyboardButton> line3 = new ArrayList<>();
         List<KeyboardButton> line4 = new ArrayList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("1. Математика")
-                .setType(TemplateActionTypeNames.OPEN_LINK).setLink("MATHS")).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"MATHS\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("2. Английский язык")
-                .setType(TemplateActionTypeNames.OPEN_LINK).setLink("ENGLISH")).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"ENGLISH\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line3.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("3. Русский язык")
-                .setType(TemplateActionTypeNames.OPEN_LINK).setLink("RUSSIAN")).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"RUSSIAN\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line4.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("Меню")
-                .setType(TemplateActionTypeNames.OPEN_LINK).setLink(MENU)).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/menu\"}")).setColor(KeyboardButtonColor.DEFAULT));
         allKey.add(line1);
         allKey.add(line2);
         allKey.add(line3);
@@ -77,7 +91,17 @@ public enum ButtonsForVK {
     }
 
     private static Keyboard keyboardForTestes() {
-        return new Keyboard();
+        Keyboard keyboard = new Keyboard().setOneTime(true);
+
+        List<List<KeyboardButton>> allKey = new ArrayList<>();
+        List<KeyboardButton> line1 = new ArrayList<>();
+        line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("next")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/next\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("выйти из теста")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/stop\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        allKey.add(line1);
+        keyboard.setButtons(allKey);
+        return keyboard;
     }
 
     /**
