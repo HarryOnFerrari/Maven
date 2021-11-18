@@ -54,7 +54,7 @@ public enum ButtonsForVK {
         List<KeyboardButton> line4 = new ArrayList<>();
         List<KeyboardButton> line5 = new ArrayList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("да, всегда")
-                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"\"}")).setColor(KeyboardButtonColor.DEFAULT));
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timerOn\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 1 день")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timer_off_1\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line3.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 2 дня")
