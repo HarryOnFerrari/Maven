@@ -31,11 +31,6 @@
       <version>1.0.7</version>
     </dependency>
     <dependency>
-      <groupId>com.github.yvasyliev</groupId>
-      <artifactId>java-vk-bots-longpoll-api</artifactId>
-      <version>3.0.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.telegram</groupId>
       <artifactId>telegrambots</artifactId>
       <version>5.3.0</version>
@@ -62,13 +57,9 @@
     <dependency>
       <groupId>com.github.yvasyliev</groupId>
       <artifactId>java-vk-bots-longpoll-api</artifactId>
-      <version>2.1.8</version>
-    </dependency>
-    <dependency>
-      <groupId>com.github.yvasyliev</groupId>
-      <artifactId>java-vk-bots-longpoll-api</artifactId>
       <version>1.2.3</version>
     </dependency>
+
   </dependencies>
 
   <build>
