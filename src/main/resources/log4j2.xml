@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Configuration status="FATAL">
+<Configuration status="WARN">
     <Appenders>
-        <File name="File" fileName="logs/log4j2.log" append="true">
-            <PatternLayout>
-                <Pattern>%d{HH:mm:ss.SSS} [%t] %-5level - %msg%n</Pattern>
-            </PatternLayout>
-        </File>
+        <RollingFile name="RollingFile" filename="log/test.log"
+                     filepattern="${logPath}/%d{YYYYMMddHHmmss}-fargo.log">
+            <PatternLayout pattern="%d{YYYY-MM-dd HH:mm:ss} [%t] %-5p %c{1}:%L - %msg%n" />
+            <Policies>
+                <SizeBasedTriggeringPolicy size="10 MB" />
+            </Policies>
+            <DefaultRolloverStrategy max="20" />
+        </RollingFile>
+
     </Appenders>
     <Loggers>
-        <Logger>
-            <Root level="info">
-                <AppenderRef ref="File"/>
-            </Root>
-        </Logger>
+        <Root level="info">
+            <AppenderRef ref="RollingFile" />
+        </Root>
     </Loggers>
 </Configuration>

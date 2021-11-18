@@ -26,6 +26,10 @@ public enum ButtonsForVK {
         current = currentKeyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для меню
+     * @return итоговая расстановка
+     */
     private static Keyboard keyboardForMenu() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
@@ -44,6 +48,10 @@ public enum ButtonsForVK {
         return new Keyboard();
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для настроек получения уведомлений
+     * @return итоговая расстановка
+     */
     private static Keyboard keyboardForChooseTimerSettingOn() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
@@ -72,6 +80,10 @@ public enum ButtonsForVK {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для выбора режима внутри предмета
+     * @return итоговая расстановка
+     */
     private static Keyboard keyboardForChooseMode() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
@@ -90,6 +102,10 @@ public enum ButtonsForVK {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для выбора предметов
+     * @return итоговая расстановка
+     */
     private static Keyboard keyboardForChooseSubject() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
@@ -114,6 +130,10 @@ public enum ButtonsForVK {
         return keyboard;
     }
 
+    /**
+     * Метод создания шаблона расстановки и функционала кнопок для режима тестирования и повторения
+     * @return итоговая расстановка
+     */
     private static Keyboard keyboardForTestes() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
