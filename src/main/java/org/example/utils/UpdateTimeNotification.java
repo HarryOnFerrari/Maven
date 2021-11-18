@@ -1,6 +1,6 @@
 package org.example.utils;
 
-import org.example.Behavior;
+import org.example.IBot;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 /**
  * Класс для создания задержки таймера по дням
- * @see org.example.User#setReminder(Behavior)
+ * @see org.example.User#setReminder(IBot) 
  * @author Пономарева Дарья
  */
 public class UpdateTimeNotification {

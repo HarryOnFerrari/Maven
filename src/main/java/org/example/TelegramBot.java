@@ -1,20 +1,71 @@
 package org.example;
 
+import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.IOException;
 import java.util.HashMap;
+import java.util.Properties;
 
 /**
  * Класс Бота для telegram.
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class TelegramBot extends Behavior {
+public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
-    /** Поле, реализующее функционал Telegram */
-    RegistrationTelegram telegram = new RegistrationTelegram(this);
+    /** Поле поведения бота для обработки команд */
+    public Behavior behavior = new Behavior(this);
+
+    /**
+     * Функция, возвращающая имя бота
+     * @return имя бота
+     */
+    @Override
+    public String getBotUsername() {
+        return "giveme100poinrsinbrs_bot";
+    }
+
+    /**
+     * Функция получения значения токена бота.
+     * @return токен бота
+     */
+    @Override
+    public String getBotToken() {
+        String token = null;
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
+            token = prop.getProperty("tokenTelegram");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return token;
+    }
+    /**
+     * Функция, которая принимает и обрабатывает обновления состояния бота.
+     * @param update - состояние отдельного пользователя
+     */
+    @Override
+    public void onUpdateReceived(Update update) {
+        if (update.hasMessage() && update.getMessage().hasText()) {
+            if (!users.containsKey(update.getMessage().getChatId())) {
+                users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
+            }
+            User user = users.get(update.getMessage().getChatId());
+            user.setReminder(this);
+            behavior.readCommands(user, update.getMessage().getText());
+        } else if (update.hasCallbackQuery()) {
+            User user = users.get(update.getCallbackQuery().getMessage().getChatId());
+            user.setReminder(this);
+            behavior.readCommands(user, update.getCallbackQuery().getData());
+        }
+    }
+
     /**
      * Функция для отправки сообщения пользователю.
      *
@@ -28,7 +79,9 @@ public class TelegramBot extends Behavior {
         newMessage.setChatId(id.toString());
         newMessage.setText(message);
         try {
-            telegram.execute(newMessage);
+            execute(newMessage);
+            if (message.equals("Вопросов нет."))
+                setMessageWithButtons(id, "", "MODE");
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -50,7 +103,7 @@ public class TelegramBot extends Behavior {
         newMessage.setText(message);
         newMessage.setReplyMarkup(ButtonsForTelegram.valueOf(keyboardLayout).value());
         try {
-            telegram.execute(newMessage);
+            execute(newMessage);
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }

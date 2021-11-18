@@ -1,7 +1,9 @@
 package org.example;
 
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
 import java.io.PrintStream;
-import java.net.URL;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -9,48 +11,53 @@ import java.util.Scanner;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class ConsoleBot extends Behavior{
+public class ConsoleBot implements IBot {
     private Scanner console;
     private PrintStream printer;
+    public Behavior b = new Behavior(this);
 
     /**
      * Функция для отправки сообщения пользователю.
      *
-     * @see IBot#setMessage(Long, String)
-     * @param id - id чата, в который требуется отправить сообщение
+     * @param id      - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
+     * @see IBot#setMessage(Long, String)
      */
     @Override
     public void setMessage(Long id, String message) {
-            printer.println(message);
-        }
+        printer.println(message);
+    }
 
     /**
      * Функция для отправки сообщений пользователю.
      *
+     * @param id             - id чата, в который требуется отправить сообщение
+     * @param message        - текст сообщения
+     * @param keyboardLayout - клавиатура, с которой считываются команды
      * @see IBot#setMessageWithButtons(Long, String, String)
-     * @param id - id чата, в который требуется отправить сообщение
-     * @param message - текст сообщения
-     * @param keyboardLayout - не используется
      */
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
-        setMessage(id, message);
+        printer.println(message);
+        for (List<InlineKeyboardButton> buttons : ButtonsForTelegram.valueOf(keyboardLayout).value().getKeyboard())
+            for (InlineKeyboardButton button : buttons)
+                printer.println(button.getText() + ": " + button.getCallbackData());
     }
 
-    public ConsoleBot(Scanner input, PrintStream output){
+    public ConsoleBot(Scanner input, PrintStream output) {
         console = input;
         console.useDelimiter("\n");
         printer = output;
     }
+
     /**
      * Метод запускает бота.
      */
-    public void run(){
+    public void run() {
         User user = new User(666L);
-        while (console.hasNext()){
+        while (console.hasNext()) {
             user.setReminder(this);
-            readCommands(user, console.next());
+            b.readCommands(user, console.next());
         }
     }
 }

@@ -8,17 +8,17 @@ import static org.example.constants.CommandConstants.REMINDER;
 
 /**
  * Класс создания напоминания пользователю.
- * @see User#setReminder(Behavior)
+ * @see User#setReminder(IBot) 
  * @author Пономарева Дарья, Бабакова Анастасия.
  */
 public class Reminder extends TimerTask {
     /** Функционал бота */
-    Behavior bot;
+    IBot bot;
     /** Поле пользователя, которому отправляется напоминание */
     Long user;
 
     /** Конструктор класса */
-    public Reminder(Behavior bot, Long user){
+    public Reminder(IBot bot, Long user){
         this.bot = bot;
         this.user = user;
     }
@@ -31,6 +31,4 @@ public class Reminder extends TimerTask {
     public void run() {
         bot.setMessageWithButtons(user, REMINDER, "SUBJECT_BOARD");
     }
-
-
 }

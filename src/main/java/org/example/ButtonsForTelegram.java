@@ -37,10 +37,10 @@ public enum ButtonsForTelegram {
     ButtonsForTelegram(InlineKeyboardMarkup currentKeyboard) {
         current = currentKeyboard;
     }
-     /**
-      * Функци для получения ресурса раксладки кнопок
-      * @return ссылка на ресурс
-      */
+    /**
+     * Функци для получения ресурса раксладки кнопок
+     * @return ссылка на ресурс
+     */
     public InlineKeyboardMarkup value(){
         return current;
     }
