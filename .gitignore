@@ -3,4 +3,4 @@ target/**
 /Maven.iml
 config.properties
 src/main/resources/config.properties
-/logs/log4j2.log
+/logs/test.log
