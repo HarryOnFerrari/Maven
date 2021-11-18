@@ -39,6 +39,7 @@ public class User {
     public Integer reminderFlagDays;
 
     /** Функция активации ожидания напоминания */
+
     public void setReminder(IBot bot) {
         if (reminder != null) {
             reminder.cancel();

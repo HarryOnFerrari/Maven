@@ -1,6 +1,5 @@
 package org.example.utils;
 
-import org.example.Behavior;
 import org.example.IBot;
 
 import java.util.Calendar;

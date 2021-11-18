@@ -5,7 +5,7 @@ package org.example;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public interface IBot{
+public interface IBot {
     /**
      * Функция для отправки сообщения пользователю.
      *

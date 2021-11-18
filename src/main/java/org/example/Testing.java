@@ -48,10 +48,6 @@ public class Testing {
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
             fileHTMLUtils.setINPUTSTREAM(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
-            /*if (!wrongList.isEmpty())
-                listQuestions.add("Вопросы закончились\n" +
-                        "Если хотите выйти из режима теста, введите /stop\n" +
-                        "Если хотите отработать вопросы с ошибкой, то введите /next");*/
         }
         key = Subjects.getKey(link);
     }
