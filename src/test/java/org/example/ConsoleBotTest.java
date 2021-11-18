@@ -25,7 +25,7 @@ public class ConsoleBotTest {
     public void repeatingTests() throws IOException {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         String str = "ENGLISH\n/test";
-        for (Integer i=0; i<=149; i++){
+        for (int i = 0; i<=149; i++){
             str += "\n/next";
         }
         ByteArrayInputStream in = new ByteArrayInputStream(str.getBytes());
@@ -33,7 +33,7 @@ public class ConsoleBotTest {
         bot.run();
         in.close();
         String[] result = outContent.toString().split("\r\n");
-        assertEquals("Вопросов нет.", result[result.length-1]);
+        assertEquals("Вопросов нет. \nДля продолжения отправьте /start", result[result.length-1]);
     }
 
     /**
@@ -49,6 +49,7 @@ public class ConsoleBotTest {
         ConsoleBot bot = new ConsoleBot(new Scanner(in), new PrintStream(outContent));
         bot.run();
         in.close();
-        assertEquals("Правильный ответ!", outContent.toString().split("\r\n")[2]);
+        String[] result = outContent.toString().split("\r\n");
+        assertEquals("Правильный ответ!", result[result.length-3]);
     }
 }
