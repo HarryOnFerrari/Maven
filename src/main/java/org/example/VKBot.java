@@ -23,14 +23,22 @@ import java.util.regex.Pattern;
 import static org.example.constants.CommandConstants.*;
 
 public class VKBot extends LongPollBot implements IBot{
+    /** Поле, через которое передаются наши запросы*/
     private TransportClient transportClient = new HttpTransportClient();
+    /** Поле взаимодействия с VK-API с помощью запросов*/
     private VkApiClient vk = new VkApiClient(transportClient);
+    /** Поле авторизации сообщества*/
     private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
     private Random random = new Random();
+    /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
     private IBot bot;
     public Behavior behavior = new Behavior(this);
 
+    /**
+     * Функция получения значения токена бота.
+     * @return токен бота
+     */
     @Override
     public String getAccessToken() {
         String token = null;
@@ -45,6 +53,10 @@ public class VKBot extends LongPollBot implements IBot{
         return token;
     }
 
+    /**
+     * Функция, возвращающая id бота
+     * @return id бота
+     */
     @Override
     public int getGroupId() {
         return 208898778;
