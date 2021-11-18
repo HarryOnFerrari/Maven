@@ -33,7 +33,7 @@ public class ConsoleBot implements IBot {
      *
      * @param id             - id чата, в который требуется отправить сообщение
      * @param message        - текст сообщения
-     * @param keyboardLayout - не используется
+     * @param keyboardLayout - клавиатура, с которой считываются команды
      * @see IBot#setMessageWithButtons(Long, String, String)
      */
     @Override

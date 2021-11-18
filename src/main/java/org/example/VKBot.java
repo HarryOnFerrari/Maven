@@ -27,10 +27,15 @@ public class VKBot extends LongPollBot implements IBot{
     private VkApiClient vk = new VkApiClient(transportClient);
     private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
     private Random random = new Random();
+    /** Поле списка пользователей */
     public HashMap<Long, User> users = new HashMap<>();
-    private IBot bot;
+    /** Поле поведения бота для обработки команд */
     public Behavior behavior = new Behavior(this);
 
+    /**
+     * Функция получения значения токена бота.
+     * @return токен бота
+     */
     @Override
     public String getAccessToken() {
         String token = null;
@@ -45,12 +50,19 @@ public class VKBot extends LongPollBot implements IBot{
         return token;
     }
 
+    /**
+     * Функция получения id группы бота
+     * @return id группы
+     */
     @Override
     public int getGroupId() {
         return 208898778;
     }
 
-
+    /**
+     * Функция, которая принимает и обрабатывает обновления состояния бота.
+     * @param command - новое событие для обработки
+     */
     @Override
     public void onMessageNew(MessageNewEvent command) {
         Message message = command.getMessage();
@@ -74,11 +86,11 @@ public class VKBot extends LongPollBot implements IBot{
             behavior.readCommands(user, commandText);
     }
 
-        /**
-         * Функция для отправки сообщения пользователю.
-         *  @param id      - id чата, в который требуется отправить сообщение
-         * @param message - текст сообщения
-         */
+    /**
+     * Функция для отправки сообщения пользователю.
+     *  @param id      - id чата, в который требуется отправить сообщение
+     * @param message - текст сообщения
+     */
     @Override
     public void setMessage(Long id, String message) {
         try {
