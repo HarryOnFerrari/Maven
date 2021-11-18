@@ -1,6 +1,9 @@
 package org.example;
 
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
+
 import java.io.PrintStream;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -36,6 +39,9 @@ public class ConsoleBot implements IBot {
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
         printer.println(message);
+        for (List<InlineKeyboardButton> buttons : ButtonsForTelegram.valueOf(keyboardLayout).value().getKeyboard())
+            for (InlineKeyboardButton button : buttons)
+                printer.println(button.getText() + ": " + button.getCallbackData());
     }
 
     public ConsoleBot(Scanner input, PrintStream output) {
@@ -50,6 +56,7 @@ public class ConsoleBot implements IBot {
     public void run() {
         User user = new User(666L);
         while (console.hasNext()) {
+            user.setReminder(this);
             b.readCommands(user, console.next());
         }
     }
