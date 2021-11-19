@@ -42,9 +42,9 @@ public class Testing {
      * Конструктор - создание нового теста
      * @exception IOException
      */
-    public Testing(Boolean flag, HashMap<String, String> wrongList, String link){
+    public Testing(Boolean isChooseModeTesting, HashMap<String, String> wrongList, String link){
         wrongUsersList = wrongList;
-        if (flag){
+        if (isChooseModeTesting){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
             fileHTMLUtils.setINPUTSTREAM(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
