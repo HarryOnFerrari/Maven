@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Properties;
  */
 public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /** Поле списка пользователей */
-    public HashMap<Long, User> users = new HashMap<>();
+    public Map<Long, User> users = new HashMap<>();
     /** Поле поведения бота для обработки команд */
     public Behavior behavior = new Behavior(this);
 

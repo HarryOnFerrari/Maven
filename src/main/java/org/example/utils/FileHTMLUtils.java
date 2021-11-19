@@ -65,7 +65,7 @@ public class FileHTMLUtils {
         String result ="";
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
-            String str = null;
+            String str;
             while ((str = br.readLine()) != null) {
                 result += str;
             }

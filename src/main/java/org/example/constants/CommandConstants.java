@@ -46,4 +46,6 @@ public class CommandConstants {
     public static final String TIMER_OFF_1 = "timer_off_1";
     public static final String TIMER_OFF_2 = "timer_off_2";
     public static final String TIMER_OFF_3 = "timer_off_3";
+    public static final String NOTIFICATION_OFF = "Уведомления выключены";
+    public static final String NOTIFICATION_ON = "Уведомления успешно включены";
 }

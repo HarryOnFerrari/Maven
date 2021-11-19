@@ -6,6 +6,7 @@ import org.glassfish.grizzly.utils.Pair;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 
 import static org.example.constants.CommandConstants.*;
@@ -22,11 +23,11 @@ public class User {
     /** Поле состояния пользователя */
     private String condition;
     /** Поле вопросов по текущему предмету, на которые пользователь ответил неправильно */
-    private HashMap<String, String> wrongList;
+    private Map<String, String> wrongList;
     /** Поле ссылка на ресурс текущего предмета */
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
-    private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
+    private Map<String, Pair<String, Map<String, String>>> subjects;
     /** Поле с таймером для отправки напоминаний */
     private Timer reminder;
     /** Поле, обозначающее согласие или отказ пользователя получать уведомление */

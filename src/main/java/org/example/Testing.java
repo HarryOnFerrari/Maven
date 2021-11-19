@@ -3,6 +3,7 @@ package org.example;
 import java.io.*;
 import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import org.example.utils.FileHTMLUtils;
 
@@ -16,10 +17,10 @@ import static org.example.constants.CommandConstants.TEST_END;
  */
 public class Testing {
 
-    /** Поле очередь */
+    /** Поле очередь вопросов и верных ответов */
     private LinkedList<String> listQuestions;
     /** Поле вопросов, на которые пользователь ответил неправильно */
-    private HashMap<String, String> wrongUsersList;
+    private Map<String, String> wrongUsersList;
 
     /** Поле правильного ответа на текущий вопрос теста */
     private String answer;
@@ -42,7 +43,7 @@ public class Testing {
      * Конструктор - создание нового теста
      * @exception IOException
      */
-    public Testing(Boolean isChooseModeTesting, HashMap<String, String> wrongList, String link){
+    public Testing(Boolean isChooseModeTesting, Map<String, String> wrongList, String link){
         wrongUsersList = wrongList;
         if (isChooseModeTesting){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();

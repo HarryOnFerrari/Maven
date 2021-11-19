@@ -22,9 +22,7 @@ public class Start {
         Thread vkBot = new Thread(() -> {
             try {
                 new BotsLongPoll(new VKBot()).run();
-            } catch (BotsLongPollHttpException e) {
-                e.printStackTrace();
-            } catch (BotsLongPollException e) {
+            } catch (BotsLongPollHttpException | BotsLongPollException e) {
                 e.printStackTrace();
             }
         });
