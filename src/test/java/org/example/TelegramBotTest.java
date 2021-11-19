@@ -102,12 +102,13 @@ public class TelegramBotTest {
         LinkedList<Long> fakeIds = new LinkedList<>();
         for (long i = 0L; i<30; i++)
             fakeIds.add(i);
+        TimerBehavior.standardDispatchTime=500;
         for (Long fakeId : fakeIds) {
             Mockito.when(message.getChatId()).thenReturn(fakeId);
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
-        Thread.sleep(10000);
+        Thread.sleep(500);
         for (Long fakeId : fakeIds){
             Mockito.verify(bot).setMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
                     "SUBJECT_BOARD");
