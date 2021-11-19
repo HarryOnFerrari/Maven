@@ -71,24 +71,25 @@ public class Behavior{
                 bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case (TIMER_OFF):
-                user.isAgreeReceiveNotification = false;
-                user.offsetReceiveNotifications = null;
-                user.setReminder(bot);
+                user.reminder.isAgreeReceiveNotification = false;
+                user.reminder.offsetReceiveNotifications = null;
+                user.reminder.setReminder(bot);
                 bot.setMessage(user.chatId, NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_ON):
-                user.isAgreeReceiveNotification = true;
-                user.offsetReceiveNotifications = null;
-                user.setReminder(bot);
+                user.reminder.isAgreeReceiveNotification = true;
+                user.reminder.offsetReceiveNotifications = null;
+                user.reminder.setReminder(bot);
                 bot.setMessage(user.chatId, NOTIFICATION_ON);
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_OFF_1):
             case (TIMER_OFF_2):
             case (TIMER_OFF_3):
-                user.offsetReceiveNotifications = Integer.parseInt(command.substring(command.length()-1));
-                user.setReminder(bot);
+                user.reminder.isAgreeReceiveNotification = false;
+                user.reminder.offsetReceiveNotifications = Integer.parseInt(command.substring(command.length()-1));
+                user.reminder.setReminder(bot);
                 bot.setMessage(user.chatId, NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;

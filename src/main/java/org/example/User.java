@@ -28,34 +28,8 @@ public class User {
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
     private Map<String, Pair<String, Map<String, String>>> subjects;
-    /** Поле с таймером для отправки напоминаний */
-    private Timer reminder;
-    /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
-    public Boolean isAgreeReceiveNotification;
-    /** Поле, обозначающее отказ пользователя получать уведомление на выбранный период*/
-    public Integer offsetReceiveNotifications;
-
-    /** Функция активации ожидания напоминания */
-
-    public void setReminder(IBot bot) {
-        if (reminder != null) {
-            reminder.cancel();
-        }
-        if (isAgreeReceiveNotification) {
-            reminder = new Timer();
-            reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
-        }
-        if (offsetReceiveNotifications != null) {
-            reminder.cancel();
-            isAgreeReceiveNotification = false;
-            UpdateTimeNotification updateTimeNotification = new UpdateTimeNotification();
-            reminder = new Timer();
-            Date currentDate = new Date();
-            Date newDay = updateTimeNotification.timeUp(currentDate, offsetReceiveNotifications);
-            reminder.schedule(new Reminder(bot, chatId), newDay, 10000);
-            isAgreeReceiveNotification = true;
-        }
-    }
+    /** Поле поведения таймера напоминаний */
+    public final TimerBehavior reminder;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -95,7 +69,8 @@ public class User {
     public User(Long chatId){
         this.chatId = chatId;
         condition = "";
-        isAgreeReceiveNotification = true;
+        reminder = new TimerBehavior(chatId);
+        reminder.isAgreeReceiveNotification = true;
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
