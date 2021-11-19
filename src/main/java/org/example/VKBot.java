@@ -59,7 +59,16 @@ public class VKBot extends LongPollBot implements IBot{
      */
     @Override
     public int getGroupId() {
-        return 208898778;
+        String groupId = null;
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
+            groupId = prop.getProperty("groupIdVK");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return Integer.parseInt(groupId);
     }
 
     /**

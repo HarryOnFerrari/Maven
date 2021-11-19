@@ -71,15 +71,15 @@ public class Behavior{
                 bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case (TIMER_OFF):
-                user.reminderFlag = false;
-                user.reminderFlagDays = null;
+                user.isAgreeReceiveNotification = false;
+                user.offsetReceiveNotifications = null;
                 user.setReminder(bot);
                 bot.setMessage(user.chatId, "Уведомления выключены");
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_ON):
-                user.reminderFlag = true;
-                user.reminderFlagDays = null;
+                user.isAgreeReceiveNotification = true;
+                user.offsetReceiveNotifications = null;
                 user.setReminder(bot);
                 bot.setMessage(user.chatId, "Уведомления успешно включены");
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
@@ -87,7 +87,7 @@ public class Behavior{
             case (TIMER_OFF_1):
             case (TIMER_OFF_2):
             case (TIMER_OFF_3):
-                user.reminderFlagDays = Integer.parseInt(command.substring(command.length()-1));
+                user.offsetReceiveNotifications = Integer.parseInt(command.substring(command.length()-1));
                 user.setReminder(bot);
                 bot.setMessage(user.chatId, "Уведомления выключены");
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");

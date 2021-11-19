@@ -26,7 +26,16 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
      */
     @Override
     public String getBotUsername() {
-        return "giveme100poinrsinbrs_bot";
+        String botUsername = null;
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
+            botUsername = prop.getProperty("botUsernameTelegram");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return botUsername;
     }
 
     /**

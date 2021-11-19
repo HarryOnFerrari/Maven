@@ -13,25 +13,21 @@ public class Start {
     public static void main(String[] args){
         try {
             TelegramBotsApi botsApi = new TelegramBotsApi(DefaultBotSession.class);
-            botsApi.registerBot(new TelegramBot().telegram);
+            botsApi.registerBot(new TelegramBot());
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
 
-        Thread consoleBot = new Thread() {
-            public void run(){new ConsoleBot(new Scanner(System.in),System.out).run();}
-        };
-        Thread vkBot = new Thread() {
-            public void run(){
-                try {
-                    new BotsLongPoll(new VKBot()).run();
-                } catch (BotsLongPollHttpException e) {
-                    e.printStackTrace();
-                } catch (BotsLongPollException e) {
-                    e.printStackTrace();
-                }
+        Thread consoleBot = new Thread(() -> new ConsoleBot(new Scanner(System.in),System.out).run());
+        Thread vkBot = new Thread(() -> {
+            try {
+                new BotsLongPoll(new VKBot()).run();
+            } catch (BotsLongPollHttpException e) {
+                e.printStackTrace();
+            } catch (BotsLongPollException e) {
+                e.printStackTrace();
             }
-        };
+        });
         consoleBot.start();
         vkBot.start();
     }

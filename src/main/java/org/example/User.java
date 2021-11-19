@@ -3,11 +3,7 @@ package org.example;
 import org.example.utils.Reminder;
 import org.example.utils.UpdateTimeNotification;
 import org.glassfish.grizzly.utils.Pair;
-import org.glassfish.jersey.internal.inject.UpdaterException;
 
-import javax.xml.crypto.Data;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Timer;
@@ -34,9 +30,9 @@ public class User {
     /** Поле с таймером для отправки напоминаний */
     private Timer reminder;
     /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
-    public Boolean reminderFlag;
+    public Boolean isAgreeReceiveNotification;
     /** Поле, обозначающее отказ пользователя получать уведомление на выбранный период*/
-    public Integer reminderFlagDays;
+    public Integer offsetReceiveNotifications;
 
     /** Функция активации ожидания напоминания */
 
@@ -44,19 +40,19 @@ public class User {
         if (reminder != null) {
             reminder.cancel();
         }
-        if (reminderFlag) {
+        if (isAgreeReceiveNotification) {
             reminder = new Timer();
             reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
         }
-        if (reminderFlagDays != null) {
+        if (offsetReceiveNotifications != null) {
             reminder.cancel();
-            reminderFlag = false;
-            UpdateTimeNotification r = new UpdateTimeNotification();
+            isAgreeReceiveNotification = false;
+            UpdateTimeNotification updateTimeNotification = new UpdateTimeNotification();
             reminder = new Timer();
-            Date current = new Date();
-            Date newDay = r.timeUp(current, reminderFlagDays);
+            Date currentDate = new Date();
+            Date newDay = updateTimeNotification.timeUp(currentDate, offsetReceiveNotifications);
             reminder.schedule(new Reminder(bot, chatId), newDay, 10000);
-            reminderFlag = true;
+            isAgreeReceiveNotification = true;
         }
     }
 
@@ -98,7 +94,7 @@ public class User {
     public User(Long chatId){
         this.chatId = chatId;
         condition = "";
-        reminderFlag = true;
+        isAgreeReceiveNotification = true;
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
