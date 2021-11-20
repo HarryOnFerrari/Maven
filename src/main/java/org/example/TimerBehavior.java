@@ -16,7 +16,7 @@ public class TimerBehavior {
     /** Поле id пользователя-владельца таймера */
     private Long userId;
     /**  */
-    public static int standardDispatchTime = 10000;
+    public static int standardDispatchTime = 86400000;
 
     /** Конструктор класса */
     public TimerBehavior(Long userId){
