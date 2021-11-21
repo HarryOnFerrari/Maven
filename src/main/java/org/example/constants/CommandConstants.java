@@ -18,6 +18,8 @@ public class CommandConstants {
     public static final String SETTING = "/setting";
     public static final String SUBJECT = "SUBJECT";
     public static final String MENU = "/menu";
+    public static final String STATISTIC_GENERAL = "/statistic_general";
+    public static final String STATISTIC_SUBJECT = "/statistic_subject";
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
             "Просто используй: \n" +

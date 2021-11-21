@@ -30,6 +30,8 @@ public class User {
     private Map<String, Pair<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
     public final TimerBehavior reminder;
+    /** Поле статистика пользователя */
+    public UserStatistic statistic;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -71,6 +73,7 @@ public class User {
         condition = "";
         reminder = new TimerBehavior(chatId);
         reminder.isAgreeReceiveNotification = true;
+        statistic = new UserStatistic(chatId);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
