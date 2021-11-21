@@ -21,14 +21,18 @@ public class CommandConstants {
     public static final String HELP_INFO = "Це бот для обучения. " +
             "Сейчас ты можешь проходить здесь тесты и проверять свой скилл. \n" +
             "Просто используй: \n" +
+            "/start - для запуска бота" +
             "/test - для запуска теста \n" +
             "/next - для перехода к следующему вопросу \n" +
-            "/stop - для завершения работы \n" +
+            "/stop - для завершения работы в режиме теста или повторения\n" +
             "/back - для возвращения к выбору предмета \n" +
-            "/repeat - для перехода в режим повторения ошибоных вопросов \n" +
+            "/repeat - для перехода в режим повторения ошибочных вопросов \n" +
             "/help - если тебе вдруг что-то стало непонятно \n" +
             "/menu - вернет вас к выбору между предметами и настройками \n" +
-            "/setting - для перехода в настройки";
+            "/setting - для перехода в настройки \n" +
+            "MATHS - для выбора предмета - математика\n" +
+            "ENGLISH - для выбора предмета - английский язык\n" +
+            "RUSSIAN - для выбора предмета - русский язык";
     public static final String WRONG_COMMAND = "Такой команды пока не существует, или Вы допустили ошибку в написании. " +
             "Воспользуйтесь командой /help, чтобы прочитать инструкцию.";
     public static final String WRONG_ANSWER = "Вы ошиблись, верный ответ: ";
@@ -46,4 +50,6 @@ public class CommandConstants {
     public static final String TIMER_OFF_1 = "timer_off_1";
     public static final String TIMER_OFF_2 = "timer_off_2";
     public static final String TIMER_OFF_3 = "timer_off_3";
+    public static final String NOTIFICATION_OFF = "Уведомления выключены";
+    public static final String NOTIFICATION_ON = "Уведомления успешно включены";
 }

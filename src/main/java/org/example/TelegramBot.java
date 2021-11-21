@@ -7,6 +7,7 @@ import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 /**
@@ -16,7 +17,7 @@ import java.util.Properties;
  */
 public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /** Поле списка пользователей */
-    public HashMap<Long, User> users = new HashMap<>();
+    public Map<Long, User> users = new HashMap<>();
     /** Поле поведения бота для обработки команд */
     public Behavior behavior = new Behavior(this);
 
@@ -26,7 +27,16 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
      */
     @Override
     public String getBotUsername() {
-        return "giveme100poinrsinbrs_bot";
+        String botUsername = null;
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
+            botUsername = prop.getProperty("botUsernameTelegram");
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return botUsername;
     }
 
     /**
@@ -57,11 +67,11 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
                 users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
             }
             User user = users.get(update.getMessage().getChatId());
-            user.setReminder(this);
+            user.reminder.setReminder(this);
             behavior.readCommands(user, update.getMessage().getText());
         } else if (update.hasCallbackQuery()) {
             User user = users.get(update.getCallbackQuery().getMessage().getChatId());
-            user.setReminder(this);
+            user.reminder.setReminder(this);
             behavior.readCommands(user, update.getCallbackQuery().getData());
         }
     }

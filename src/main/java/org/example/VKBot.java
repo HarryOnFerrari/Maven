@@ -15,6 +15,7 @@ import com.vk.api.sdk.httpclient.HttpTransportClient;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Random;
 import java.util.regex.Matcher;
@@ -31,7 +32,7 @@ public class VKBot extends LongPollBot implements IBot{
     private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
     private Random random = new Random();
     /** Поле списка пользователей */
-    public HashMap<Long, User> users = new HashMap<>();
+    public Map<Long, User> users = new HashMap<>();
     /** Поле поведения бота для обработки команд */
     public Behavior behavior = new Behavior(this);
 
@@ -59,7 +60,16 @@ public class VKBot extends LongPollBot implements IBot{
      */
     @Override
     public int getGroupId() {
-        return 208898778;
+        Integer groupId = null;
+        Properties prop = new Properties();
+        try {
+            prop.load(TelegramBot.class.getClassLoader().getResourceAsStream("config.properties"));
+            groupId = Integer.parseInt(prop.getProperty("groupIdVK"));
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return groupId;
     }
 
     /**
@@ -75,7 +85,7 @@ public class VKBot extends LongPollBot implements IBot{
             users.put(userId, new User(userId));
         }
         User user = users.get(userId);
-        user.setReminder(this);
+        user.reminder.setReminder(this);
         if (message.getPayload() != null){
             Matcher textMatch = Pattern.compile("\\{.+?:\"\\\\?(.+?)\"}").matcher(message.getPayload());
             textMatch.find();

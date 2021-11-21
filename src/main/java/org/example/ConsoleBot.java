@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ConsoleBot implements IBot {
     private Scanner console;
     private PrintStream printer;
-    public Behavior b = new Behavior(this);
+    public Behavior behavior = new Behavior(this);
 
     /**
      * Функция для отправки сообщения пользователю.
@@ -56,8 +56,8 @@ public class ConsoleBot implements IBot {
     public void run() {
         User user = new User(666L);
         while (console.hasNext()) {
-            user.setReminder(this);
-            b.readCommands(user, console.next());
+            user.reminder.setReminder(this);
+            behavior.readCommands(user, console.next());
         }
     }
 }

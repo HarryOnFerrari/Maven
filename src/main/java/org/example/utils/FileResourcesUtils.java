@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Чтение файла из файла с расширением .txt
@@ -23,9 +24,9 @@ public class FileResourcesUtils {
      *
      * @return лист доступных учебных предметов
      */
-    public LinkedList<String> makeListWords() {
+    public List<String> makeListWords() {
         BufferedReader br = null;
-        LinkedList<String> list = new LinkedList<>();
+        List<String> list = new LinkedList<>();
         try {
             br = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
             String str;

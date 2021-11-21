@@ -3,6 +3,7 @@ package org.example;
 import com.vk.api.sdk.objects.messages.*;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.example.constants.CommandConstants.*;
@@ -33,8 +34,8 @@ public enum ButtonsForVK {
     private static Keyboard keyboardForMenu() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
-        List<List<KeyboardButton>> allKey = new ArrayList<>();
-        List<KeyboardButton> line1 = new ArrayList<>();
+        List<List<KeyboardButton>> allKey = new LinkedList<>();
+        List<KeyboardButton> line1 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("настройки")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/setting\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("выбор предмета")
@@ -55,12 +56,12 @@ public enum ButtonsForVK {
     private static Keyboard keyboardForChooseTimerSettingOn() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
-        List<List<KeyboardButton>> allKey = new ArrayList<>();
-        List<KeyboardButton> line1 = new ArrayList<>();
-        List<KeyboardButton> line2 = new ArrayList<>();
-        List<KeyboardButton> line3 = new ArrayList<>();
-        List<KeyboardButton> line4 = new ArrayList<>();
-        List<KeyboardButton> line5 = new ArrayList<>();
+        List<List<KeyboardButton>> allKey = new LinkedList<>();
+        List<KeyboardButton> line1 = new LinkedList<>();
+        List<KeyboardButton> line2 = new LinkedList<>();
+        List<KeyboardButton> line3 = new LinkedList<>();
+        List<KeyboardButton> line4 = new LinkedList<>();
+        List<KeyboardButton> line5 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("да, всегда")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"timerOn\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("нет, 1 день")
@@ -87,9 +88,9 @@ public enum ButtonsForVK {
     private static Keyboard keyboardForChooseMode() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
-        List<List<KeyboardButton>> allKey = new ArrayList<>();
-        List<KeyboardButton> line1 = new ArrayList<>();
-        List<KeyboardButton> line2 = new ArrayList<>();
+        List<List<KeyboardButton>> allKey = new LinkedList<>();
+        List<KeyboardButton> line1 = new LinkedList<>();
+        List<KeyboardButton> line2 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("тестирование")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/test\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("повторение")
@@ -109,11 +110,11 @@ public enum ButtonsForVK {
     private static Keyboard keyboardForChooseSubject() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
-        List<List<KeyboardButton>> allKey = new ArrayList<>();
-        List<KeyboardButton> line1 = new ArrayList<>();
-        List<KeyboardButton> line2 = new ArrayList<>();
-        List<KeyboardButton> line3 = new ArrayList<>();
-        List<KeyboardButton> line4 = new ArrayList<>();
+        List<List<KeyboardButton>> allKey = new LinkedList<>();
+        List<KeyboardButton> line1 = new LinkedList<>();
+        List<KeyboardButton> line2 = new LinkedList<>();
+        List<KeyboardButton> line3 = new LinkedList<>();
+        List<KeyboardButton> line4 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("1. Математика")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"MATHS\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("2. Английский язык")
@@ -137,8 +138,8 @@ public enum ButtonsForVK {
     private static Keyboard keyboardForTestes() {
         Keyboard keyboard = new Keyboard().setOneTime(true);
 
-        List<List<KeyboardButton>> allKey = new ArrayList<>();
-        List<KeyboardButton> line1 = new ArrayList<>();
+        List<List<KeyboardButton>> allKey = new LinkedList<>();
+        List<KeyboardButton> line1 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("next")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/next\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("выйти из теста")

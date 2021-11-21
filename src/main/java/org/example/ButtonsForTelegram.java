@@ -4,7 +4,7 @@ import org.example.utils.FileResourcesUtils;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import static org.example.constants.CommandConstants.*;
@@ -50,7 +50,7 @@ public enum ButtonsForTelegram {
      * @return итоговая расстановка
      */
     private static InlineKeyboardMarkup keyboardForTestes(){
-        List<InlineKeyboardButton> buttons = new ArrayList<>();
+        List<InlineKeyboardButton> buttons = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("next");
         button1.setCallbackData(NEXT);
@@ -59,7 +59,7 @@ public enum ButtonsForTelegram {
         button2.setCallbackData(STOP);
         buttons.add(button1);
         buttons.add(button2);
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         rowList.add(buttons);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         keyboard.setKeyboard(rowList);
@@ -74,19 +74,19 @@ public enum ButtonsForTelegram {
         FileResourcesUtils fileResourcesUtils = new FileResourcesUtils();
         List<String> listSubjects = fileResourcesUtils.makeListWords();
         InlineKeyboardMarkup keyboard =new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         for (String subject : listSubjects){
             InlineKeyboardButton button = new InlineKeyboardButton();
             button.setText(subject.split(",")[0]);
             button.setCallbackData(subject.split(",")[1]);
-            List<InlineKeyboardButton> buttons = new ArrayList<>();
+            List<InlineKeyboardButton> buttons = new LinkedList<>();
             buttons.add(button);
             rowList.add(buttons);
         }
         InlineKeyboardButton buttonMenu = new InlineKeyboardButton();
         buttonMenu.setText("меню");
         buttonMenu.setCallbackData(MENU);
-        List<InlineKeyboardButton> buttons = new ArrayList<>();
+        List<InlineKeyboardButton> buttons = new LinkedList<>();
         buttons.add(buttonMenu);
         rowList.add(buttons);
         keyboard.setKeyboard(rowList);
@@ -98,8 +98,8 @@ public enum ButtonsForTelegram {
      * @return итоговая расстановка
      */
     private static InlineKeyboardMarkup keyboardForChooseMode() {
-        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
-        List<InlineKeyboardButton> buttons2 = new ArrayList<>();
+        List<InlineKeyboardButton> buttons1 = new LinkedList<>();
+        List<InlineKeyboardButton> buttons2 = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("тестирование");
         button1.setCallbackData(TEST);
@@ -112,7 +112,7 @@ public enum ButtonsForTelegram {
         buttons1.add(button1);
         buttons1.add(button2);
         buttons2.add(button3);
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         rowList.add(buttons1);
         rowList.add(buttons2);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
@@ -125,12 +125,12 @@ public enum ButtonsForTelegram {
      * @return итоговая расстановка
      */
     public static InlineKeyboardMarkup keyboardForChooseTimerSettingOn(){
-        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
+        List<InlineKeyboardButton> buttons1 = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("включить уведомления");
         button1.setCallbackData(TIMER_ON);
         buttons1.add(button1);
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         rowList.add(buttons1);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         keyboard.setKeyboard(rowList);
@@ -142,16 +142,16 @@ public enum ButtonsForTelegram {
      * @return итоговая расстановка
      */
     public static InlineKeyboardMarkup keyboardForChooseTimerSettingOff() {
-        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
-        List<InlineKeyboardButton> buttons2 = new ArrayList<>();
-        List<InlineKeyboardButton> buttons3 = new ArrayList<>();
-        List<InlineKeyboardButton> buttonsForever = new ArrayList<>();
+        List<InlineKeyboardButton> buttons1 = new LinkedList<>();
+        List<InlineKeyboardButton> buttons2 = new LinkedList<>();
+        List<InlineKeyboardButton> buttons3 = new LinkedList<>();
+        List<InlineKeyboardButton> buttonsForever = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         InlineKeyboardButton button3 = new InlineKeyboardButton();
         InlineKeyboardButton buttonForever = new InlineKeyboardButton();
         button1.setText("1 день");
-        button1.setCallbackData("timer_off_1"); //86400000
+        button1.setCallbackData("timer_off_1"); //86400000 ms
         buttons1.add(button1);
         button2.setText("2 дня");
         button2.setCallbackData("timer_off_2"); //172800000
@@ -162,7 +162,7 @@ public enum ButtonsForTelegram {
         buttonForever.setText("навсегда");
         buttonForever.setCallbackData(TIMER_OFF);
         buttonsForever.add(buttonForever);
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         rowList.add(buttons1);
         rowList.add(buttons2);
         rowList.add(buttons3);
@@ -178,9 +178,9 @@ public enum ButtonsForTelegram {
      */
     public static InlineKeyboardMarkup keyboardForMenu() {
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
-        List<List<InlineKeyboardButton>> rowList= new ArrayList<>();
-        List<InlineKeyboardButton> buttons1 = new ArrayList<>();
-        List<InlineKeyboardButton> buttons2 = new ArrayList<>();
+        List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
+        List<InlineKeyboardButton> buttons1 = new LinkedList<>();
+        List<InlineKeyboardButton> buttons2 = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("настройки");
         button1.setCallbackData(SETTING);

@@ -3,13 +3,10 @@ package org.example;
 import org.example.utils.Reminder;
 import org.example.utils.UpdateTimeNotification;
 import org.glassfish.grizzly.utils.Pair;
-import org.glassfish.jersey.internal.inject.UpdaterException;
 
-import javax.xml.crypto.Data;
-import javax.xml.datatype.XMLGregorianCalendar;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Timer;
 
 import static org.example.constants.CommandConstants.*;
@@ -26,39 +23,13 @@ public class User {
     /** Поле состояния пользователя */
     private String condition;
     /** Поле вопросов по текущему предмету, на которые пользователь ответил неправильно */
-    private HashMap<String, String> wrongList;
+    private Map<String, String> wrongList;
     /** Поле ссылка на ресурс текущего предмета */
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
-    private HashMap<String, Pair<String, HashMap<String, String>>> subjects;
-    /** Поле с таймером для отправки напоминаний */
-    private Timer reminder;
-    /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
-    public Boolean reminderFlag;
-    /** Поле, обозначающее отказ пользователя получать уведомление на выбранный период*/
-    public Integer reminderFlagDays;
-
-    /** Функция активации ожидания напоминания */
-
-    public void setReminder(IBot bot) {
-        if (reminder != null) {
-            reminder.cancel();
-        }
-        if (reminderFlag) {
-            reminder = new Timer();
-            reminder.schedule(new Reminder(bot, chatId), 10000, 10000);
-        }
-        if (reminderFlagDays != null) {
-            reminder.cancel();
-            reminderFlag = false;
-            UpdateTimeNotification r = new UpdateTimeNotification();
-            reminder = new Timer();
-            Date current = new Date();
-            Date newDay = r.timeUp(current, reminderFlagDays);
-            reminder.schedule(new Reminder(bot, chatId), newDay, 10000);
-            reminderFlag = true;
-        }
-    }
+    private Map<String, Pair<String, Map<String, String>>> subjects;
+    /** Поле поведения таймера напоминаний */
+    public final TimerBehavior reminder;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -98,7 +69,8 @@ public class User {
     public User(Long chatId){
         this.chatId = chatId;
         condition = "";
-        reminderFlag = true;
+        reminder = new TimerBehavior(chatId);
+        reminder.isAgreeReceiveNotification = true;
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
