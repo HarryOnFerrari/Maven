@@ -1,9 +1,6 @@
 package org.example;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 public class UserStatistic {
     /** Поле текущего теста, по которому считается предметная статистика*/
@@ -74,9 +71,18 @@ public class UserStatistic {
 
     public String makeStatSubject () {
         createLastTestResult();
-        if (allSubjectsStat.get(subject).isEmpty())
+        if (allSubjectsStat.get(subject).isEmpty()) {
             return subject + ": Информации нет. Пройдите тест.";
-        return subject + ": " + allSubjectsStat.get(subject).toString();
+        }
+        return makeFormatStatistic(allSubjectsStat.get(subject));
+    }
+
+    public String makeFormatStatistic(Map<Integer, String> results) {
+        StringBuilder statSubject = new StringBuilder();
+        for (Integer numberOfResult : results.keySet()) {
+            statSubject.append(subject + ": попытка №" + numberOfResult + ": " + results.get(numberOfResult) + "\n");
+        }
+        return statSubject.toString();
     }
 
     public String makeStatGeneral() {
