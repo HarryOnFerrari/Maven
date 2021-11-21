@@ -35,6 +35,7 @@ public class Behavior{
                 break;
             case (TEST):
                 user.setCondition(TEST);
+                user.statistic.setSubject(user.statistic.getSubject());
                 bot.setMessage(user.chatId, user.testes.newLine());
                 break;
             case (REPEAT):
@@ -97,6 +98,7 @@ public class Behavior{
                 bot.setMessage(user.chatId, user.statistic.makeStatGeneral());
                 break;
             case (STATISTIC_SUBJECT):
+                bot.setMessage(user.chatId, user.statistic.makeStatSubject());
                 break;
             default:
                 checkFalseCommand(user, command);
