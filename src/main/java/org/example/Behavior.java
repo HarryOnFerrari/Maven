@@ -35,7 +35,7 @@ public class Behavior{
                 break;
             case (TEST):
                 user.setCondition(TEST);
-                user.statistic.setSubject(user.statistic.getSubject());
+                //user.statistic.setSubject(user.statistic.getSubject());
                 bot.setMessage(user.chatId, user.testes.newLine());
                 break;
             case (REPEAT):
@@ -58,7 +58,7 @@ public class Behavior{
                 } else {
                     bot.setMessage(user.chatId, "Тест завершен");
                     bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
-                    user.setCondition("");
+                    user.setCondition(STOP);
                 }
                 break;
             case ("ENGLISH"):

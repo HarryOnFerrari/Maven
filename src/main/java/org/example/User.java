@@ -41,6 +41,7 @@ public class User {
         switch (str) {
             case (TEST):
                 testes = new Testing(true, wrongList, link);
+                statistic.startGenerateStat();
                 break;
             case (REPEAT):
                 testes = new Testing(false, wrongList, link);
@@ -53,6 +54,9 @@ public class User {
                 break;
             case (BACK):
                 str = "";
+                break;
+            case (STOP):
+                statistic.createLastTestResult();
         }
         condition = str;
     }

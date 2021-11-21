@@ -44,17 +44,25 @@ public class UserStatistic {
     }
 
     public void setSubject(String subject) {
-        createLastTestResult();
         this.subject = subject;
-        Map<Integer, String> sub = allSubjectsStat.get(subject);
-        sub.put(sub.size()+1, "Нет информации. Пройдите тест.");
     }
 
-    private void createLastTestResult(){
+    public void startGenerateStat(){
+        //createLastTestResult();
+        countWrongAnswer = 0;
+        countRightAnswer = 0;
+        Map<Integer, String> sub = allSubjectsStat.get(subject);
+        //sub.put(sub.size()+1, "Нет информации. Пройдите тест.");
+        sub.put(sub.size()+1, new String());
+    }
+
+    public void createLastTestResult(){
         if (countRightAnswer != 0 || countWrongAnswer != 0){
             Map<Integer, String> previousSub = allSubjectsStat.get(this.subject);
             previousSub.put(previousSub.size(),
                     countRightAnswer + " - правильных, " + countWrongAnswer + " - неправильных\n");
+            countWrongAnswer = 0;
+            countRightAnswer = 0;
         }
     }
 
@@ -66,6 +74,8 @@ public class UserStatistic {
 
     public String makeStatSubject () {
         createLastTestResult();
+        if (allSubjectsStat.get(subject).isEmpty())
+            return subject + ": Информации нет. Пройдите тест.";
         return subject + ": " + allSubjectsStat.get(subject).toString();
     }
 
