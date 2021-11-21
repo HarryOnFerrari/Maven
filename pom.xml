@@ -126,7 +126,7 @@
         <configuration>
           <archive>
             <manifest>
-              <mainClass>org.example.Start</mainClass>
+              <mainClass>Start</mainClass>
             </manifest>
           </archive>
           <descriptorRefs>
