@@ -76,7 +76,11 @@ public class UserStatistic {
             result.append(sub);
             result.append(": ");
             Map<Integer, String> subStat = allSubjectsStat.get(sub);
-            result.append(subStat.get(subStat.size()));
+            if (subStat.get(subStat.size()) != null) {
+                result.append(subStat.get(subStat.size()));
+            } else {
+                result.append("нет информации, пройдите тест.\n");
+            }
             //result.append("\n");
         }
         //String result = subject + ": " + countRightAnswer + " - правильных, " + countWrongAnswer + " - неправильных, ";
