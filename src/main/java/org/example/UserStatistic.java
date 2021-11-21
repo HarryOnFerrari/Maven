@@ -2,9 +2,11 @@ package org.example;
 
 import java.util.*;
 
+/**
+ * Класс бота для обработки данных статистики
+ * @author Бабакова Анастасия, Пономарева Дарья.
+ */
 public class UserStatistic {
-    /** Поле текущего теста, по которому считается предметная статистика*/
-    //private final Testing tests;
     /** Поле id пользователя */
     private Long userId;
     /** Поле количества верных ответов */
@@ -12,13 +14,12 @@ public class UserStatistic {
     /** Поле количества неверных ответов */
     public Integer countWrongAnswer = 0;
     private User user;
-    /** Поле номера попытки */
-    private Integer numberOfTrial;
 
-    /** hello bro how are you */
+    /** Общая таблица по всей статистике */
     Map<String, Map<Integer, String>> allSubjectsStat = initSubjectMap();
 
-    private Map<String, Map<Integer, String>> initSubjectMap(){
+    /** Метод заполнения статистики учебными предметами */
+    private Map<String, Map<Integer, String>> initSubjectMap() {
         Map<String, Map<Integer, String>> result = new HashMap<>();
         for (Subjects sub: Subjects.values()){
             result.put(sub.toString(), new HashMap<>());
@@ -26,13 +27,6 @@ public class UserStatistic {
         return result;
     }
 
-    public Integer getNumberOfTrial() {
-        return numberOfTrial;
-    }
-
-    public void setNumberOfTrial(Integer numberOfTrial) {
-        this.numberOfTrial = numberOfTrial;
-    }
     /** Поле названия предмета */
     private String subject;
 
@@ -44,6 +38,7 @@ public class UserStatistic {
         this.subject = subject;
     }
 
+    /**  */
     public void startGenerateStat(){
         //createLastTestResult();
         countWrongAnswer = 0;
@@ -53,6 +48,7 @@ public class UserStatistic {
         sub.put(sub.size()+1, new String());
     }
 
+    /** Метод создания статистики по последнему резултату теста */
     public void createLastTestResult(){
         if (countRightAnswer != 0 || countWrongAnswer != 0){
             Map<Integer, String> previousSub = allSubjectsStat.get(this.subject);
@@ -69,6 +65,10 @@ public class UserStatistic {
         this.userId = userId;
     }
 
+    /**
+     * Метод приведения статистики по попыткам конкретного предмета
+     * @return статистика по предмету с указанием попыток
+     */
     public String makeStatSubject () {
         createLastTestResult();
         if (allSubjectsStat.get(subject).isEmpty()) {
@@ -77,6 +77,10 @@ public class UserStatistic {
         return makeFormatStatistic(allSubjectsStat.get(subject));
     }
 
+    /**
+     * Метод приведения сводки попытка-результат к читабельному формату
+     * @return строковый формат представления сводки
+     */
     public String makeFormatStatistic(Map<Integer, String> results) {
         StringBuilder statSubject = new StringBuilder();
         for (Integer numberOfResult : results.keySet()) {
@@ -85,6 +89,10 @@ public class UserStatistic {
         return statSubject.toString();
     }
 
+    /**
+     * Метод создания общей сводки по всем предметам
+     * @return статистика по предметам
+     */
     public String makeStatGeneral() {
         createLastTestResult();
         StringBuilder result = new StringBuilder();
@@ -97,10 +105,7 @@ public class UserStatistic {
             } else {
                 result.append("нет информации, пройдите тест.\n");
             }
-            //result.append("\n");
         }
-        //String result = subject + ": " + countRightAnswer + " - правильных, " + countWrongAnswer + " - неправильных, ";
-        //return result;
         return result.toString();
     }
 }

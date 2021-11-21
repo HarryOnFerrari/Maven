@@ -6,6 +6,10 @@ import org.example.utils.UpdateTimeNotification;
 import java.util.Date;
 import java.util.Timer;
 
+/**
+ * Класс бота для настройки отправки уведомлений.
+ * @author Бабакова Анастасия, Пономарева Дарья.
+ */
 public class TimerBehavior {
     /** Поле с таймером для отправки напоминаний */
     private Timer reminder;
