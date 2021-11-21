@@ -1,1 +1,1 @@
-web: java -Dserver.port=$PORT $JAVA_OPTS -jar target/Maven-1.0-SNAPSHOT-jar-with-dependencies.jar
+web: java $JAVA_OPTS -jar target/Maven-1.0-SNAPSHOT-jar-with-dependencies.jar -Dserver.port=$PORT
