@@ -58,6 +58,7 @@
       <artifactId>java-vk-bots-longpoll-api</artifactId>
       <version>1.2.3</version>
     </dependency>
+
   </dependencies>
 
   <build>
