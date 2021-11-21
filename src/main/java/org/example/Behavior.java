@@ -94,7 +94,7 @@ public class Behavior{
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
             case (STATISTIC_GENERAL):
-                bot.setMessage(user.chatId, user.statistic.makeStatGeneral(user));
+                bot.setMessage(user.chatId, user.statistic.makeStatGeneral());
                 break;
             case (STATISTIC_SUBJECT):
                 break;

@@ -12,9 +12,28 @@ public class UserStatistic {
     private User user;
     /** Поле номера попытки */
     private Integer numberOfTrial;
+
+    public Integer getNumberOfTrial() {
+        return numberOfTrial;
+    }
+
+    public void setNumberOfTrial(Integer numberOfTrial) {
+        this.numberOfTrial = numberOfTrial;
+    }
+    /** Поле названия предмета */
+    private String subject;
+
+    public String getSubject() {
+        return subject;
+    }
+
+    public void setSubject(String subject) {
+        this.subject = subject;
+    }
+
+
     /** Конструктор класса */
     public UserStatistic(Long chatId){
-        //this.tests = tests;
         this.userId = userId;
     }
 
@@ -22,8 +41,7 @@ public class UserStatistic {
         return "";
     }
 
-    public String makeStatGeneral(User user) {
-        String subject = user.getCondition();
+    public String makeStatGeneral() {
         String result = subject + ": " + countRightAnswer + " - правильных, " + countWrongAnswer + " - неправильных, ";
         return result;
     }

@@ -49,6 +49,7 @@ public class User {
             case ("MATHS"): case ("RUSSIAN"): case("ENGLISH"):
                 link = subjects.get(str).getFirst();
                 wrongList = subjects.get(str).getSecond();
+                statistic.setSubject(str);
                 break;
             case (BACK):
                 str = "";
