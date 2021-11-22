@@ -83,9 +83,14 @@ public class UserStatistic {
      */
     public String makeFormatStatistic(Map<Integer, String> results) {
         StringBuilder statSubject = new StringBuilder();
-        for (Integer numberOfResult : results.keySet()) {
-            statSubject.append(subject + ": попытка №" + numberOfResult + ": " + results.get(numberOfResult) + "\n");
+        for (Map.Entry entry : results.entrySet()) {
+            entry.setValue(": попытка №" + entry.getKey() + ": " + entry.getValue() + "\n");
+            statSubject.append(subject + entry.getValue());
         }
+
+        /*for (Integer numberOfResult : results.keySet()) {
+            statSubject.append(subject + ": попытка №" + numberOfResult + ": " + results.get(numberOfResult) + "\n");
+        }*/
         return statSubject.toString();
     }
 
