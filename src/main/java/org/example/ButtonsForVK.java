@@ -2,12 +2,14 @@ package org.example;
 
 import com.vk.api.sdk.objects.messages.*;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 
-import static org.example.constants.CommandConstants.*;
-
+/**
+ * enum с шаблонами клавиатуры на каждое состояние для vk
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public enum ButtonsForVK {
     /** Состояние тестирования */
     TEST_BOARD(keyboardForTestes()),

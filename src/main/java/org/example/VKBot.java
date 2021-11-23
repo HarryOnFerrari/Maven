@@ -23,6 +23,11 @@ import java.util.regex.Pattern;
 
 import static org.example.constants.CommandConstants.*;
 
+/**
+ * Класс Бота для vk.
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class VKBot extends LongPollBot implements IBot{
     /** Поле, через которое передаются наши запросы*/
     private TransportClient transportClient = new HttpTransportClient();

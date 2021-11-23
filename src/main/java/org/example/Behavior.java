@@ -2,6 +2,11 @@ package org.example;
 
 import static org.example.constants.CommandConstants.*;
 
+/**
+ * Класс, описывающий поведение бота.
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class Behavior{
     private IBot bot;
     public Behavior(IBot bot){

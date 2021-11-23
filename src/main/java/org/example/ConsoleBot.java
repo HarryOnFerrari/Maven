@@ -44,6 +44,11 @@ public class ConsoleBot implements IBot {
                 printer.println(button.getText() + ": " + button.getCallbackData());
     }
 
+    /**
+     * Конструктор класса
+     * @param input - входящая строка с клавиатуры
+     * @param output - текст сообщения на выходе
+     */
     public ConsoleBot(Scanner input, PrintStream output) {
         console = input;
         console.useDelimiter("\n");
