@@ -14,9 +14,26 @@ public class TimerBehavior {
     /** Поле с таймером для отправки напоминаний */
     private Timer reminder;
     /** Поле, обозначающее согласие или отказ пользователя получать уведомление */
-    public Boolean isAgreeReceiveNotification;
+    private Boolean isAgreeReceiveNotification;
+    public Boolean getAgreeReceiveNotification() {
+        return isAgreeReceiveNotification;
+    }
+
+    public void setAgreeReceiveNotification(Boolean agreeReceiveNotification) {
+        isAgreeReceiveNotification = agreeReceiveNotification;
+    }
+
     /** Поле, обозначающее отказ пользователя получать уведомление на выбранный период*/
-    public Integer offsetReceiveNotifications;
+    private int offsetReceiveNotifications;
+    public int getOffsetReceiveNotifications() {
+        return offsetReceiveNotifications;
+    }
+
+    public void setOffsetReceiveNotifications(int offsetReceiveNotifications) {
+        this.offsetReceiveNotifications = offsetReceiveNotifications;
+    }
+
+
     /** Поле id пользователя-владельца таймера */
     private Long userId;
     /** Сутки */
@@ -36,7 +53,7 @@ public class TimerBehavior {
             reminder = new Timer();
             reminder.schedule(new Reminder(bot, userId), standardDispatchTime, standardDispatchTime);
         }
-        if (offsetReceiveNotifications != null) {
+        if (offsetReceiveNotifications > 0) {
             reminder.cancel();
             UpdateTimeNotification updateTimeNotification = new UpdateTimeNotification();
             reminder = new Timer();
