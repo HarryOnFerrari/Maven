@@ -4,16 +4,13 @@ import java.util.*;
 
 /**
  * Класс бота для обработки данных статистики
- * @author Бабакова Анастасия, Пономарева Дарья.
+ * @author Бабакова Анастасия(немножко), Пономарева Дарья(множко).
  */
 public class UserStatistic {
-    /** Поле id пользователя */
-    private Long userId;
     /** Поле количества верных ответов */
     public Integer countRightAnswer = 0;
     /** Поле количества неверных ответов */
     public Integer countWrongAnswer = 0;
-    private User user;
 
     /** Общая таблица по всей статистике */
     Map<String, Map<Integer, String>> allSubjectsStat = initSubjectMap();
@@ -30,21 +27,27 @@ public class UserStatistic {
     /** Поле названия предмета */
     private String subject;
 
+    /**
+     * Функция получения поля {@link UserStatistic#subject}
+     * @return текущий предмет статистики
+     */
     public String getSubject() {
         return subject;
     }
 
+    /**
+     * Процедура переключения предмета для составления статистики
+     * @param subject предмет, по которому будет составляться статистика
+     */
     public void setSubject(String subject) {
         this.subject = subject;
     }
 
-    /**  */
+    /** Метод подготовки класса к генерации новой статистики по предмету */
     public void startGenerateStat(){
-        //createLastTestResult();
         countWrongAnswer = 0;
         countRightAnswer = 0;
         Map<Integer, String> sub = allSubjectsStat.get(subject);
-        //sub.put(sub.size()+1, "Нет информации. Пройдите тест.");
         sub.put(sub.size()+1, new String());
     }
 
@@ -57,12 +60,6 @@ public class UserStatistic {
             countWrongAnswer = 0;
             countRightAnswer = 0;
         }
-    }
-
-
-    /** Конструктор класса */
-    public UserStatistic(Long chatId){
-        this.userId = userId;
     }
 
     /**
@@ -84,13 +81,9 @@ public class UserStatistic {
     public String makeFormatStatistic(Map<Integer, String> results) {
         StringBuilder statSubject = new StringBuilder();
         for (Map.Entry entry : results.entrySet()) {
-            entry.setValue(": попытка №" + entry.getKey() + ": " + entry.getValue() + "\n");
+            entry.setValue(": попытка №" + entry.getKey() + ": " + entry.getValue());
             statSubject.append(subject + entry.getValue());
         }
-
-        /*for (Integer numberOfResult : results.keySet()) {
-            statSubject.append(subject + ": попытка №" + numberOfResult + ": " + results.get(numberOfResult) + "\n");
-        }*/
         return statSubject.toString();
     }
 

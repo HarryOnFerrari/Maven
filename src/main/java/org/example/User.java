@@ -1,13 +1,9 @@
 package org.example;
 
-import org.example.utils.Reminder;
-import org.example.utils.UpdateTimeNotification;
 import org.glassfish.grizzly.utils.Pair;
 
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.Timer;
 
 import static org.example.constants.CommandConstants.*;
 
@@ -78,7 +74,7 @@ public class User {
         condition = "";
         reminder = new TimerBehavior(chatId);
         reminder.isAgreeReceiveNotification = true;
-        statistic = new UserStatistic(chatId);
+        statistic = new UserStatistic();
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(

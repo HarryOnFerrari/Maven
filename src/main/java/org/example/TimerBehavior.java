@@ -19,7 +19,7 @@ public class TimerBehavior {
     public Integer offsetReceiveNotifications;
     /** Поле id пользователя-владельца таймера */
     private Long userId;
-    /**  */
+    /** Предустановленное время для отправки сообщений */
     public static int standardDispatchTime = 86400000;
 
     /** Конструктор класса */
