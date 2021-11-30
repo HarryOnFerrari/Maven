@@ -114,4 +114,22 @@ public class TelegramBotTest {
                     "SUBJECT_BOARD");
         }
     }
+
+    /**
+     * Отладочный тест для проверки того, что, после прохождения теста по одному предмету, результат
+     * последней попытки не переносится в статистику другого предмета (больная мозоль)
+     */
+    @Test
+    public void checkUserStatisticsLogic(){
+        Update update = new Update();
+        Message message = Mockito.mock(Message.class);
+        Mockito.when(message.hasText()).thenReturn(true);
+        Mockito.when(message.getChatId()).thenReturn(chatId);
+        Mockito.when(message.getText()).thenReturn("MATHS").thenReturn("/test").thenReturn("100").
+                thenReturn("/stop").thenReturn("ENGLISH").thenReturn("/statistic_subject");
+        update.setMessage(message);
+        for (int i=0; i<6; i++)
+            bot.onUpdateReceived(update);
+        Mockito.verify(bot).setMessage(chatId, "ENGLISH: Информации нет. Пройдите тест.");
+    }
 }

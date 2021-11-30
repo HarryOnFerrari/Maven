@@ -5,10 +5,10 @@ import org.example.utils.UpdateTimeNotification;
 
 import java.util.Date;
 import java.util.Timer;
+
 /**
- * Класс Бота для настройки уведомлений.
- *
- * @author Бабакова Анастасия, Пономарева Дарья
+ * Класс бота для настройки отправки уведомлений.
+ * @author Бабакова Анастасия, Пономарева Дарья.
  */
 public class TimerBehavior {
     /** Поле с таймером для отправки напоминаний */
@@ -36,7 +36,8 @@ public class TimerBehavior {
 
     /** Поле id пользователя-владельца таймера */
     private Long userId;
-    /** Сутки */
+
+    /** Предустановленное время для отправки сообщений */
     public static int standardDispatchTime = 86400000;
 
     /** Конструктор класса */

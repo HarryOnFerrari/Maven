@@ -8,7 +8,7 @@ import java.util.GregorianCalendar;
 
 /**
  * Класс для создания задержки таймера по дням
- * @see org.example.User#setReminder(IBot) 
+ * @see org.example.TimerBehavior#setReminder(IBot)
  * @author Пономарева Дарья
  */
 public class UpdateTimeNotification {

@@ -3,9 +3,8 @@ package org.example;
 import static org.example.constants.CommandConstants.*;
 
 /**
- * Класс, описывающий поведение бота.
- *
- * @author Бабакова Анастасия, Пономарева Дарья
+ * Класс бота для обработки его поведения с описанием команд
+ * @author Бабакова Анастасия, Пономарева Дарья.
  */
 public class Behavior{
     private IBot bot;
@@ -40,6 +39,7 @@ public class Behavior{
                 break;
             case (TEST):
                 user.setCondition(TEST);
+                //user.statistic.setSubject(user.statistic.getSubject());
                 bot.setMessage(user.chatId, user.testes.newLine());
                 break;
             case (REPEAT):
@@ -62,7 +62,7 @@ public class Behavior{
                 } else {
                     bot.setMessage(user.chatId, "Тест завершен");
                     bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
-                    user.setCondition("");
+                    user.setCondition(STOP);
                 }
                 break;
             case ("ENGLISH"):
@@ -98,6 +98,12 @@ public class Behavior{
                 bot.setMessage(user.chatId, NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
                 break;
+            case (STATISTIC_GENERAL):
+                bot.setMessage(user.chatId, user.statistic.makeStatGeneral());
+                break;
+            case (STATISTIC_SUBJECT):
+                bot.setMessage(user.chatId, user.statistic.makeStatSubject());
+                break;
             default:
                 checkFalseCommand(user, command);
                 break;
@@ -127,10 +133,12 @@ public class Behavior{
     public final void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())) {
             bot.setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
+            user.statistic.countRightAnswer += 1;
         }
         else {
             user.testes.saveQuestion();
             bot.setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
+            user.statistic.countWrongAnswer += 1;
         }
     }
 

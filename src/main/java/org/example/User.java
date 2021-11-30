@@ -26,6 +26,8 @@ public class User {
     private Map<String, Pair<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
     public final TimerBehavior reminder;
+    /** Поле статистика пользователя */
+    public UserStatistic statistic;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -35,6 +37,7 @@ public class User {
         switch (str) {
             case (TEST):
                 testes = new Testing(true, wrongList, link);
+                statistic.startGenerateStat();
                 break;
             case (REPEAT):
                 testes = new Testing(false, wrongList, link);
@@ -43,9 +46,13 @@ public class User {
             case ("MATHS"): case ("RUSSIAN"): case("ENGLISH"):
                 link = subjects.get(str).getFirst();
                 wrongList = subjects.get(str).getSecond();
+                statistic.setSubject(str);
                 break;
             case (BACK):
                 str = "";
+                break;
+            case (STOP):
+                statistic.createLastTestResult();
         }
         condition = str;
     }
@@ -66,6 +73,7 @@ public class User {
         this.chatId = chatId;
         condition = "";
         reminder = new TimerBehavior(chatId);
+        statistic = new UserStatistic();
         reminder.setAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {

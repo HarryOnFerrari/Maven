@@ -86,11 +86,17 @@ public enum ButtonsForTelegram {
             rowList.add(buttons);
         }
         InlineKeyboardButton buttonMenu = new InlineKeyboardButton();
+        InlineKeyboardButton buttonStatistic = new InlineKeyboardButton();
         buttonMenu.setText("меню");
+        buttonStatistic.setText("статистика");
         buttonMenu.setCallbackData(MENU);
+        buttonStatistic.setCallbackData(STATISTIC_GENERAL);
         List<InlineKeyboardButton> buttons = new LinkedList<>();
+        List<InlineKeyboardButton> buttonsStatistic = new LinkedList<>();
         buttons.add(buttonMenu);
+        buttonsStatistic.add(buttonStatistic);
         rowList.add(buttons);
+        rowList.add(buttonsStatistic);
         keyboard.setKeyboard(rowList);
         return keyboard;
     }
@@ -102,21 +108,27 @@ public enum ButtonsForTelegram {
     private static InlineKeyboardMarkup keyboardForChooseMode() {
         List<InlineKeyboardButton> buttons1 = new LinkedList<>();
         List<InlineKeyboardButton> buttons2 = new LinkedList<>();
+        List<InlineKeyboardButton> buttons3 = new LinkedList<>();
         InlineKeyboardButton button1 = new InlineKeyboardButton();
         button1.setText("тестирование");
         button1.setCallbackData(TEST);
         InlineKeyboardButton button2 = new InlineKeyboardButton();
         button2.setText("повторение");
         button2.setCallbackData(REPEAT);
+        InlineKeyboardButton buttonStatistic = new InlineKeyboardButton();
+        buttonStatistic.setText("статистика");
+        buttonStatistic.setCallbackData(STATISTIC_SUBJECT);
         InlineKeyboardButton button3 = new InlineKeyboardButton();
         button3.setText("вернуться к выбору предмета");
         button3.setCallbackData(BACK);
         buttons1.add(button1);
         buttons1.add(button2);
-        buttons2.add(button3);
+        buttons2.add(buttonStatistic);
+        buttons3.add(button3);
         List<List<InlineKeyboardButton>> rowList= new LinkedList<>();
         rowList.add(buttons1);
         rowList.add(buttons2);
+        rowList.add(buttons3);
         InlineKeyboardMarkup keyboard = new InlineKeyboardMarkup();
         keyboard.setKeyboard(rowList);
         return keyboard;

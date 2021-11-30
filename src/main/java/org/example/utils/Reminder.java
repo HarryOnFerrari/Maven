@@ -1,14 +1,13 @@
 package org.example.utils;
 import org.example.*;
 
-import java.util.Date;
 import java.util.TimerTask;
 
 import static org.example.constants.CommandConstants.REMINDER;
 
 /**
  * Класс создания напоминания пользователю.
- * @see User#setReminder(IBot) 
+ * @see TimerBehavior#setReminder(IBot)
  * @author Пономарева Дарья, Бабакова Анастасия.
  */
 public class Reminder extends TimerTask {
