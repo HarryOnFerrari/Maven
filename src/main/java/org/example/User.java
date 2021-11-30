@@ -73,8 +73,8 @@ public class User {
         this.chatId = chatId;
         condition = "";
         reminder = new TimerBehavior(chatId);
-        reminder.isAgreeReceiveNotification = true;
         statistic = new UserStatistic();
+        reminder.setAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
