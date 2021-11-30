@@ -8,6 +8,9 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.util.LinkedList;
+import java.util.List;
+
+import static org.example.TimerBehavior.*;
 
 
 /**
@@ -99,7 +102,7 @@ public class TelegramBotTest {
         Message message = Mockito.mock(Message.class);
         Mockito.when(message.hasText()).thenReturn(true);
         Mockito.when(message.getText()).thenReturn("/start");
-        LinkedList<Long> fakeIds = new LinkedList<>();
+        List<Long> fakeIds = new LinkedList<>();
         for (long i = 0L; i<30; i++)
             fakeIds.add(i);
         TimerBehavior.standardDispatchTime=500;
