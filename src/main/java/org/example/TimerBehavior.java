@@ -32,13 +32,13 @@ public class TimerBehavior {
     public void setOffsetReceiveNotifications(int offsetReceiveNotifications) {
         this.offsetReceiveNotifications = offsetReceiveNotifications;
     }
-
+    /** Предустановленное время для отправки сообщений раз в сутки, значение в ms*/
+    private final int standardDispatchTime = 24 * 60 * 60 * 1000;
 
     /** Поле id пользователя-владельца таймера */
     private Long userId;
 
-    /** Предустановленное время для отправки сообщений */
-    public static int standardDispatchTime = 86400000;
+
 
     /** Конструктор класса */
     public TimerBehavior(Long userId){
@@ -47,6 +47,7 @@ public class TimerBehavior {
 
     /** Функция активации ожидания напоминания */
     public void setReminder(IBot bot) {
+
         if (reminder != null) {
             reminder.cancel();
         }
