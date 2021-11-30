@@ -96,7 +96,7 @@ public class TelegramBotTest {
      * Проверка своевременной рассылки напоминания большому числу пользователей
      * @throws InterruptedException
      */
-    @Test
+    /*@Test
     public void remind() throws InterruptedException {
         Update update = new Update();
         Message message = Mockito.mock(Message.class);
@@ -116,7 +116,7 @@ public class TelegramBotTest {
             Mockito.verify(bot).setMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
                     "SUBJECT_BOARD");
         }
-    }
+    }*/
 
     /**
      * Отладочный тест для проверки того, что, после прохождения теста по одному предмету, результат
