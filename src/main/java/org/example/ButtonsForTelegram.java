@@ -10,7 +10,9 @@ import java.util.List;
 import static org.example.constants.CommandConstants.*;
 
 /**
- * Состояния бота
+ * enum с шаблонами клавиатуры на каждое состояние для telegram
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
  */
 
 public enum ButtonsForTelegram {
