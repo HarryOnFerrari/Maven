@@ -8,9 +8,23 @@ import java.util.*;
  */
 public class UserStatistic {
     /** Поле количества верных ответов */
-    public Integer countRightAnswer = 0;
+    private Integer countRightAnswer = 0;
+    public Integer getCountRightAnswer() {
+        return countRightAnswer;
+    }
+
+    public void setCountRightAnswer(Integer countRightAnswer) {
+        this.countRightAnswer += countRightAnswer;
+    }
     /** Поле количества неверных ответов */
-    public Integer countWrongAnswer = 0;
+    private Integer countWrongAnswer = 0;
+    public Integer getCountWrongAnswer() {
+        return countWrongAnswer;
+    }
+
+    public void setCountWrongAnswer(Integer countWrongAnswer) {
+        this.countWrongAnswer += countWrongAnswer;
+    }
 
     /** Общая таблица по всей статистике */
     Map<String, Map<Integer, String>> allSubjectsStat = initSubjectMap();

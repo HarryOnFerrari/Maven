@@ -133,12 +133,12 @@ public class Behavior{
     public final void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.testes.getAnswer())) {
             bot.setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
-            user.statistic.countRightAnswer += 1;
+            user.statistic.setCountRightAnswer(1);
         }
         else {
             user.testes.saveQuestion();
             bot.setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
-            user.statistic.countWrongAnswer += 1;
+            user.statistic.setCountWrongAnswer(1);
         }
     }
 
