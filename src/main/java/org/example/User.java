@@ -13,9 +13,9 @@ import static org.example.constants.CommandConstants.*;
  */
 public class User {
     /** Поле id чата пользователя */
-    public Long chatId;
+    private Long chatId;
     /** Поле текущего теста пользователя */
-    public Testing testes;
+    private Testing testes;
     /** Поле состояния пользователя */
     private String condition;
     /** Поле вопросов по текущему предмету, на которые пользователь ответил неправильно */
@@ -25,9 +25,13 @@ public class User {
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
     private Map<String, Pair<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
-    public final TimerBehavior reminder;
+    private TimerBehavior reminder;
     /** Поле статистика пользователя */
-    public UserStatistic statistic;
+    private UserStatistic statistic;
+
+    public Long getChatId() {
+        return chatId;
+    }
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -85,24 +89,45 @@ public class User {
     }
 
     /**
-     * Функция определения хэшкода по id чата
-     * @return личный хэшкод пользователя
+     * Функция получения доступа к полю {@link User#testes}
      */
-    @Override
-    public int hashCode(){
-        return chatId.hashCode();
+    public Testing getTestes() {
+        return testes;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#statistic}
+     */
+    public UserStatistic getStatistic() {
+        return statistic;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#reminder}
+     */
+    public TimerBehavior getReminder() {
+        return reminder;
     }
 
     /**
      * Функция сопоставления пользователей
-     * @param other - id чата дугого пользователя
+     * @param o - дугой пользователь
      * @return true - если other является данным пользователем, в противном случае false
      */
     @Override
-    public boolean equals(Object other){
-        if (other == null || other.getClass() != Long.class)
-            return false;
-        Long otherUser = (Long) other;
-        return otherUser.hashCode() == this.hashCode(); // Ввести толковую проверку!!!
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        User user = (User) o;
+        return chatId.equals(user.chatId);
+    }
+
+    /**
+     * Функция определения хэшкода по id чата
+     * @return личный хэшкод пользователя
+     */
+    @Override
+    public int hashCode() {
+        return chatId.hashCode();
     }
 }

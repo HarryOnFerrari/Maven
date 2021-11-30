@@ -67,11 +67,11 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
                 users.put(update.getMessage().getChatId(), new User(update.getMessage().getChatId()));
             }
             User user = users.get(update.getMessage().getChatId());
-            user.reminder.setReminder(this);
+            user.getReminder().setReminder(this);
             behavior.readCommands(user, update.getMessage().getText());
         } else if (update.hasCallbackQuery()) {
             User user = users.get(update.getCallbackQuery().getMessage().getChatId());
-            user.reminder.setReminder(this);
+            user.getReminder().setReminder(this);
             behavior.readCommands(user, update.getCallbackQuery().getData());
         }
     }

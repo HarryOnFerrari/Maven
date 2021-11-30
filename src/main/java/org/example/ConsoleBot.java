@@ -61,7 +61,7 @@ public class ConsoleBot implements IBot {
     public void run() {
         User user = new User(666L);
         while (console.hasNext()) {
-            user.reminder.setReminder(this);
+            user.getReminder().setReminder(this);
             behavior.readCommands(user, console.next());
         }
     }

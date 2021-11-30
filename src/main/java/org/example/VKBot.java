@@ -90,7 +90,7 @@ public class VKBot extends LongPollBot implements IBot{
             users.put(userId, new User(userId));
         }
         User user = users.get(userId);
-        user.reminder.setReminder(this);
+        user.getReminder().setReminder(this);
         if (message.getPayload() != null){
             Matcher textMatch = Pattern.compile("\\{.+?:\"\\\\?(.+?)\"}").matcher(message.getPayload());
             textMatch.find();

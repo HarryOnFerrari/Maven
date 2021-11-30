@@ -20,48 +20,47 @@ public class Behavior{
     public final void readCommands(User user, String command){
         switch (command) {
             case (START):
-                bot.setMessage(user.chatId,
+                bot.setMessage(user.getChatId(),
                         "Привет, работяга!");
-                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case(SUBJECT):
-                bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case(MENU):
-                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case(SETTING):
-                bot.setMessageWithButtons(user.chatId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
-                bot.setMessageWithButtons(user.chatId, TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
+                bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_ON, "SETTING_BOARD_ON");
+                bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
                 break;
             case (HELP):
-                bot.setMessage(user.chatId, HELP_INFO);
+                bot.setMessage(user.getChatId(), HELP_INFO);
                 break;
             case (TEST):
                 user.setCondition(TEST);
-                //user.statistic.setSubject(user.statistic.getSubject());
-                bot.setMessage(user.chatId, user.testes.newLine());
+                bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 break;
             case (REPEAT):
                 user.setCondition(REPEAT);
-                bot.setMessage(user.chatId, user.testes.newLine());
+                bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 break;
             case (NEXT):
                 if (!user.getCondition().equals(TEST)) {
-                    bot.setMessage(user.chatId,
+                    bot.setMessage(user.getChatId(),
                             "Чтобы начать тестирование, отправьте /test");
                 } else {
-                    bot.setMessage(user.chatId, user.testes.newLine());
+                    bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 }
                 break;
             case (STOP):
                 if (!user.getCondition().equals(TEST)) {
-                    bot.setMessage(user.chatId,
+                    bot.setMessage(user.getChatId(),
                             "Вы не начинали тестирование. " +
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
-                    bot.setMessage(user.chatId, "Тест завершен");
-                    bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
+                    bot.setMessage(user.getChatId(), "Тест завершен");
+                    bot.setMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
                     user.setCondition(STOP);
                 }
                 break;
@@ -69,40 +68,40 @@ public class Behavior{
             case ("MATHS"):
             case ("RUSSIAN"):
                 user.setCondition(command);
-                bot.setMessageWithButtons(user.chatId, CHOOSE_MODE, "MODE_BOARD");
+                bot.setMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
                 break;
             case (BACK):
                 user.setCondition(command);
-                bot.setMessageWithButtons(user.chatId, CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case (TIMER_OFF):
-                user.reminder.setAgreeReceiveNotification(false);
-                user.reminder.setOffsetReceiveNotifications(0);
-                user.reminder.setReminder(bot);
-                bot.setMessage(user.chatId, NOTIFICATION_OFF);
-                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                user.getReminder().setAgreeReceiveNotification(false);
+                user.getReminder().setOffsetReceiveNotifications(0);
+                user.getReminder().setReminder(bot);
+                bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
+                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_ON):
-                user.reminder.setAgreeReceiveNotification(true);
-                user.reminder.setOffsetReceiveNotifications(0);
-                user.reminder.setReminder(bot);
-                bot.setMessage(user.chatId, NOTIFICATION_ON);
-                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                user.getReminder().setAgreeReceiveNotification(true);
+                user.getReminder().setOffsetReceiveNotifications(0);
+                user.getReminder().setReminder(bot);
+                bot.setMessage(user.getChatId(), NOTIFICATION_ON);
+                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_OFF_1):
             case (TIMER_OFF_2):
             case (TIMER_OFF_3):
-                user.reminder.setAgreeReceiveNotification(false);
-                user.reminder.setOffsetReceiveNotifications(Integer.parseInt(command.substring(command.length()-1)));
-                user.reminder.setReminder(bot);
-                bot.setMessage(user.chatId, NOTIFICATION_OFF);
-                bot.setMessageWithButtons(user.chatId, MENU_MODE, "MENU_BOARD");
+                user.getReminder().setAgreeReceiveNotification(false);
+                user.getReminder().setOffsetReceiveNotifications(Integer.parseInt(command.substring(command.length()-1)));
+                user.getReminder().setReminder(bot);
+                bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
+                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case (STATISTIC_GENERAL):
-                bot.setMessage(user.chatId, user.statistic.makeStatGeneral());
+                bot.setMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
                 break;
             case (STATISTIC_SUBJECT):
-                bot.setMessage(user.chatId, user.statistic.makeStatSubject());
+                bot.setMessage(user.getChatId(), user.getStatistic().makeStatSubject());
                 break;
             default:
                 checkFalseCommand(user, command);
@@ -120,7 +119,7 @@ public class Behavior{
         if (user.getCondition().equals(TEST)) {
             checkTestAnswer(user, command);
         } else {
-            bot.setMessage(user.chatId, WRONG_COMMAND);
+            bot.setMessage(user.getChatId(), WRONG_COMMAND);
         }
     }
 
@@ -131,14 +130,14 @@ public class Behavior{
      * @param command - сообщение от пользователя
      */
     public final void checkTestAnswer(User user, String command){
-        if (command.equalsIgnoreCase(user.testes.getAnswer())) {
-            bot.setMessageWithButtons(user.chatId, RIGHT_ANSWER, "TEST_BOARD");
-            user.statistic.setCountRightAnswer(1);
+        if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
+            bot.setMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
+            user.getStatistic().setCountRightAnswer(1);
         }
         else {
-            user.testes.saveQuestion();
-            bot.setMessageWithButtons(user.chatId,WRONG_ANSWER + user.testes.getAnswer(), "TEST_BOARD");
-            user.statistic.setCountWrongAnswer(1);
+            user.getTestes().saveQuestion();
+            bot.setMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
+            user.getStatistic().setCountWrongAnswer(1);
         }
     }
 
