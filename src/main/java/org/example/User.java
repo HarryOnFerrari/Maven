@@ -12,6 +12,8 @@ import static org.example.constants.CommandConstants.*;
  * @author Пономарева Дарья, Бабакова Анастасия.
  */
 public class User {
+
+
     /** Поле id чата пользователя */
     private Long chatId;
     /** Поле текущего теста пользователя */
@@ -29,9 +31,13 @@ public class User {
     /** Поле статистика пользователя */
     private UserStatistic statistic;
 
+    public User() { }
+
+
     public Long getChatId() {
         return chatId;
     }
+    public void setChatId(Long chatId) { this.chatId = chatId; }
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}

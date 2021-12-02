@@ -18,31 +18,23 @@ public class FileResourcesUtils {
      */
     public final InputStream INPUTSTREAM_SUBJECT = this.getClass()
             .getClassLoader().getResourceAsStream("Subjects.txt");
-    
+
     /**
      * Чтение файла и добавление полученных строк в лист
      *
      * @return лист доступных учебных предметов
      */
     public List<String> makeListWords() {
-        BufferedReader br = null;
+        BufferedReader bufferedReader;
         List<String> list = new LinkedList<>();
         try {
-            br = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
-            String str;
-            while ((str = br.readLine()) != null) {
-                list.add(str);
+            bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                list.add(line);
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return list;
     }
