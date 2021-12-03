@@ -18,7 +18,9 @@ public class TelegramUserTest {
      */
     @Test
     public void checkMessageAfterTest(){
-        user.setChatId(0L);
+        user.setChatId(537446876L);
+        /*user.setCondition("ENGLISH");
+        user.setCondition(TEST);*/
         behavior.readCommands(user, START);
         behavior.readCommands(user, SUBJECT);
         behavior.readCommands(user, "ENGLISH");

@@ -30,7 +30,7 @@ public class TelegramBotTest {
     @BeforeEach
     public void init() throws TelegramApiException {
         bot = Mockito.spy(new TelegramBot());
-        bot.behavior = Mockito.spy(new Behavior(bot));
+        //bot.behavior = Mockito.spy(new Behavior(bot));
         Mockito.doReturn(null).when(bot).execute(Mockito.any(SendMessage.class));
         Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
         Mockito.doNothing().when(bot).setMessageWithButtons(
