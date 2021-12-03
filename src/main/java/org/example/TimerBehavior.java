@@ -33,7 +33,7 @@ public class TimerBehavior {
         this.offsetReceiveNotifications = offsetReceiveNotifications;
     }
     /** Предустановленное время для отправки сообщений раз в сутки, значение в ms*/
-    private final int standardDispatchTime = 24 * 60 * 60 * 1000;
+    private final static int standardDispatchTime = 24 * 60 * 60 * 1000;
 
     /** Поле id пользователя-владельца таймера */
     private Long userId;

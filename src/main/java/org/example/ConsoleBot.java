@@ -14,7 +14,7 @@ import java.util.Scanner;
 public class ConsoleBot implements IBot {
     private Scanner console;
     private PrintStream printer;
-    public Behavior behavior = new Behavior(this);
+    private Behavior behavior = new Behavior(this);
 
     /**
      * Функция для отправки сообщения пользователю.

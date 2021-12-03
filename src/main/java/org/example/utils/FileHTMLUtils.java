@@ -57,10 +57,9 @@ public class FileHTMLUtils {
      * @exception IOException
      */
     public String readFiles(){
-        BufferedReader bufferedReader;
+        //BufferedReader bufferedReader;
         String result ="";
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM));
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM))){
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 result += line;

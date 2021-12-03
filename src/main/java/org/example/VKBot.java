@@ -37,9 +37,9 @@ public class VKBot extends LongPollBot implements IBot{
     private GroupActor actor = new GroupActor(getGroupId(), getAccessToken());
     private Random random = new Random();
     /** Поле списка пользователей */
-    public Map<Long, User> users = new HashMap<>();
+    private Map<Long, User> users = new HashMap<>();
     /** Поле поведения бота для обработки команд */
-    public Behavior behavior = new Behavior(this);
+    private Behavior behavior = new Behavior(this);
 
     /**
      * Функция получения значения токена бота.

@@ -25,10 +25,9 @@ public class FileResourcesUtils {
      * @return лист доступных учебных предметов
      */
     public List<String> makeListWords() {
-        BufferedReader bufferedReader;
+        //BufferedReader bufferedReader;
         List<String> list = new LinkedList<>();
-        try {
-            bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT));
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT))){
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line);
