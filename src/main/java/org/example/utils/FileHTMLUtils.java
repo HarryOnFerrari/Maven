@@ -47,7 +47,7 @@ public class FileHTMLUtils {
     }
 
     /**
-     * Конструктор, считывающий содержание файла *.html
+     * Поле с содержаним файла *.html
      */
     private InputStream INPUTSTREAM;
 
@@ -57,7 +57,6 @@ public class FileHTMLUtils {
      * @exception IOException
      */
     public String readFiles(){
-        //BufferedReader bufferedReader;
         String result ="";
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM))){
             String line;

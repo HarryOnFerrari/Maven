@@ -12,16 +12,15 @@ public class UserStatistic {
     public Integer getCountRightAnswer() {
         return countRightAnswer;
     }
-
     public void setCountRightAnswer(Integer countRightAnswer) {
         this.countRightAnswer += countRightAnswer;
     }
+
     /** Поле количества неверных ответов */
     private Integer countWrongAnswer = 0;
     public Integer getCountWrongAnswer() {
         return countWrongAnswer;
     }
-
     public void setCountWrongAnswer(Integer countWrongAnswer) {
         this.countWrongAnswer += countWrongAnswer;
     }
