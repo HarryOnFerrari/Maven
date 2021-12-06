@@ -2,6 +2,7 @@ package org.example.utils;
 
 import java.io.*;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Чтение из ресурсов файла с расширением .html
@@ -14,14 +15,9 @@ public class FileHTMLUtils {
      *
      * @return лист чередующихся вопросов и ответов на них, нулевой элемент - вопрос
      */
-    public LinkedList<String> makeListQuestions() {
-        String content = "";
-        try {
-            content = readFiles();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        LinkedList<String> list = new LinkedList<>();
+    public List<String> makeListQuestions() {
+        String content = readFiles();
+        List<String> list = new LinkedList<>();
         String start = "\"TermText notranslate lang-ru\">";
         String end = "</span>";
         long endOfTheEnd = content.indexOf("Модули из той же папки",0);
@@ -51,7 +47,7 @@ public class FileHTMLUtils {
     }
 
     /**
-     * Конструктор, считывающий содержание файла *.html
+     * Поле с содержаним файла *.html
      */
     private InputStream INPUTSTREAM;
 
@@ -60,25 +56,15 @@ public class FileHTMLUtils {
      *
      * @exception IOException
      */
-    public String readFiles() throws IOException {
-        BufferedReader br = null;
+    public String readFiles(){
         String result ="";
-        try {
-            br = new BufferedReader(new InputStreamReader(INPUTSTREAM));
-            String str;
-            while ((str = br.readLine()) != null) {
-                result += str;
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM))){
+            String line;
+            while ((line = bufferedReader.readLine()) != null) {
+                result += line;
             }
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            try {
-                if (br != null) {
-                    br.close();
-                }
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
         }
         return result;
     }

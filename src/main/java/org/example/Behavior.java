@@ -75,14 +75,14 @@ public class Behavior{
                 bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case (TIMER_OFF):
-                user.getReminder().setAgreeReceiveNotification(false);
+                user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case (TIMER_ON):
-                user.getReminder().setAgreeReceiveNotification(true);
+                user.getReminder().setIsAgreeReceiveNotification(true);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_ON);
@@ -91,7 +91,7 @@ public class Behavior{
             case (TIMER_OFF_1):
             case (TIMER_OFF_2):
             case (TIMER_OFF_3):
-                user.getReminder().setAgreeReceiveNotification(false);
+                user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(Integer.parseInt(command.substring(command.length()-1)));
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_OFF);

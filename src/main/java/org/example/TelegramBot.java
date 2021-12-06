@@ -17,9 +17,17 @@ import java.util.Properties;
  */
 public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /** Поле списка пользователей */
-    public Map<Long, User> users = new HashMap<>();
+    private Map<Long, User> users = new HashMap<>();
+
     /** Поле поведения бота для обработки команд */
-    public Behavior behavior = new Behavior(this);
+    private Behavior behavior = new Behavior(this);
+    public Behavior getBehavior() {
+        return behavior;
+    }
+
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
+    }
 
     /**
      * Функция, возвращающая имя бота

@@ -1,7 +1,7 @@
 package org.example;
 
 import java.io.*;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.example.utils.FileHTMLUtils;
@@ -17,7 +17,7 @@ import static org.example.constants.CommandConstants.TEST_END;
 public class Testing {
 
     /** Поле очередь вопросов и верных ответов */
-    private LinkedList<String> listQuestions;
+    private List<String> listQuestions;
     /** Поле вопросов, на которые пользователь ответил неправильно */
     private Map<String, String> wrongUsersList;
 
@@ -63,10 +63,10 @@ public class Testing {
                 question = (!wrongUsersList.isEmpty()) ? TEST_END : newLine();
             }
             else{
-                    question = key + listQuestions.remove();
-                    if (listQuestions.size() != 0)
-                        answer = listQuestions.remove();
-                }
+                question = key + listQuestions.remove(0);
+                if (listQuestions.size() != 0)
+                    answer = listQuestions.remove(0);
+            }
         }
         else if (wrongUsersList != null && wrongUsersList.size() != 0) {
             question = wrongUsersList.keySet().iterator().next();

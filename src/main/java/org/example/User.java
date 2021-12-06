@@ -14,6 +14,10 @@ import static org.example.constants.CommandConstants.*;
 public class User {
     /** Поле id чата пользователя */
     private Long chatId;
+    public Long getChatId() {
+        return chatId;
+    }
+    public void setChatId(Long chatId) { this.chatId = chatId; }
     /** Поле текущего теста пользователя */
     private Testing testes;
     /** Поле состояния пользователя */
@@ -28,10 +32,6 @@ public class User {
     private TimerBehavior reminder;
     /** Поле статистика пользователя */
     private UserStatistic statistic;
-
-    public Long getChatId() {
-        return chatId;
-    }
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -78,7 +78,7 @@ public class User {
         condition = "";
         reminder = new TimerBehavior(chatId);
         statistic = new UserStatistic();
-        reminder.setAgreeReceiveNotification(true);
+        reminder.setIsAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(), new Pair<>(
