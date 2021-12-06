@@ -40,13 +40,12 @@ public class Testing {
 
     /**
      * Конструктор - создание нового теста
-     * @exception IOException
      */
     public Testing(Boolean isChooseModeTesting, Map<String, String> wrongList, String link){
         wrongUsersList = wrongList;
         if (isChooseModeTesting){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
-            fileHTMLUtils.setINPUTSTREAM(link);
+            fileHTMLUtils.setInputStream(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
         }
         key = Subjects.getKey(link);

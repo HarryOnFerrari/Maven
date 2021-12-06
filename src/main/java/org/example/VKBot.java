@@ -39,7 +39,7 @@ public class VKBot extends LongPollBot implements IBot{
     /** Поле списка пользователей */
     private Map<Long, User> users = new HashMap<>();
     /** Поле поведения бота для обработки команд */
-    private Behavior behavior = new Behavior(this);
+    private final Behavior behavior = new Behavior(this);
 
     /**
      * Функция получения значения токена бота.
@@ -84,24 +84,25 @@ public class VKBot extends LongPollBot implements IBot{
     @Override
     public void onMessageNew(MessageNewEvent command) {
         Message message = command.getMessage();
-        Long userId = (long)(message.getPeerId());
+        Long userId = message.getPeerId().longValue();
         String commandText;
         if (!users.containsKey(userId)) {
             users.put(userId, new User(userId));
         }
         User user = users.get(userId);
         user.getReminder().setReminder(this);
-        if (message.getPayload() != null){
+        if (message.getPayload() != null) {
             Matcher textMatch = Pattern.compile("\\{.+?:\"\\\\?(.+?)\"}").matcher(message.getPayload());
             textMatch.find();
             commandText = textMatch.group(1);
-        }
-        else
+        } else {
             commandText = message.getText();
-        if (commandText.equals(SETTING))
+        }
+        if (commandText.equals(SETTING)) {
             setMessageWithButtons(userId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
-        else
+        } else {
             behavior.readCommands(user, commandText);
+        }
     }
 
     /**

@@ -42,7 +42,6 @@ public class TimerBehavior {
 
     /** Функция активации ожидания напоминания */
     public void setReminder(IBot bot) {
-
         if (reminder != null) {
             reminder.cancel();
         }

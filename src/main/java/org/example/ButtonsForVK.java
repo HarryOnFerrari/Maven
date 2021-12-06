@@ -24,6 +24,15 @@ public enum ButtonsForVK {
     /** Состояние меню */
     MENU_BOARD (keyboardForMenu());
 
+    /**
+     * Функци для получения ресурса раксладки кнопок
+     * @return ссылка на ресурс
+     */
+    public Keyboard value(){
+        return current;
+    }
+    /** Поле текущей расстановки кнопок*/
+    Keyboard current;
     /** Метод инициализации current */
     ButtonsForVK(Keyboard currentKeyboard) {
         current = currentKeyboard;
@@ -150,14 +159,4 @@ public enum ButtonsForVK {
         keyboard.setButtons(allKey);
         return keyboard;
     }
-
-    /**
-     * Функци для получения ресурса раксладки кнопок
-     * @return ссылка на ресурс
-     */
-    public Keyboard value(){
-        return current;
-    }
-    /** Поле текущей расстановки кнопок*/
-    Keyboard current;
 }

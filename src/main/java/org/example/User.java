@@ -23,7 +23,7 @@ public class User {
     /** Поле состояния пользователя */
     private String condition;
     /** Поле вопросов по текущему предмету, на которые пользователь ответил неправильно */
-    private Map<String, String> wrongList;
+    private Map<String, String> wrongAnswersList;
     /** Поле ссылка на ресурс текущего предмета */
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
@@ -37,19 +37,21 @@ public class User {
      * Процедура определения состояния пользователя {@link User#condition}
      * @param str - состояние
      */
-    public void setCondition(String str){
+    public void setCondition(String str) {
         switch (str) {
             case (TEST):
-                testes = new Testing(true, wrongList, link);
+                testes = new Testing(true, wrongAnswersList, link);
                 statistic.startGenerateStat();
                 break;
             case (REPEAT):
-                testes = new Testing(false, wrongList, link);
+                testes = new Testing(false, wrongAnswersList, link);
                 str = TEST;
                 break;
-            case ("MATHS"): case ("RUSSIAN"): case("ENGLISH"):
+            case ("MATHS"):
+            case ("RUSSIAN"):
+            case("ENGLISH"):
                 link = subjects.get(str).getFirst();
-                wrongList = subjects.get(str).getSecond();
+                wrongAnswersList = subjects.get(str).getSecond();
                 statistic.setSubject(str);
                 break;
             case (BACK):
@@ -57,6 +59,7 @@ public class User {
                 break;
             case (STOP):
                 statistic.createLastTestResult();
+                break;
         }
         condition = str;
     }

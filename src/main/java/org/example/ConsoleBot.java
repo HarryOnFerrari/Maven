@@ -39,9 +39,11 @@ public class ConsoleBot implements IBot {
     @Override
     public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
         printer.println(message);
-        for (List<InlineKeyboardButton> buttons : ButtonsForTelegram.valueOf(keyboardLayout).value().getKeyboard())
-            for (InlineKeyboardButton button : buttons)
+        for (List<InlineKeyboardButton> buttons : ButtonsForTelegram.valueOf(keyboardLayout).value().getKeyboard()) {
+            for (InlineKeyboardButton button : buttons) {
                 printer.println(button.getText() + ": " + button.getCallbackData());
+            }
+        }
     }
 
     /**

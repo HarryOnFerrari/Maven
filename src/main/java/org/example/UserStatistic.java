@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class UserStatistic {
     /** Поле количества верных ответов */
-    private Integer countRightAnswer = 0;
-    public Integer getCountRightAnswer() {
+    private int countRightAnswer = 0;
+    public int getCountRightAnswer() {
         return countRightAnswer;
     }
     public void setCountRightAnswer(Integer countRightAnswer) {
@@ -17,11 +17,11 @@ public class UserStatistic {
     }
 
     /** Поле количества неверных ответов */
-    private Integer countWrongAnswer = 0;
-    public Integer getCountWrongAnswer() {
+    private int countWrongAnswer = 0;
+    public int getCountWrongAnswer() {
         return countWrongAnswer;
     }
-    public void setCountWrongAnswer(Integer countWrongAnswer) {
+    public void setCountWrongAnswer(int countWrongAnswer) {
         this.countWrongAnswer += countWrongAnswer;
     }
 
