@@ -26,15 +26,23 @@ public class Start {
             e.printStackTrace();
         }
 
-        Thread consoleBot = new Thread(() -> new ConsoleBot(new Scanner(System.in),System.out).run());
-        Thread vkBot = new Thread(() -> {
-            try {
-                new BotsLongPoll(new VKBot()).run();
-            } catch (BotsLongPollHttpException | BotsLongPollException e) {
-                e.printStackTrace();
-            }
-        });
-        consoleBot.start();
-        vkBot.start();
+        //Thread consoleBot = new Thread(() -> new ConsoleBot(new Scanner(System.in),System.out).run());
+        //Thread vkBot = new Thread(() -> {
+            //try {
+                //new BotsLongPoll(new VKBot()).run();
+            //} catch (BotsLongPollHttpException | BotsLongPollException e) {
+                //e.printStackTrace();
+            //}
+        //});
+        //consoleBot.start();
+        //vkBot.start();
+        try {
+            BotsLongPoll vkBot = new BotsLongPoll(new VKBot());
+            vkBot.run();
+        } catch (BotsLongPollException e) {
+            e.printStackTrace();
+        } catch (BotsLongPollHttpException e) {
+            e.printStackTrace();
+        }
     }
 }

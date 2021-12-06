@@ -93,14 +93,18 @@ public enum ButtonsForVK {
         List<List<KeyboardButton>> allKey = new LinkedList<>();
         List<KeyboardButton> line1 = new LinkedList<>();
         List<KeyboardButton> line2 = new LinkedList<>();
+        List<KeyboardButton> line3 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("тестирование")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/test\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("повторение")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/repeat\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line3.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("статистика")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/statistic_subject\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("вернуться к выбору предмета")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/back\"}")).setColor(KeyboardButtonColor.DEFAULT));
         allKey.add(line1);
         allKey.add(line2);
+        allKey.add(line3);
         keyboard.setButtons(allKey);
         return keyboard;
     }
@@ -117,17 +121,21 @@ public enum ButtonsForVK {
         List<KeyboardButton> line2 = new LinkedList<>();
         List<KeyboardButton> line3 = new LinkedList<>();
         List<KeyboardButton> line4 = new LinkedList<>();
+        List<KeyboardButton> line5 = new LinkedList<>();
         line1.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("1. Математика")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"MATHS\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line2.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("2. Английский язык")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"ENGLISH\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line3.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("3. Русский язык")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"RUSSIAN\"}")).setColor(KeyboardButtonColor.DEFAULT));
+        line5.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("статистика")
+                .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/statistic_general\"}")).setColor(KeyboardButtonColor.DEFAULT));
         line4.add(new KeyboardButton().setAction(new KeyboardButtonAction().setLabel("Меню")
                 .setType(TemplateActionTypeNames.TEXT).setPayload("{\"\":\"/menu\"}")).setColor(KeyboardButtonColor.DEFAULT));
         allKey.add(line1);
         allKey.add(line2);
         allKey.add(line3);
+        allKey.add(line5);
         allKey.add(line4);
         keyboard.setButtons(allKey);
         return keyboard;
