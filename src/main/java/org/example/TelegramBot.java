@@ -21,13 +21,6 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
 
     /** Поле поведения бота для обработки команд */
     private Behavior behavior = new Behavior(this);
-    public Behavior getBehavior() {
-        return behavior;
-    }
-
-    public void setBehavior(Behavior behavior) {
-        this.behavior = behavior;
-    }
 
     /**
      * Функция, возвращающая имя бота
@@ -125,5 +118,12 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    public Behavior getBehavior() {
+        return behavior;
+    }
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
     }
 }

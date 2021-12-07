@@ -7,7 +7,7 @@ import static org.example.constants.CommandConstants.*;
  * @author Бабакова Анастасия, Пономарева Дарья.
  */
 public class Behavior{
-    private IBot bot;
+    private final IBot bot;
     public Behavior(IBot bot){
         this.bot = bot;
     }
@@ -19,33 +19,33 @@ public class Behavior{
      */
     public final void readCommands(User user, String command){
         switch (command) {
-            case (START):
+            case START:
                 bot.setMessage(user.getChatId(),
                         "Привет, работяга!");
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
-            case(SUBJECT):
+            case SUBJECT:
                 bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
-            case(MENU):
+            case MENU:
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
-            case(SETTING):
+            case SETTING:
                 bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_ON, "SETTING_BOARD_ON");
                 bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
                 break;
-            case (HELP):
+            case HELP:
                 bot.setMessage(user.getChatId(), HELP_INFO);
                 break;
-            case (TEST):
+            case TEST:
                 user.setCondition(TEST);
                 bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 break;
-            case (REPEAT):
+            case REPEAT:
                 user.setCondition(REPEAT);
                 bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 break;
-            case (NEXT):
+            case NEXT:
                 if (!user.getCondition().equals(TEST)) {
                     bot.setMessage(user.getChatId(),
                             "Чтобы начать тестирование, отправьте /test");
@@ -53,7 +53,7 @@ public class Behavior{
                     bot.setMessage(user.getChatId(), user.getTestes().newLine());
                 }
                 break;
-            case (STOP):
+            case STOP:
                 if (!user.getCondition().equals(TEST)) {
                     bot.setMessage(user.getChatId(),
                             "Вы не начинали тестирование. " +
@@ -64,43 +64,43 @@ public class Behavior{
                     user.setCondition(STOP);
                 }
                 break;
-            case ("ENGLISH"):
-            case ("MATHS"):
-            case ("RUSSIAN"):
+            case "ENGLISH":
+            case "MATHS":
+            case "RUSSIAN":
                 user.setCondition(command);
                 bot.setMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
                 break;
-            case (BACK):
+            case BACK:
                 user.setCondition(command);
                 bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
-            case (TIMER_OFF):
+            case TIMER_OFF:
                 user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
-            case (TIMER_ON):
+            case TIMER_ON:
                 user.getReminder().setIsAgreeReceiveNotification(true);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_ON);
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
-            case (TIMER_OFF_1):
-            case (TIMER_OFF_2):
-            case (TIMER_OFF_3):
+            case TIMER_OFF_1:
+            case TIMER_OFF_2:
+            case TIMER_OFF_3:
                 user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(Integer.parseInt(command.substring(command.length()-1)));
                 user.getReminder().setReminder(bot);
                 bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
                 bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
-            case (STATISTIC_GENERAL):
+            case STATISTIC_GENERAL:
                 bot.setMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
                 break;
-            case (STATISTIC_SUBJECT):
+            case STATISTIC_SUBJECT:
                 bot.setMessage(user.getChatId(), user.getStatistic().makeStatSubject());
                 break;
             default:
@@ -115,7 +115,7 @@ public class Behavior{
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    public final void checkFalseCommand(User user, String command){
+    private void checkFalseCommand(User user, String command){
         if (user.getCondition().equals(TEST)) {
             checkTestAnswer(user, command);
         } else {
@@ -129,7 +129,7 @@ public class Behavior{
      * @param user - пользователь
      * @param command - сообщение от пользователя
      */
-    public final void checkTestAnswer(User user, String command){
+    private void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
             bot.setMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
             user.getStatistic().setCountRightAnswer(1);
