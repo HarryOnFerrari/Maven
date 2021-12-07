@@ -21,10 +21,10 @@ public class ConsoleBot implements IBot {
      *
      * @param id      - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
-     * @see IBot#setMessage(Long, String)
+     * @see IBot#sendMessage(Long, String)
      */
     @Override
-    public void setMessage(Long id, String message) {
+    public void sendMessage(Long id, String message) {
         printer.println(message);
     }
 
@@ -34,10 +34,10 @@ public class ConsoleBot implements IBot {
      * @param id             - id чата, в который требуется отправить сообщение
      * @param message        - текст сообщения
      * @param keyboardLayout - клавиатура, с которой считываются команды
-     * @see IBot#setMessageWithButtons(Long, String, String)
+     * @see IBot#sendMessageWithButtons(Long, String, String)
      */
     @Override
-    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+    public void sendMessageWithButtons(Long id, String message, String keyboardLayout) {
         printer.println(message);
         for (List<InlineKeyboardButton> buttons : ButtonsForTelegram.valueOf(keyboardLayout).value().getKeyboard()) {
             for (InlineKeyboardButton button : buttons) {
@@ -64,7 +64,7 @@ public class ConsoleBot implements IBot {
         User user = new User(666L);
         while (console.hasNext()) {
             user.getReminder().setReminder(this);
-            behavior.readCommands(user, console.next());
+            behavior.processCommand(user, console.next());
         }
     }
 }
