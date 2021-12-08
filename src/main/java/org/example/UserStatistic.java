@@ -8,8 +8,8 @@ import java.util.*;
  */
 public class UserStatistic {
     /** Поле количества верных ответов */
-    private Integer countRightAnswer = 0;
-    public Integer getCountRightAnswer() {
+    private int countRightAnswer = 0;
+    public int getCountRightAnswer() {
         return countRightAnswer;
     }
     public void setCountRightAnswer(Integer countRightAnswer) {
@@ -17,11 +17,11 @@ public class UserStatistic {
     }
 
     /** Поле количества неверных ответов */
-    private Integer countWrongAnswer = 0;
-    public Integer getCountWrongAnswer() {
+    private int countWrongAnswer = 0;
+    public int getCountWrongAnswer() {
         return countWrongAnswer;
     }
-    public void setCountWrongAnswer(Integer countWrongAnswer) {
+    public void setCountWrongAnswer(int countWrongAnswer) {
         this.countWrongAnswer += countWrongAnswer;
     }
 
@@ -91,11 +91,10 @@ public class UserStatistic {
      * Метод приведения сводки попытка-результат к читабельному формату
      * @return строковый формат представления сводки
      */
-    public String makeFormatStatistic(Map<Integer, String> results) {
+    private String makeFormatStatistic(Map<Integer, String> results) {
         StringBuilder statSubject = new StringBuilder();
-        for (Map.Entry entry : results.entrySet()) {
-            entry.setValue(": попытка №" + entry.getKey() + ": " + entry.getValue());
-            statSubject.append(subject + entry.getValue());
+        for (Map.Entry<Integer,String> entry : results.entrySet()) {
+            statSubject.append(subject).append(": попытка №").append(entry.getKey()).append(": ").append(entry.getValue());
         }
         return statSubject.toString();
     }

@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Чтение файла из файла с расширением .txt
@@ -13,12 +14,8 @@ import java.util.List;
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class FileResourcesUtils {
-    /**
-     * Конструктор, считывающий содержание файла Subjects.txt
-     */
-    public final InputStream INPUTSTREAM_SUBJECT = this.getClass()
-            .getClassLoader().getResourceAsStream("Subjects.txt");
-
+    /** Имя читаемого файла */
+    private static final String filename = "Subjects.txt";
     /**
      * Чтение файла и добавление полученных строк в лист
      *
@@ -26,7 +23,8 @@ public class FileResourcesUtils {
      */
     public List<String> makeListWords() {
         List<String> list = new LinkedList<>();
-        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(INPUTSTREAM_SUBJECT))){
+        try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(Objects.requireNonNull(this.getClass()
+                .getClassLoader().getResourceAsStream(filename))))){
             String line;
             while ((line = bufferedReader.readLine()) != null) {
                 list.add(line);

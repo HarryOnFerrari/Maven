@@ -27,8 +27,7 @@ public class TelegramBotTest {
     private Message message = new Message();
     /** Поле типа Chat для установки id */
     private Chat chat = new Chat();
-    /** Поле списка команд для отправки боту */
-    private String[] commands;
+
     /** Поле типа Update для отправки запросов боту */
     private Update update = new Update();
 
@@ -40,8 +39,8 @@ public class TelegramBotTest {
         bot = Mockito.spy(new TelegramBot());
         bot.setBehavior(Mockito.spy(new Behavior(bot)));
         Mockito.doReturn(null).when(bot).execute(Mockito.any(SendMessage.class));
-        Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
-        Mockito.doNothing().when(bot).setMessageWithButtons(
+        Mockito.doNothing().when(bot).sendMessage(Mockito.any(Long.class), Mockito.anyString());
+        Mockito.doNothing().when(bot).sendMessageWithButtons(
                 Mockito.any(Long.class), Mockito.anyString(), Mockito.anyString());
         chat.setId(chatId);
         message.setChat(chat);
@@ -59,7 +58,7 @@ public class TelegramBotTest {
         message.setText("/start");
         update.setMessage(message);
         bot.onUpdateReceived(update);
-        Mockito.verify(bot).setMessage(chatId, "Привет, работяга!");
+        Mockito.verify(bot).sendMessage(chatId, "Привет, работяга!");
     }
 
     /**
@@ -69,13 +68,13 @@ public class TelegramBotTest {
      */
     @Test
     public void checkMessageAfterTest(){
-        commands = new String[]{"ENGLISH", "/test", "/next"};
+        String[] commands = new String[]{"ENGLISH", "/test", "/next"};
         for (int i=0; i<151; i++){
             message.setText(commands[Math.min(i, 2)]);
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
-        Mockito.verify(bot).setMessage(chatId, "Вопросов нет. \nДля продолжения отправьте /start");
+        Mockito.verify(bot).sendMessage(chatId, "Вопросов нет. \nДля продолжения отправьте /start");
     }
 
     /**
@@ -85,14 +84,14 @@ public class TelegramBotTest {
      */
     @Test
     public void savingWhenChanging(){
-        commands = new String[]{"MATHS", "/test", "la-la-la", "/stop", "ENGLISH", "MATHS", "/repeat"};
+        String[] commands = new String[]{"MATHS", "/test", "la-la-la", "/stop", "ENGLISH", "MATHS", "/repeat"};
         for (String command : commands) {
             message.setText(command);
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
         Mockito.verify(bot, Mockito.times(2))
-                .setMessage(chatId, "Вычислите степень: 10^2");
+                .sendMessage(chatId, "Вычислите степень: 10^2");
     }
 
     /**
@@ -113,7 +112,7 @@ public class TelegramBotTest {
         }
         Thread.sleep(500);
         for (Long fakeId : fakeIds){
-            Mockito.verify(bot).setMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
+            Mockito.verify(bot).sendMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
                     "SUBJECT_BOARD");
         }
     }
@@ -124,12 +123,12 @@ public class TelegramBotTest {
      */
     @Test
     public void checkUserStatisticsLogic(){
-        commands = new String[]{"MATHS", "/test", "100", "/stop", "ENGLISH", "/statistic_subject"};
+        String[] commands = new String[]{"MATHS", "/test", "100", "/stop", "ENGLISH", "/statistic_subject"};
         for (String command : commands){
             message.setText(command);
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
-        Mockito.verify(bot).setMessage(chatId, "ENGLISH: Информации нет. Пройдите тест.");
+        Mockito.verify(bot).sendMessage(chatId, "ENGLISH: Информации нет. Пройдите тест.");
     }
 }

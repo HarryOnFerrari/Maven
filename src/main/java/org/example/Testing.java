@@ -15,15 +15,12 @@ import static org.example.constants.CommandConstants.TEST_END;
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class Testing {
-
     /** Поле очередь вопросов и верных ответов */
     private List<String> listQuestions;
     /** Поле вопросов, на которые пользователь ответил неправильно */
     private Map<String, String> wrongUsersList;
-
     /** Поле правильного ответа на текущий вопрос теста */
     private String answer;
-
     /** Поле последнего заданного вопроса */
     private String question;
 
@@ -40,13 +37,12 @@ public class Testing {
 
     /**
      * Конструктор - создание нового теста
-     * @exception IOException
      */
     public Testing(Boolean isChooseModeTesting, Map<String, String> wrongList, String link){
         wrongUsersList = wrongList;
         if (isChooseModeTesting){
             FileHTMLUtils fileHTMLUtils = new FileHTMLUtils();
-            fileHTMLUtils.setINPUTSTREAM(link);
+            fileHTMLUtils.setInputStream(link);
             listQuestions = fileHTMLUtils.makeListQuestions();
         }
         key = Subjects.getKey(link);

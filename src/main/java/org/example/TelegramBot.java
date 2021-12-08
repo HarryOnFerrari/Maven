@@ -21,13 +21,6 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
 
     /** Поле поведения бота для обработки команд */
     private Behavior behavior = new Behavior(this);
-    public Behavior getBehavior() {
-        return behavior;
-    }
-
-    public void setBehavior(Behavior behavior) {
-        this.behavior = behavior;
-    }
 
     /**
      * Функция, возвращающая имя бота
@@ -76,30 +69,30 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
             }
             User user = users.get(update.getMessage().getChatId());
             user.getReminder().setReminder(this);
-            behavior.readCommands(user, update.getMessage().getText());
+            behavior.processCommand(user, update.getMessage().getText());
         } else if (update.hasCallbackQuery()) {
             User user = users.get(update.getCallbackQuery().getMessage().getChatId());
             user.getReminder().setReminder(this);
-            behavior.readCommands(user, update.getCallbackQuery().getData());
+            behavior.processCommand(user, update.getCallbackQuery().getData());
         }
     }
 
     /**
      * Функция для отправки сообщения пользователю.
      *
-     * @see IBot#setMessage(Long, String)
+     * @see IBot#sendMessage(Long, String)
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
      */
     @Override
-    public void setMessage(Long id, String message) {
+    public void sendMessage(Long id, String message) {
         SendMessage newMessage = new SendMessage();
         newMessage.setChatId(id.toString());
         newMessage.setText(message);
         try {
             execute(newMessage);
             if (message.equals("Вопросов нет."))
-                setMessageWithButtons(id, "", "MODE");
+                sendMessageWithButtons(id, "", "MODE");
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
@@ -108,14 +101,14 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
     /**
      * Функция для отправки сообщения с кнопками пользователю.
      *
-     * @see IBot#setMessageWithButtons(Long, String, String)
+     * @see IBot#sendMessageWithButtons(Long, String, String)
      * @see ButtonsForTelegram
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
     @Override
-    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+    public void sendMessageWithButtons(Long id, String message, String keyboardLayout) {
         SendMessage newMessage = new SendMessage();
         newMessage.setChatId(id.toString());
         newMessage.setText(message);
@@ -125,5 +118,12 @@ public class TelegramBot extends TelegramLongPollingBot implements IBot{
         } catch (TelegramApiException e) {
             e.printStackTrace();
         }
+    }
+
+    public Behavior getBehavior() {
+        return behavior;
+    }
+    public void setBehavior(Behavior behavior) {
+        this.behavior = behavior;
     }
 }
