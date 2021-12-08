@@ -1,4 +1,4 @@
-package org.example.Buttons;
+package org.example.buttons;
 
 import com.vk.api.sdk.objects.messages.*;
 

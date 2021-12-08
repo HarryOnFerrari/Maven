@@ -1,7 +1,7 @@
-package org.example.BotsPlatforms;
+package org.example.platforms;
 
 import org.example.Behavior;
-import org.example.Buttons.ButtonsForTelegram;
+import org.example.buttons.ButtonsForTelegram;
 import org.example.IBot;
 import org.example.User;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;

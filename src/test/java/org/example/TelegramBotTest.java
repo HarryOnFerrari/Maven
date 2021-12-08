@@ -1,5 +1,5 @@
 package org.example;
-import org.example.BotsPlatforms.TelegramBot;
+import org.example.platforms.TelegramBot;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.mockito.Mockito;

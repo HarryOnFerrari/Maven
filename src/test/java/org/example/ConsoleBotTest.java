@@ -1,5 +1,5 @@
 package org.example;
-import org.example.BotsPlatforms.ConsoleBot;
+import org.example.platforms.ConsoleBot;
 import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 

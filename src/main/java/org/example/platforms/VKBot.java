@@ -1,4 +1,4 @@
-package org.example.BotsPlatforms;
+package org.example.platforms;
 
 import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.exceptions.BotsLongPollException;
@@ -13,7 +13,7 @@ import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
 import org.example.Behavior;
-import org.example.Buttons.ButtonsForVK;
+import org.example.buttons.ButtonsForVK;
 import org.example.IBot;
 import org.example.User;
 
