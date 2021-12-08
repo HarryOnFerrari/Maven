@@ -27,8 +27,7 @@ public class TelegramBotTest {
     private Message message = new Message();
     /** Поле типа Chat для установки id */
     private Chat chat = new Chat();
-    /** Поле списка команд для отправки боту */
-    private String[] commands;
+
     /** Поле типа Update для отправки запросов боту */
     private Update update = new Update();
 
@@ -69,7 +68,7 @@ public class TelegramBotTest {
      */
     @Test
     public void checkMessageAfterTest(){
-        commands = new String[]{"ENGLISH", "/test", "/next"};
+        String[] commands = new String[]{"ENGLISH", "/test", "/next"};
         for (int i=0; i<151; i++){
             message.setText(commands[Math.min(i, 2)]);
             update.setMessage(message);
@@ -85,7 +84,7 @@ public class TelegramBotTest {
      */
     @Test
     public void savingWhenChanging(){
-        commands = new String[]{"MATHS", "/test", "la-la-la", "/stop", "ENGLISH", "MATHS", "/repeat"};
+        String[] commands = new String[]{"MATHS", "/test", "la-la-la", "/stop", "ENGLISH", "MATHS", "/repeat"};
         for (String command : commands) {
             message.setText(command);
             update.setMessage(message);
@@ -124,7 +123,7 @@ public class TelegramBotTest {
      */
     @Test
     public void checkUserStatisticsLogic(){
-        commands = new String[]{"MATHS", "/test", "100", "/stop", "ENGLISH", "/statistic_subject"};
+        String[] commands = new String[]{"MATHS", "/test", "100", "/stop", "ENGLISH", "/statistic_subject"};
         for (String command : commands){
             message.setText(command);
             update.setMessage(message);

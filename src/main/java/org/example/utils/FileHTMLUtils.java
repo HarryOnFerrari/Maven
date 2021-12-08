@@ -47,7 +47,7 @@ public class FileHTMLUtils {
     /**
      * Чтение файла в формат String
      */
-    public String readFiles(){
+    private String readFiles(){
         StringBuilder result = new StringBuilder();
         try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream))){
             String line;

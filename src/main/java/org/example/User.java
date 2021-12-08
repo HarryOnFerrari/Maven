@@ -1,7 +1,5 @@
 package org.example;
 
-import org.glassfish.grizzly.utils.Pair;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -14,10 +12,6 @@ import static org.example.constants.CommandConstants.*;
 public class User {
     /** Поле id чата пользователя */
     private Long chatId;
-    public Long getChatId() {
-        return chatId;
-    }
-    public void setChatId(Long chatId) { this.chatId = chatId; }
     /** Поле текущего теста пользователя */
     private Testing testes;
     /** Поле состояния пользователя */
@@ -27,7 +21,7 @@ public class User {
     /** Поле ссылка на ресурс текущего предмета */
     private String link;
     /** Поле с парами "ссылка - список вопросов к повторению" для всех предметов */
-    private Map<String, Pair<String, Map<String, String>>> subjects;
+    private Map<String, Map.Entry<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
     /** Поле статистика пользователя */
@@ -39,25 +33,25 @@ public class User {
      */
     public void setCondition(String str) {
         switch (str) {
-            case (TEST):
+            case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
                 statistic.startGenerateStat();
                 break;
-            case (REPEAT):
+            case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
                 str = TEST;
                 break;
-            case ("MATHS"):
-            case ("RUSSIAN"):
-            case("ENGLISH"):
-                link = subjects.get(str).getFirst();
-                wrongAnswersList = subjects.get(str).getSecond();
+            case "MATHS":
+            case "RUSSIAN":
+            case "ENGLISH":
+                link = subjects.get(str).getKey();
+                wrongAnswersList = subjects.get(str).getValue();
                 statistic.setSubject(str);
                 break;
-            case (BACK):
+            case BACK:
                 str = "";
                 break;
-            case (STOP):
+            case STOP:
                 statistic.createLastTestResult();
                 break;
         }
@@ -84,7 +78,7 @@ public class User {
         reminder.setIsAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
-            subjects.put(sub.toString(), new Pair<>(
+            subjects.put(sub.toString(),  Map.entry(
                     sub.value(),
                     new HashMap<>()
             ));
@@ -111,6 +105,11 @@ public class User {
     public TimerBehavior getReminder() {
         return reminder;
     }
+
+    public Long getChatId() {
+        return chatId;
+    }
+    public void setChatId(Long chatId) { this.chatId = chatId; }
 
     /**
      * Функция сопоставления пользователей

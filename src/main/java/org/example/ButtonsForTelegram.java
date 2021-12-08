@@ -29,9 +29,6 @@ public enum ButtonsForTelegram {
     /** Состояние меню */
     MENU_BOARD (keyboardForMenu());
 
-
-
-
     /** Поле текущей расстановки кнопок*/
     InlineKeyboardMarkup current;
 
