@@ -39,8 +39,8 @@ public class TelegramBotTest {
         bot = Mockito.spy(new TelegramBot());
         bot.setBehavior(Mockito.spy(new Behavior(bot)));
         Mockito.doReturn(null).when(bot).execute(Mockito.any(SendMessage.class));
-        Mockito.doNothing().when(bot).setMessage(Mockito.any(Long.class), Mockito.anyString());
-        Mockito.doNothing().when(bot).setMessageWithButtons(
+        Mockito.doNothing().when(bot).sendMessage(Mockito.any(Long.class), Mockito.anyString());
+        Mockito.doNothing().when(bot).sendMessageWithButtons(
                 Mockito.any(Long.class), Mockito.anyString(), Mockito.anyString());
         chat.setId(chatId);
         message.setChat(chat);
@@ -58,7 +58,7 @@ public class TelegramBotTest {
         message.setText("/start");
         update.setMessage(message);
         bot.onUpdateReceived(update);
-        Mockito.verify(bot).setMessage(chatId, "Привет, работяга!");
+        Mockito.verify(bot).sendMessage(chatId, "Привет, работяга!");
     }
 
     /**
@@ -74,7 +74,7 @@ public class TelegramBotTest {
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
-        Mockito.verify(bot).setMessage(chatId, "Вопросов нет. \nДля продолжения отправьте /start");
+        Mockito.verify(bot).sendMessage(chatId, "Вопросов нет. \nДля продолжения отправьте /start");
     }
 
     /**
@@ -91,7 +91,7 @@ public class TelegramBotTest {
             bot.onUpdateReceived(update);
         }
         Mockito.verify(bot, Mockito.times(2))
-                .setMessage(chatId, "Вычислите степень: 10^2");
+                .sendMessage(chatId, "Вычислите степень: 10^2");
     }
 
     /**
@@ -112,7 +112,7 @@ public class TelegramBotTest {
         }
         Thread.sleep(500);
         for (Long fakeId : fakeIds){
-            Mockito.verify(bot).setMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
+            Mockito.verify(bot).sendMessageWithButtons(fakeId, "Вас давно не было видно. Хотите пройти тест?",
                     "SUBJECT_BOARD");
         }
     }
@@ -129,6 +129,6 @@ public class TelegramBotTest {
             update.setMessage(message);
             bot.onUpdateReceived(update);
         }
-        Mockito.verify(bot).setMessage(chatId, "ENGLISH: Информации нет. Пройдите тест.");
+        Mockito.verify(bot).sendMessage(chatId, "ENGLISH: Информации нет. Пройдите тест.");
     }
 }

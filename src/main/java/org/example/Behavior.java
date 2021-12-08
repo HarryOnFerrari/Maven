@@ -17,12 +17,12 @@ public class Behavior{
      * @param user - текущий пользователь
      * @param command - сообщение пользователя
      */
-    public final void readCommands(User user, String command){
+    public final void processCommand(User user, String command){
         switch (command) {
             case START:
                 bot.setMessage(user.getChatId(),
                         "Привет, работяга!");
-                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
+                bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case SUBJECT:
                 bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
@@ -39,28 +39,28 @@ public class Behavior{
                 break;
             case TEST:
                 user.setCondition(TEST);
-                bot.setMessage(user.getChatId(), user.getTestes().newLine());
+                bot.sendMessage(user.getChatId(), user.getTestes().newLine());
                 break;
             case REPEAT:
                 user.setCondition(REPEAT);
-                bot.setMessage(user.getChatId(), user.getTestes().newLine());
+                bot.sendMessage(user.getChatId(), user.getTestes().newLine());
                 break;
             case NEXT:
                 if (!user.getCondition().equals(TEST)) {
-                    bot.setMessage(user.getChatId(),
+                    bot.sendMessage(user.getChatId(),
                             "Чтобы начать тестирование, отправьте /test");
                 } else {
-                    bot.setMessage(user.getChatId(), user.getTestes().newLine());
+                    bot.sendMessage(user.getChatId(), user.getTestes().newLine());
                 }
                 break;
             case STOP:
                 if (!user.getCondition().equals(TEST)) {
-                    bot.setMessage(user.getChatId(),
+                    bot.sendMessage(user.getChatId(),
                             "Вы не начинали тестирование. " +
                                     "Воспользуйтесь командой /help, чтобы прочитать инструкцию.");
                 } else {
-                    bot.setMessage(user.getChatId(), "Тест завершен");
-                    bot.setMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
+                    bot.sendMessage(user.getChatId(), "Тест завершен");
+                    bot.sendMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
                     user.setCondition(STOP);
                 }
                 break;
@@ -68,25 +68,25 @@ public class Behavior{
             case "MATHS":
             case "RUSSIAN":
                 user.setCondition(command);
-                bot.setMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
+                bot.sendMessageWithButtons(user.getChatId(), CHOOSE_MODE, "MODE_BOARD");
                 break;
             case BACK:
                 user.setCondition(command);
-                bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                bot.sendMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case TIMER_OFF:
                 user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
-                bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
-                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
+                bot.sendMessage(user.getChatId(), NOTIFICATION_OFF);
+                bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case TIMER_ON:
                 user.getReminder().setIsAgreeReceiveNotification(true);
                 user.getReminder().setOffsetReceiveNotifications(0);
                 user.getReminder().setReminder(bot);
-                bot.setMessage(user.getChatId(), NOTIFICATION_ON);
-                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
+                bot.sendMessage(user.getChatId(), NOTIFICATION_ON);
+                bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case TIMER_OFF_1:
             case TIMER_OFF_2:
@@ -94,8 +94,8 @@ public class Behavior{
                 user.getReminder().setIsAgreeReceiveNotification(false);
                 user.getReminder().setOffsetReceiveNotifications(Integer.parseInt(command.substring(command.length()-1)));
                 user.getReminder().setReminder(bot);
-                bot.setMessage(user.getChatId(), NOTIFICATION_OFF);
-                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
+                bot.sendMessage(user.getChatId(), NOTIFICATION_OFF);
+                bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case STATISTIC_GENERAL:
                 bot.setMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
@@ -119,7 +119,7 @@ public class Behavior{
         if (user.getCondition().equals(TEST)) {
             checkTestAnswer(user, command);
         } else {
-            bot.setMessage(user.getChatId(), WRONG_COMMAND);
+            bot.sendMessage(user.getChatId(), WRONG_COMMAND);
         }
     }
 
@@ -131,12 +131,12 @@ public class Behavior{
      */
     private void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
-            bot.setMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
+            bot.sendMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
             user.getStatistic().setCountRightAnswer(1);
         }
         else {
             user.getTestes().saveQuestion();
-            bot.setMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
+            bot.sendMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
             user.getStatistic().setCountWrongAnswer(1);
         }
     }

@@ -99,9 +99,9 @@ public class VKBot extends LongPollBot implements IBot{
             commandText = message.getText();
         }
         if (commandText.equals(SETTING)) {
-            setMessageWithButtons(userId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
+            sendMessageWithButtons(userId, TIMER_SETTING_ON, "SETTING_BOARD_ON");
         } else {
-            behavior.readCommands(user, commandText);
+            behavior.processCommand(user, commandText);
         }
     }
 
@@ -111,7 +111,7 @@ public class VKBot extends LongPollBot implements IBot{
      * @param message - текст сообщения
      */
     @Override
-    public void setMessage(Long id, String message) {
+    public void sendMessage(Long id, String message) {
         try {
             new MessagesSend(this)
                     .setPeerId(Math.toIntExact(id))
@@ -130,7 +130,7 @@ public class VKBot extends LongPollBot implements IBot{
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
     @Override
-    public void setMessageWithButtons(Long id, String message, String keyboardLayout) {
+    public void sendMessageWithButtons(Long id, String message, String keyboardLayout) {
         try {
             vk.messages().send(actor).message(message)
                     .userId(Math.toIntExact(id))

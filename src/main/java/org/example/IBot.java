@@ -12,7 +12,7 @@ public interface IBot {
      * @param id - id чата, в который требуется отправить сообщение
      * @param message - текст сообщения
      */
-    void setMessage(Long id, String message);
+    void sendMessage(Long id, String message);
 
     /**
      * Функция для отправки сообщения с кнопками пользователю.
@@ -21,5 +21,5 @@ public interface IBot {
      * @param message - сообщение
      * @param keyboardLayout - вариант шаблона клавиатуры
      */
-    void setMessageWithButtons(Long id, String message, String keyboardLayout);
+    void sendMessageWithButtons(Long id, String message, String keyboardLayout);
 }
