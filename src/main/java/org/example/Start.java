@@ -3,11 +3,11 @@ package org.example;
 import api.longpoll.bots.BotsLongPoll;
 import api.longpoll.bots.exceptions.BotsLongPollException;
 import api.longpoll.bots.exceptions.BotsLongPollHttpException;
+import org.example.BotsPlatforms.TelegramBot;
+import org.example.BotsPlatforms.VKBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
-import java.util.Scanner;
 
 /**
  * Класс запуска.
@@ -39,9 +39,7 @@ public class Start {
         try {
             BotsLongPoll vkBot = new BotsLongPoll(new VKBot());
             vkBot.run();
-        } catch (BotsLongPollException e) {
-            e.printStackTrace();
-        } catch (BotsLongPollHttpException e) {
+        } catch (BotsLongPollException | BotsLongPollHttpException e) {
             e.printStackTrace();
         }
     }

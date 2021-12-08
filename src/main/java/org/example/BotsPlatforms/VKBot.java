@@ -1,4 +1,4 @@
-package org.example;
+package org.example.BotsPlatforms;
 
 import api.longpoll.bots.LongPollBot;
 import api.longpoll.bots.exceptions.BotsLongPollException;
@@ -12,6 +12,10 @@ import com.vk.api.sdk.client.actors.GroupActor;
 import com.vk.api.sdk.exceptions.ApiException;
 import com.vk.api.sdk.exceptions.ClientException;
 import com.vk.api.sdk.httpclient.HttpTransportClient;
+import org.example.Behavior;
+import org.example.Buttons.ButtonsForVK;
+import org.example.IBot;
+import org.example.User;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -28,7 +32,7 @@ import static org.example.constants.CommandConstants.*;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class VKBot extends LongPollBot implements IBot{
+public class VKBot extends LongPollBot implements IBot {
     /** Поле, через которое передаются наши запросы*/
     private TransportClient transportClient = new HttpTransportClient();
     /** Поле взаимодействия с VK-API с помощью запросов*/

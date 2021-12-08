@@ -20,22 +20,22 @@ public class Behavior{
     public final void processCommand(User user, String command){
         switch (command) {
             case START:
-                bot.setMessage(user.getChatId(),
+                bot.sendMessage(user.getChatId(),
                         "Привет, работяга!");
                 bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case SUBJECT:
-                bot.setMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
+                bot.sendMessageWithButtons(user.getChatId(), CHOOSE_SUBJECT, "SUBJECT_BOARD");
                 break;
             case MENU:
-                bot.setMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
+                bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case SETTING:
-                bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_ON, "SETTING_BOARD_ON");
-                bot.setMessageWithButtons(user.getChatId(), TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
+                bot.sendMessageWithButtons(user.getChatId(), TIMER_SETTING_ON, "SETTING_BOARD_ON");
+                bot.sendMessageWithButtons(user.getChatId(), TIMER_SETTING_OFF, "SETTING_BOARD_OFF");
                 break;
             case HELP:
-                bot.setMessage(user.getChatId(), HELP_INFO);
+                bot.sendMessage(user.getChatId(), HELP_INFO);
                 break;
             case TEST:
                 user.setCondition(TEST);
@@ -98,10 +98,10 @@ public class Behavior{
                 bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case STATISTIC_GENERAL:
-                bot.setMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
+                bot.sendMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
                 break;
             case STATISTIC_SUBJECT:
-                bot.setMessage(user.getChatId(), user.getStatistic().makeStatSubject());
+                bot.sendMessage(user.getChatId(), user.getStatistic().makeStatSubject());
                 break;
             default:
                 checkFalseCommand(user, command);

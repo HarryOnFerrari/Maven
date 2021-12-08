@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Buttons;
 
 import org.example.utils.FileResourcesUtils;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.InlineKeyboardMarkup;

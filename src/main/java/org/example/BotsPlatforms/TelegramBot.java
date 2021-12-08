@@ -1,5 +1,9 @@
-package org.example;
+package org.example.BotsPlatforms;
 
+import org.example.Behavior;
+import org.example.Buttons.ButtonsForTelegram;
+import org.example.IBot;
+import org.example.User;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Update;
@@ -15,7 +19,7 @@ import java.util.Properties;
  *
  * @author Бабакова Анастасия, Пономарева Дарья
  */
-public class TelegramBot extends TelegramLongPollingBot implements IBot{
+public class TelegramBot extends TelegramLongPollingBot implements IBot {
     /** Поле списка пользователей */
     private Map<Long, User> users = new HashMap<>();
 

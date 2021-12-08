@@ -1,5 +1,9 @@
-package org.example;
+package org.example.BotsPlatforms;
 
+import org.example.Behavior;
+import org.example.Buttons.ButtonsForTelegram;
+import org.example.IBot;
+import org.example.User;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.InlineKeyboardButton;
 
 import java.io.PrintStream;
