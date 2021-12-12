@@ -16,7 +16,7 @@ public class UpdateTimeNotificationTest {
      * Тест на корректный перенос даты
      */
     @Test
-    public void testStartMessage()
+    public void testOffsetDate()
     {
         UpdateTimeNotification updateTimeNotification = new UpdateTimeNotification();
         Date currentDate = new Date(1639267235000L); //Sun Dec 12 05:00:35 YEKT 2021
