@@ -89,25 +89,4 @@ public class BehaviorTest
         Assert.assertEquals("ENGLISH: Информации нет. Пройдите тест.",
                 fakeBot.getMessages().get(fakeBot.getMessages().size()-1));
     }
-
-    /**
-     * Проверка своевременной рассылки напоминания большому числу пользователей
-     */
-    @Test
-    public void remind() throws InterruptedException {
-        FakeBot fakeBot = new FakeBot();
-        Behavior behavior = new Behavior(fakeBot);
-        TimerBehavior.setStandardDispatchTime(10);
-        int users = 10;
-        for (long i = 0L; i<users; i++) {
-            User user = new User(i);
-            behavior.processCommand(user, "timerOn");
-        }
-        Thread.sleep( 10 + users*20); // отправка 1 сообщения у fakeBot занимет примерно 20ms
-        String questionWithWrongAnswer = "Вас давно не было видно. Хотите пройти тест?";
-        Assert.assertEquals(questionWithWrongAnswer,
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 2));
-        Assert.assertEquals(questionWithWrongAnswer,
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 30 - 2));
-    }
 }

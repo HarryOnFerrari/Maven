@@ -31,8 +31,10 @@ public class UserStatisticTest {
     {
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
-        List<String> commands = List.of("MATHS", "/test", "Неправильный ответ", "/stop", "/back", "/statistic_general",
-                "ENGLISH", "/test", "ПрОсТой", "/next", "множество", "/next", "бла-бла", "/stop", "/back", "/statistic_general",
+        List<String> commands = List.of(
+                "MATHS", "/test", "Неправильный ответ", "/stop", "/back", "/statistic_general",
+                "ENGLISH", "/test", "ПрОсТой", "/next", "множество",
+                                               "/next", "бла-бла", "/stop", "/back", "/statistic_general",
                 "MATHS", "/test", "100", "/stop", "/back", "/statistic_general");
         for (String command : commands)
         {
@@ -60,19 +62,22 @@ public class UserStatisticTest {
     {
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
-        List<String> commands = List.of("MATHS", "/test", "Неправильный ответ", "/stop", "/statistic_subject",
-                                                 "/test", "100", "/stop", "/statistic_subject", "/back",
-                                       "RUSSIAN", "/test", "A", "/stop", "/statistic_subject");
+        List<String> commands = List.of(
+                "MATHS", "/statistic_subject", "/test", "Неправильный ответ", "/stop", "/statistic_subject",
+                                               "/test", "100", "/stop", "/statistic_subject", "/back",
+                "RUSSIAN", "/test", "A", "/stop", "/statistic_subject");
         for (String command : commands)
         {
             behavior.processCommand(user, command);
         }
+        Assert.assertEquals("MATHS: Информации нет. Пройдите тест.",
+                fakeBot.getMessages().get(1));
         Assert.assertEquals("MATHS: попытка №1: 0 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(5));
+                fakeBot.getMessages().get(6));
         Assert.assertEquals("MATHS: попытка №1: 0 - правильных, 1 - неправильных\n" +
-                        "MATHS: попытка №2: 1 - правильных, 0 - неправильных\n",
-                fakeBot.getMessages().get(10));
+                                    "MATHS: попытка №2: 1 - правильных, 0 - неправильных\n",
+                fakeBot.getMessages().get(11));
         Assert.assertEquals("RUSSIAN: попытка №1: 0 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(17));
+                fakeBot.getMessages().get(18));
     }
 }
