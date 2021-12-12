@@ -6,6 +6,11 @@ import org.junit.Test;
 
 import java.util.List;
 
+/**
+ * Тесты на класс {@link UserStatistic}
+ *
+ * @author Бабакова Анастасия, Пономарева Дарья
+ */
 public class UserStatisticTest {
     private static User user;
 
@@ -17,6 +22,7 @@ public class UserStatisticTest {
     {
         user = new User(0L);
     }
+
     /**
      * Тест на корректную обработку общей статистики
      */
@@ -47,7 +53,7 @@ public class UserStatisticTest {
     }
 
     /**
-     * Тест на корректное предметной статистики
+     * Тест на корректную обработку предметной статистики
      */
     @Test
     public void testSubjectStatistic()
