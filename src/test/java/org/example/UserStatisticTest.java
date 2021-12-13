@@ -80,4 +80,23 @@ public class UserStatisticTest {
         Assert.assertEquals("RUSSIAN: попытка №1: 0 - правильных, 1 - неправильных\n",
                 fakeBot.getMessages().get(18));
     }
+
+    /**
+     * Проверка начала формирования статистики при запуске теста
+     * (запуск теста фиксируется, даже если пользователь не начал отвечать на вопросы)
+     */
+    @Test
+    public void unfinishedTest(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        User user = new User(0L);
+        List<String> commands = List.of(
+                "MATHS", "/test", "/stop", "/statistic_subject");
+        for (String command : commands)
+        {
+            behavior.processCommand(user, command);
+        }
+        Assert.assertEquals("MATHS: попытка №1: ",
+                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+    }
 }

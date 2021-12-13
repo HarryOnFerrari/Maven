@@ -5,6 +5,7 @@ import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
+import java.util.Timer;
 
 /**
  * Тесты на класс {@link TimerBehavior}
@@ -61,5 +62,25 @@ public class TimerBehaviorTest {
                 fakeBot.getMessages().get(fakeBot.getMessages().size() - 2));
         Assert.assertEquals(questionWithWrongAnswer,
                 fakeBot.getMessages().get(fakeBot.getMessages().size() - 30 - 2));
+    }
+
+    /**
+     * Тест на корректное включение и получение уведомлений
+     * @throws InterruptedException
+     */
+    @Test
+    public void checkAfterDisagree() throws InterruptedException {
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        TimerBehavior.setStandardDispatchTime(10);
+        User user = new User(0L);
+        behavior.processCommand(user, "timerOff");
+        Thread.sleep(10 + 20);
+        Assert.assertNotEquals("Вас давно не было видно. Хотите пройти тест?",
+                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+        behavior.processCommand(user, "timerOn");
+        Thread.sleep(10 + 20);
+        Assert.assertEquals("Вас давно не было видно. Хотите пройти тест?",
+                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
     }
 }
