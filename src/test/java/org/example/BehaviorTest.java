@@ -50,7 +50,7 @@ public class BehaviorTest
         behavior.processCommand(user, "/test");
         behavior.processCommand(user, "ПрОсТоЙ");
         Assert.assertEquals("Правильный ответ!",
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+                fakeBot.getMessages().get(2));
     }
 
     /**

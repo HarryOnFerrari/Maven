@@ -1,7 +1,6 @@
 package org.example;
 
 import org.junit.Assert;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 import java.util.List;
@@ -12,17 +11,6 @@ import java.util.List;
  * @author Бабакова Анастасия, Пономарева Дарья
  */
 public class UserStatisticTest {
-    private static User user;
-
-    /**
-     * Общая подготовка для всех методов
-     */
-    @BeforeClass
-    public static void prepare()
-    {
-        user = new User(0L);
-    }
-
     /**
      * Тест на корректную обработку общей статистики
      */
@@ -31,6 +19,7 @@ public class UserStatisticTest {
     {
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
+        User user = new User(2L);
         List<String> commands = List.of(
                 "MATHS", "/test", "Неправильный ответ", "/stop", "/back", "/statistic_general",
                 "ENGLISH", "/test", "ПрОсТой", "/next", "множество",
@@ -62,6 +51,7 @@ public class UserStatisticTest {
     {
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
+        User user = new User(3L);
         List<String> commands = List.of(
                 "MATHS", "/statistic_subject", "/test", "Неправильный ответ", "/stop", "/statistic_subject",
                                                "/test", "100", "/stop", "/statistic_subject", "/back",
@@ -89,7 +79,7 @@ public class UserStatisticTest {
     public void unfinishedTest(){
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
-        User user = new User(0L);
+        User user = new User(1L);
         List<String> commands = List.of(
                 "MATHS", "/test", "/stop", "/statistic_subject");
         for (String command : commands)

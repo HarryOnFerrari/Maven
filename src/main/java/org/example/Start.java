@@ -3,6 +3,8 @@ package org.example;
 import api.longpoll.bots.BotsLongPoll;
 import api.longpoll.bots.exceptions.BotsLongPollException;
 import api.longpoll.bots.exceptions.BotsLongPollHttpException;
+
+import org.example.platforms.ConsoleBot;
 import org.example.platforms.TelegramBot;
 import org.example.platforms.VKBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
