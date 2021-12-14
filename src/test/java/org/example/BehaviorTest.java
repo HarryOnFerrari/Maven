@@ -50,7 +50,7 @@ public class BehaviorTest
         behavior.processCommand(user, "/test");
         behavior.processCommand(user, "ПрОсТоЙ");
         Assert.assertEquals("Правильный ответ!",
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+                fakeBot.getMessages().get(2));
     }
 
     /**
@@ -71,6 +71,23 @@ public class BehaviorTest
         Assert.assertEquals(questionWithWrongAnswer,
                 fakeBot.getMessages().get(1));
         Assert.assertEquals(questionWithWrongAnswer,
+                fakeBot.getMessages().get(6));
+    }
+
+    /**
+     * Отладочный тест для проверки того, что, после прохождения теста по одному предмету, результат
+     * последней попытки не переносится в статистику другого предмета (больная мозоль)
+     */
+    @Test
+    public void checkUserStatisticsLogic(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        User user = new User(5L);
+        List<String> commands = List.of("MATHS", "/test", "100", "/stop", "ENGLISH", "/statistic_subject");
+        for (String command : commands){
+            behavior.processCommand(user, command);
+        }
+        Assert.assertEquals("ENGLISH: Информации нет. Пройдите тест.",
                 fakeBot.getMessages().get(6));
     }
 }
