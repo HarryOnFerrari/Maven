@@ -25,28 +25,10 @@ public class TimerBehaviorTest {
     }
 
     /**
-     * Тест на корректное поведение таймера
-     */
-    @Test
-    public void testBehaviorReminder()
-    {
-        FakeBot fakeBot = new FakeBot();
-        Behavior behavior = new Behavior(fakeBot);
-        List<String> commands = List.of("/start", "timerOff", "timerOn", "timer_off_2");
-        for (String command : commands)
-        {
-            behavior.processCommand(user, command);
-        }
-        Assert.assertEquals("Уведомления выключены", fakeBot.getMessages().get(2));
-        Assert.assertEquals("Уведомления успешно включены", fakeBot.getMessages().get(4));
-        Assert.assertEquals("Уведомления выключены", fakeBot.getMessages().get(6));
-    }
-
-    /**
      * Проверка своевременной рассылки напоминания большому числу пользователей
      */
     @Test
-    public void remind() throws InterruptedException {
+    public void checkRemind() throws InterruptedException {
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
         TimerBehavior.setStandardDispatchTime(10);
