@@ -25,7 +25,9 @@ public class User {
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
     /** Поле статистика пользователя */
-    private UserStatistic statistic;
+    private UserStatistic_new statistic;
+    /** Поле с названием текущего предмета */
+    private String currentSubject;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -35,7 +37,7 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
-                statistic.startGenerateStat();
+                statistic.startGenerateStat(currentSubject);
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -44,15 +46,15 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
+                currentSubject = str;
                 link = subjects.get(str).getKey();
                 wrongAnswersList = subjects.get(str).getValue();
-                statistic.setSubject(str);
                 break;
             case BACK:
                 str = "";
                 break;
             case STOP:
-                statistic.createLastTestResult();
+                statistic.createLastTestResult(currentSubject);
                 break;
         }
         condition = str;
@@ -74,7 +76,7 @@ public class User {
         this.chatId = chatId;
         condition = "";
         reminder = new TimerBehavior(chatId);
-        statistic = new UserStatistic();
+        statistic = new UserStatistic_new();
         reminder.setIsAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
@@ -93,10 +95,28 @@ public class User {
     }
 
     /**
-     * Функция получения доступа к полю {@link User#statistic}
+     * Функция получения общей статистики по предметам
      */
-    public UserStatistic getStatistic() {
-        return statistic;
+    public String generalStatistic() {
+        statistic.createLastTestResult(currentSubject);
+        return statistic.makeStatGeneral();
+    }
+
+    /**
+     * Функция для сохранения результата после ответа на вопрос
+     */
+    public void isThisRightAnswer(Boolean yes){ //rename me pls :^(
+        if (yes)
+            statistic.addCountRightAnswer();
+        else
+            statistic.addCountWrongAnswer();
+    }
+
+    /**
+     *Функция получения статистики по отдельному предмету
+     */
+    public String subjectStatistic() {
+        return statistic.makeStatSubject(currentSubject);
     }
 
     /**

@@ -6,7 +6,8 @@ import java.util.*;
  * Класс бота для обработки данных статистики
  * @author Бабакова Анастасия(немножко), Пономарева Дарья(множко).
  */
-public class UserStatistic implements IUserStatistic {
+public class UserStatistic  //implements IUserStatistic
+{
     /** Поле количества верных ответов */
     private int countRightAnswer = 0;
     public int getCountRightAnswer() {
@@ -66,7 +67,7 @@ public class UserStatistic implements IUserStatistic {
 
 
     /** Метод создания статистики по последнему резултату теста */
-    @Override
+    //@Override
     public void createLastTestResult(){
         if (countRightAnswer != 0 || countWrongAnswer != 0){
             Map<Integer, String> previousSub = allSubjectsStat.get(this.subject);
@@ -81,7 +82,7 @@ public class UserStatistic implements IUserStatistic {
      * Метод приведения статистики по попыткам конкретного предмета
      * @return статистика по предмету с указанием попыток
      */
-    @Override
+    //@Override
     public String makeStatSubject () {
         createLastTestResult();
         if (allSubjectsStat.get(subject).isEmpty()) {
@@ -106,7 +107,7 @@ public class UserStatistic implements IUserStatistic {
      * Метод создания общей сводки по всем предметам
      * @return статистика по предметам
      */
-    @Override
+    //@Override
     public String makeStatGeneral() {
         createLastTestResult();
         StringBuilder result = new StringBuilder();
