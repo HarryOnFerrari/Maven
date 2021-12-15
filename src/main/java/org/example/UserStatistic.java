@@ -62,6 +62,8 @@ public class UserStatistic implements IUserStatistic {
     private String makeFormatStatistic(Map<Integer, String> results, String subject) {
         StringBuilder statSubject = new StringBuilder();
         for (Map.Entry<Integer,String> entry : results.entrySet()) {
+            if (entry.getValue().isEmpty())
+                entry.setValue("Вы не дали ни одного ответа\n"); // если поменяешь, то подправь тест unfinishedTest
             statSubject.append(subject)
                     .append(": попытка №")
                     .append(entry.getKey())

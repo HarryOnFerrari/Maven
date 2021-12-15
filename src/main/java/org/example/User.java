@@ -101,10 +101,18 @@ public class User {
     }
 
     /**
-     * Функция получения доступа к полю {@link User#statistic}
+     * Функция получения общей статистики по предметам
      */
-    public UserStatistic getStatistic() {
-        return statistic;
+    public String generalStatistic() {
+        statistic.createLastTestResult(countRightAnswer, countWrongAnswer, subject);
+        return statistic.makeStatGeneral();
+    }
+
+    /**
+     *Функция получения статистики по отдельному предмету
+     */
+    public String subjectStatistic() {
+        return statistic.makeStatSubject(subject);
     }
 
     /**
@@ -141,12 +149,15 @@ public class User {
         return chatId.hashCode();
     }
 
-    public void setCountWrongAnswer(int countWrongAnswer) {
-        this.countWrongAnswer += countWrongAnswer;
-    }
-
-    public void setCountRightAnswer(int countRightAnswer) {
-        this.countRightAnswer += countRightAnswer;
+    /**
+     * Функция для сохранения результата после ответа на вопрос теста
+     * @param answer true - если ответ правильный, в противном случае false
+     */
+    public void isAnswerRight(Boolean answer){
+        if (answer)
+            countRightAnswer += 1;
+        else
+            countWrongAnswer += 1;
     }
 
     public String getSubject() {
