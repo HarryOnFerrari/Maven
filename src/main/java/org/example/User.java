@@ -31,7 +31,7 @@ public class User {
     /** Поле количества неверных ответов */
     private int countWrongAnswer = 0;
     /** Поле названия текущего учебного предмета */
-    private String subject;
+    private String currentSubject;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -41,7 +41,7 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
-                statistic.startGenerateStat(subject);
+                statistic.startGenerateStat(currentSubject);
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -50,28 +50,20 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
-                subject = str;
-                link = subjects.get(subject).getKey();
-                wrongAnswersList = subjects.get(subject).getValue();
+                currentSubject = str;
+                link = subjects.get(currentSubject).getKey();
+                wrongAnswersList = subjects.get(currentSubject).getValue();
                 break;
             case BACK:
                 str = "";
                 break;
             case STOP:
-                statistic.createLastTestResult(countRightAnswer, countWrongAnswer, subject);
+                statistic.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
                 countRightAnswer = 0;
                 countWrongAnswer = 0;
                 break;
         }
         condition = str;
-    }
-
-    /**
-     * Функция получения значения поля {@link User#condition}
-     * @return возвращает значение состояния
-     */
-    public String getCondition() {
-        return condition;
     }
 
     /**
@@ -94,42 +86,36 @@ public class User {
     }
 
     /**
-     * Функция получения доступа к полю {@link User#testes}
-     */
-    public Testing getTestes() {
-        return testes;
-    }
-
-    /**
      * Функция получения общей статистики по предметам
+     * @return статистика по всем предметам, включающая только последнюю попытку по каждому предмету
      */
     public String generalStatistic() {
-        statistic.createLastTestResult(countRightAnswer, countWrongAnswer, subject);
+        statistic.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
         return statistic.makeStatGeneral();
     }
 
     /**
-     *Функция получения статистики по отдельному предмету
+     * Функция получения статистики по отдельному предмету
+     * @return статистика с попытками по текущему предмету
      */
     public String subjectStatistic() {
-        return statistic.makeStatSubject(subject);
+        return statistic.makeStatSubject(currentSubject);
     }
 
     /**
-     * Функция получения доступа к полю {@link User#reminder}
+     * Функция для сохранения результата после ответа на вопрос теста
+     * @param answer true - если ответ правильный, в противном случае false
      */
-    public TimerBehavior getReminder() {
-        return reminder;
+    public void isAnswerRight(Boolean answer){
+        if (answer)
+            countRightAnswer += 1;
+        else
+            countWrongAnswer += 1;
     }
-
-    public Long getChatId() {
-        return chatId;
-    }
-    public void setChatId(Long chatId) { this.chatId = chatId; }
 
     /**
      * Функция сопоставления пользователей
-     * @param o - дугой пользователь
+     * @param o - другой пользователь
      * @return true - если other является данным пользователем, в противном случае false
      */
     @Override
@@ -150,17 +136,40 @@ public class User {
     }
 
     /**
-     * Функция для сохранения результата после ответа на вопрос теста
-     * @param answer true - если ответ правильный, в противном случае false
+     * Функция получения значения поля {@link User#condition}
+     * @return возвращает значение состояния
      */
-    public void isAnswerRight(Boolean answer){
-        if (answer)
-            countRightAnswer += 1;
-        else
-            countWrongAnswer += 1;
+    public String getCondition() {
+        return condition;
     }
 
-    public String getSubject() {
-        return subject;
+    /**
+     * Функция получения доступа к полю {@link User#currentSubject}
+     * @return название предмета
+     */
+    public String getCurrentSubject() {
+        return currentSubject;
+    }
+    /**
+     * Функция получения доступа к полю {@link User#reminder}
+     */
+    public TimerBehavior getReminder() {
+        return reminder;
+    }
+
+    /**
+     * Функция получения доступа к id чата пользователя {@link User#chatId}
+     * @return название предмета
+     */
+    public Long getChatId() {
+        return chatId;
+    }
+    public void setChatId(Long chatId) { this.chatId = chatId; }
+
+    /**
+     * Функция получения доступа к полю {@link User#testes}
+     */
+    public Testing getTestes() {
+        return testes;
     }
 }

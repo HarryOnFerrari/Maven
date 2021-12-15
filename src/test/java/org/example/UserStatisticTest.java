@@ -20,22 +20,22 @@ public class UserStatisticTest {
         statistic.startGenerateStat("MATHS");
         statistic.createLastTestResult(0, 1, "MATHS");
         Assert.assertEquals("MATHS: 0 - правильных, 1 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: нет информации, пройдите тест.\n",
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: нет информации, пройдите тест.\n",
                 statistic.makeStatGeneral());
 
         statistic.startGenerateStat("ENGLISH");
         statistic.createLastTestResult(2, 1, "ENGLISH");
         Assert.assertEquals("MATHS: 0 - правильных, 1 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: 2 - правильных, 1 - неправильных\n",
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: 2 - правильных, 1 - неправильных\n",
                 statistic.makeStatGeneral());
 
         statistic.startGenerateStat("MATHS");
         statistic.createLastTestResult(1, 0, "MATHS");
         Assert.assertEquals("MATHS: 1 - правильных, 0 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: 2 - правильных, 1 - неправильных\n",
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: 2 - правильных, 1 - неправильных\n",
                 statistic.makeStatGeneral());
     }
 
@@ -58,7 +58,7 @@ public class UserStatisticTest {
         statistic.startGenerateStat("MATHS");
         statistic.createLastTestResult(1, 0, "MATHS");
         Assert.assertEquals("MATHS: попытка №1: 0 - правильных, 1 - неправильных\n" +
-                        "MATHS: попытка №2: 1 - правильных, 0 - неправильных\n",
+                                    "MATHS: попытка №2: 1 - правильных, 0 - неправильных\n",
                 statistic.makeStatSubject("MATHS"));
 
         statistic.startGenerateStat("RUSSIAN");
@@ -77,5 +77,9 @@ public class UserStatisticTest {
         statistic.startGenerateStat("MATHS");
         Assert.assertEquals("MATHS: попытка №1: Вы не дали ни одного ответа\n",
                 statistic.makeStatSubject("MATHS"));
+        Assert.assertEquals("MATHS: Вы не дали ни одного ответа\n" +
+                            "RUSSIAN: нет информации, пройдите тест.\n" +
+                            "ENGLISH: нет информации, пройдите тест.\n",
+                statistic.makeStatGeneral());
     }
 }

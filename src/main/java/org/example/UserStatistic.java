@@ -10,10 +10,6 @@ import java.util.*;
  * @author Бабакова Анастасия(немножко), Пономарева Дарья(множко).
  */
 public class UserStatistic implements IUserStatistic {
-    /** Поле количества верных ответов */
-    private int countRightAnswer;
-    /** Поле количества неверных ответов */
-    private int countWrongAnswer;
     /** Общая таблица по всей статистике */
     Map<String, Map<Integer, String>> allSubjectsStat = initSubjectMap();
     /** Метод заполнения статистики учебными предметами */
@@ -33,9 +29,7 @@ public class UserStatistic implements IUserStatistic {
 
     /** Метод создания статистики по последнему результату теста */
     @Override
-    public void createLastTestResult(int right, int wrong, String subject){
-        countRightAnswer = right;
-        countWrongAnswer = wrong;
+    public void createLastTestResult(int countRightAnswer, int countWrongAnswer, String subject){
         if (countRightAnswer != 0 || countWrongAnswer != 0){
             Map<Integer, String> previousSub = allSubjectsStat.get(subject);
             previousSub.put(previousSub.size(),
@@ -56,14 +50,14 @@ public class UserStatistic implements IUserStatistic {
     }
 
     /**
-     * Метод приведения сводки попытка-результат к читабельному формату
+     * Метод приведения сводки предмет-попытка-результат к читабельному формату
      * @return строковый формат представления сводки
      */
     private String makeFormatStatistic(Map<Integer, String> results, String subject) {
         StringBuilder statSubject = new StringBuilder();
         for (Map.Entry<Integer,String> entry : results.entrySet()) {
             if (entry.getValue().isEmpty())
-                entry.setValue("Вы не дали ни одного ответа\n"); // если поменяешь, то подправь тест unfinishedTest
+                entry.setValue("Вы не дали ни одного ответа\n");
             statSubject.append(subject)
                     .append(": попытка №")
                     .append(entry.getKey())
