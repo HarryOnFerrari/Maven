@@ -26,6 +26,12 @@ public class User {
     private TimerBehavior reminder;
     /** Поле статистика пользователя */
     private UserStatistic statistic;
+    /** Поле количества верных ответов */
+    private int countRightAnswer = 0;
+    /** Поле количества неверных ответов */
+    private int countWrongAnswer = 0;
+    /** Поле названия текущего учебного предмета */
+    private String subject;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -35,7 +41,7 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
-                statistic.startGenerateStat();
+                statistic.startGenerateStat(subject);
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -44,15 +50,17 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
-                link = subjects.get(str).getKey();
-                wrongAnswersList = subjects.get(str).getValue();
-                statistic.setSubject(str);
+                subject = str;
+                link = subjects.get(subject).getKey();
+                wrongAnswersList = subjects.get(subject).getValue();
                 break;
             case BACK:
                 str = "";
                 break;
             case STOP:
-                statistic.createLastTestResult();
+                statistic.createLastTestResult(countRightAnswer, countWrongAnswer, subject);
+                countRightAnswer = 0;
+                countWrongAnswer = 0;
                 break;
         }
         condition = str;
@@ -131,5 +139,17 @@ public class User {
     @Override
     public int hashCode() {
         return chatId.hashCode();
+    }
+
+    public void setCountWrongAnswer(int countWrongAnswer) {
+        this.countWrongAnswer += countWrongAnswer;
+    }
+
+    public void setCountRightAnswer(int countRightAnswer) {
+        this.countRightAnswer += countRightAnswer;
+    }
+
+    public String getSubject() {
+        return subject;
     }
 }

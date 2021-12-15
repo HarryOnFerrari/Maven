@@ -101,7 +101,7 @@ public class Behavior{
                 bot.sendMessage(user.getChatId(), user.getStatistic().makeStatGeneral());
                 break;
             case STATISTIC_SUBJECT:
-                bot.sendMessage(user.getChatId(), user.getStatistic().makeStatSubject());
+                bot.sendMessage(user.getChatId(), user.getStatistic().makeStatSubject(user.getSubject()));
                 break;
             default:
                 checkFalseCommand(user, command);
@@ -132,12 +132,12 @@ public class Behavior{
     private void checkTestAnswer(User user, String command){
         if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
             bot.sendMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
-            user.getStatistic().setCountRightAnswer(1);
+            user.setCountRightAnswer(1);
         }
         else {
             user.getTestes().saveQuestion();
             bot.sendMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
-            user.getStatistic().setCountWrongAnswer(1);
+            user.setCountWrongAnswer(1);
         }
     }
 
