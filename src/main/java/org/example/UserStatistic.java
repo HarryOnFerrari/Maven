@@ -85,7 +85,10 @@ public class UserStatistic implements IUserStatistic {
                   .append(": ");
             Map<Integer, String> subStat = allSubjectsStat.get(sub);
             if (subStat.get(subStat.size()) != null) {
-                result.append(subStat.get(subStat.size()));
+                if (subStat.get(subStat.size()).isEmpty())
+                    result.append("Вы не дали ни одного ответа\n");
+                else
+                    result.append(subStat.get(subStat.size()));
             } else {
                 result.append("нет информации, пройдите тест.\n");
             }
