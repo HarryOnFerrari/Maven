@@ -3,14 +3,13 @@ package org.example;
 import api.longpoll.bots.BotsLongPoll;
 import api.longpoll.bots.exceptions.BotsLongPollException;
 import api.longpoll.bots.exceptions.BotsLongPollHttpException;
+
 import org.example.platforms.ConsoleBot;
 import org.example.platforms.TelegramBot;
 import org.example.platforms.VKBot;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
-
-import java.util.Scanner;
 
 /**
  * Класс запуска.
@@ -29,15 +28,21 @@ public class Start {
             e.printStackTrace();
         }
 
-        Thread consoleBot = new Thread(() -> new ConsoleBot(new Scanner(System.in),System.out).run());
-        Thread vkBot = new Thread(() -> {
-            try {
-                new BotsLongPoll(new VKBot()).run();
-            } catch (BotsLongPollHttpException | BotsLongPollException e) {
-                e.printStackTrace();
-            }
-        });
-        consoleBot.start();
-        vkBot.start();
+        //Thread consoleBot = new Thread(() -> new ConsoleBot(new Scanner(System.in),System.out).run());
+        //Thread vkBot = new Thread(() -> {
+            //try {
+                //new BotsLongPoll(new VKBot()).run();
+            //} catch (BotsLongPollHttpException | BotsLongPollException e) {
+                //e.printStackTrace();
+            //}
+        //});
+        //consoleBot.start();
+        //vkBot.start();
+        try {
+            BotsLongPoll vkBot = new BotsLongPoll(new VKBot());
+            vkBot.run();
+        } catch (BotsLongPollException | BotsLongPollHttpException e) {
+            e.printStackTrace();
+        }
     }
 }

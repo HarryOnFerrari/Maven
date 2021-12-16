@@ -3,7 +3,6 @@ package org.example;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.List;
 
 /**
  * Тесты на класс {@link UserStatistic}
@@ -17,30 +16,27 @@ public class UserStatisticTest {
     @Test
     public void testGeneralStatistic()
     {
-        FakeBot fakeBot = new FakeBot();
-        Behavior behavior = new Behavior(fakeBot);
-        User user = new User(2L);
-        List<String> commands = List.of(
-                "MATHS", "/test", "Неправильный ответ", "/stop", "/back", "/statistic_general",
-                "ENGLISH", "/test", "ПрОсТой", "/next", "множество",
-                                               "/next", "бла-бла", "/stop", "/back", "/statistic_general",
-                "MATHS", "/test", "100", "/stop", "/back", "/statistic_general");
-        for (String command : commands)
-        {
-            behavior.processCommand(user, command);
-        }
+        UserStatistic statistic = new UserStatistic();
+        statistic.startGenerateStat("MATHS");
+        statistic.createLastTestResult(0, 1, "MATHS");
         Assert.assertEquals("MATHS: 0 - правильных, 1 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: нет информации, пройдите тест.\n",
-                fakeBot.getMessages().get(6));
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: нет информации, пройдите тест.\n",
+                statistic.makeStatGeneral());
+
+        statistic.startGenerateStat("ENGLISH");
+        statistic.createLastTestResult(2, 1, "ENGLISH");
         Assert.assertEquals("MATHS: 0 - правильных, 1 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: 2 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(17));
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: 2 - правильных, 1 - неправильных\n",
+                statistic.makeStatGeneral());
+
+        statistic.startGenerateStat("MATHS");
+        statistic.createLastTestResult(1, 0, "MATHS");
         Assert.assertEquals("MATHS: 1 - правильных, 0 - неправильных\n" +
-                        "RUSSIAN: нет информации, пройдите тест.\n" +
-                        "ENGLISH: 2 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(24));
+                                    "RUSSIAN: нет информации, пройдите тест.\n" +
+                                    "ENGLISH: 2 - правильных, 1 - неправильных\n",
+                statistic.makeStatGeneral());
     }
 
     /**
@@ -49,26 +45,26 @@ public class UserStatisticTest {
     @Test
     public void testSubjectStatistic()
     {
-        FakeBot fakeBot = new FakeBot();
-        Behavior behavior = new Behavior(fakeBot);
-        User user = new User(3L);
-        List<String> commands = List.of(
-                "MATHS", "/statistic_subject", "/test", "Неправильный ответ", "/stop", "/statistic_subject",
-                                               "/test", "100", "/stop", "/statistic_subject", "/back",
-                "RUSSIAN", "/test", "A", "/stop", "/statistic_subject");
-        for (String command : commands)
-        {
-            behavior.processCommand(user, command);
-        }
+        UserStatistic statistic = new UserStatistic();
+
         Assert.assertEquals("MATHS: Информации нет. Пройдите тест.",
-                fakeBot.getMessages().get(1));
+                statistic.makeStatSubject("MATHS"));
+
+        statistic.startGenerateStat("MATHS");
+        statistic.createLastTestResult(0, 1, "MATHS");
         Assert.assertEquals("MATHS: попытка №1: 0 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(6));
+                statistic.makeStatSubject("MATHS"));
+
+        statistic.startGenerateStat("MATHS");
+        statistic.createLastTestResult(1, 0, "MATHS");
         Assert.assertEquals("MATHS: попытка №1: 0 - правильных, 1 - неправильных\n" +
                                     "MATHS: попытка №2: 1 - правильных, 0 - неправильных\n",
-                fakeBot.getMessages().get(11));
+                statistic.makeStatSubject("MATHS"));
+
+        statistic.startGenerateStat("RUSSIAN");
+        statistic.createLastTestResult(0, 1, "RUSSIAN");
         Assert.assertEquals("RUSSIAN: попытка №1: 0 - правильных, 1 - неправильных\n",
-                fakeBot.getMessages().get(18));
+                statistic.makeStatSubject("RUSSIAN"));
     }
 
     /**
@@ -77,16 +73,13 @@ public class UserStatisticTest {
      */
     @Test
     public void unfinishedTest(){
-        FakeBot fakeBot = new FakeBot();
-        Behavior behavior = new Behavior(fakeBot);
-        User user = new User(1L);
-        List<String> commands = List.of(
-                "MATHS", "/test", "/stop", "/statistic_subject");
-        for (String command : commands)
-        {
-            behavior.processCommand(user, command);
-        }
-        Assert.assertEquals("MATHS: попытка №1: ",
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+        UserStatistic statistic = new UserStatistic();
+        statistic.startGenerateStat("MATHS");
+        Assert.assertEquals("MATHS: попытка №1: Вы не дали ни одного ответа\n",
+                statistic.makeStatSubject("MATHS"));
+        Assert.assertEquals("MATHS: Вы не дали ни одного ответа\n" +
+                            "RUSSIAN: нет информации, пройдите тест.\n" +
+                            "ENGLISH: нет информации, пройдите тест.\n",
+                statistic.makeStatGeneral());
     }
 }
