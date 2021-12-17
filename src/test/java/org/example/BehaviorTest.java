@@ -2,6 +2,7 @@ package org.example;
 
 import java.util.List;
 
+import org.checkerframework.checker.units.qual.A;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -54,6 +55,20 @@ public class BehaviorTest
     }
 
     /**
+     * Тест на неправильный ответ
+     */
+    @Test
+    public void wrongAnswer(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        behavior.processCommand(user, "MATHS");
+        behavior.processCommand(user, "/test");
+        behavior.processCommand(user, "Неправильный ответ");
+        Assert.assertEquals("Вы ошиблись, верный ответ: 100",
+                fakeBot.getMessages().get(2));
+    }
+
+    /**
      * Тестирование, сохранения вопроса, на который был дан неправильный ответ
      */
     @Test
@@ -72,6 +87,50 @@ public class BehaviorTest
                 fakeBot.getMessages().get(1));
         Assert.assertEquals(questionWithWrongAnswer,
                 fakeBot.getMessages().get(6));
+    }
+
+    /**
+     * Тест на сохранение всех впопросов, на которые был дан неправильный ответ
+     */
+    @Test
+    public void saveAllWrongAnswers(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        List<String> commands = List.of("ENGLISH", "/test", "простой", "/next", "не_множество",
+                "/next", "чушь", "/next", "не_украшения", "успех", "/stop", "/repeat");
+        for (String command : commands)
+            behavior.processCommand(user, command);
+
+        Assert.assertEquals("Переведите на русский: trappings",
+                fakeBot.getMessages().get(fakeBot.getMessages().size()-1));
+        behavior.processCommand(user, "украшения");
+        behavior.processCommand(user, "/next");
+        Assert.assertEquals("Переведите на русский: plenty",
+                fakeBot.getMessages().get(fakeBot.getMessages().size()-1));
+        behavior.processCommand(user, "множество");
+        behavior.processCommand(user, "/next");
+        Assert.assertEquals("Вопросов нет. \n" +
+                        "Для продолжения отправьте /start",
+                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+    }
+
+    /**
+     * Тест на команду  /next после всех вопросов теста
+     */
+    @Test
+    public void testIsOver(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        behavior.processCommand(user, "MATHS");
+        behavior.processCommand(user, "/test");
+        for (int i = 10; i<=29; i++) {
+            behavior.processCommand(user, String.valueOf(i^2));
+            behavior.processCommand(user, "/next");
+        }
+        Assert.assertEquals("Вопросы закончились\n" +
+                        "Если хотите выйти из режима теста, введите /stop\n" +
+                        "Если хотите отработать вопросы с ошибкой, то введите /next",
+                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
     }
 
     /**
@@ -138,7 +197,6 @@ public class BehaviorTest
                 fakeBot.getKeyboard().get(1));
     }
 
-
     /**
      * Отладочный тест для проверки того, что, после прохождения теста по одному предмету, результат
      * последней попытки не переносится в статистику другого предмета (больная мозоль)
@@ -170,15 +228,15 @@ public class BehaviorTest
             behavior.processCommand(user, "timerOn");
         }
         Thread.sleep( 10 + users*20); // отправка 1 сообщения у fakeBot занимет примерно 20ms
-        String questionWithWrongAnswer = "Вас давно не было видно. Хотите пройти тест?";
-        Assert.assertEquals(questionWithWrongAnswer,
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 2));
-        Assert.assertEquals(questionWithWrongAnswer,
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 30 - 2));
+        String message = "Вас давно не было видно. Хотите пройти тест?";
+        for (int i=0; i<users; i++)
+            Assert.assertEquals(message,
+                    fakeBot.getMessages().get(fakeBot.getMessages().size() - i -1));
     }
 
     /**
      * Тест на корректное включение и получение уведомлений
+     * после смены режима с "получать"(предустановленный) -> "не получать" -> "получать"
      * @throws InterruptedException
      */
     @Test
@@ -188,8 +246,8 @@ public class BehaviorTest
         TimerBehavior.setStandardDispatchTime(10);
         behavior.processCommand(user, "timerOff");
         Thread.sleep(10 + 20);
-        Assert.assertNotEquals("Вас давно не было видно. Хотите пройти тест?",
-                fakeBot.getMessages().get(fakeBot.getMessages().size() - 1));
+        for (String message : fakeBot.getMessages())
+            Assert.assertNotEquals("Вас давно не было видно. Хотите пройти тест?", message);
         behavior.processCommand(user, "timerOn");
         Thread.sleep(10 + 20);
         Assert.assertEquals("Вас давно не было видно. Хотите пройти тест?",
