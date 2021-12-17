@@ -75,6 +75,71 @@ public class BehaviorTest
     }
 
     /**
+     * Тестирование на верное завершение режима повторения, когда вопросы закончились или не был пройден тест
+     */
+    @Test
+    public void correctEndWhenRepeating()
+    {
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        List<String> commands = List.of("MATHS", "/repeat", "MATHS", "/test", "Неправильный ответ", "/stop",
+                "MATHS", "/repeat", "100", "/next");
+        for (String command : commands)
+        {
+            behavior.processCommand(user, command);
+        }
+
+        String correctEndRepeating = "Вопросов нет. \n" +
+                            "Для продолжения отправьте /start";
+        Assert.assertEquals(correctEndRepeating,
+                fakeBot.getMessages().get(1));
+        Assert.assertEquals(correctEndRepeating,
+                fakeBot.getMessages().get(10));
+    }
+
+    /**
+     * Тестирование на корректную работу команды /back
+     */
+    @Test
+    public void correctBack()
+    {
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        List<String> commands = List.of("/start", "SUBJECT", "MATHS", "/test", "la-la-la", "/stop", "/back");
+        for (String command : commands)
+        {
+            behavior.processCommand(user, command);
+        }
+        String correctAnswerAfterBack = "Выберите предмет:";
+        Assert.assertEquals(correctAnswerAfterBack,
+                fakeBot.getMessages().get(2));
+        Assert.assertEquals(correctAnswerAfterBack,
+                fakeBot.getMessages().get(8));
+    }
+
+    /**
+     * Тестирование на корректное отображение списка предметов
+     */
+    @Test
+    public void listSubjects()
+    {
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        List<String> commands = List.of("/start", "SUBJECT");
+        for (String command : commands)
+        {
+            behavior.processCommand(user, command);
+        }
+        Assert.assertEquals("1.Математика\n" +
+                                    "2.Английский язык\n" +
+                                    "3.Русский язык\n" +
+                                    "меню\n" +
+                                    "статистика\n",
+                fakeBot.getKeyboard().get(1));
+    }
+
+
+    /**
      * Отладочный тест для проверки того, что, после прохождения теста по одному предмету, результат
      * последней попытки не переносится в статистику другого предмета (больная мозоль)
      */
