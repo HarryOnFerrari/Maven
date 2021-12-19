@@ -25,13 +25,13 @@ public class User {
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
     /** Поле статистика пользователя */
-    private UserStatistic statistic;
+    private IUserStatistic statistics;
     /** Поле количества верных ответов */
-    private int countRightAnswer = 0;
+    //private int countRightAnswer = 0;
     /** Поле количества неверных ответов */
-    private int countWrongAnswer = 0;
+    //private int countWrongAnswer = 0;
     /** Поле названия текущего учебного предмета */
-    private String currentSubject;
+    //private String currentSubject;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -41,7 +41,7 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
-                statistic.startGenerateStat(currentSubject);
+                //statistics.startGenerateStat(currentSubject);
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -50,17 +50,17 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
-                currentSubject = str;
-                link = subjects.get(currentSubject).getKey();
-                wrongAnswersList = subjects.get(currentSubject).getValue();
+                //currentSubject = str;
+                link = subjects.get(str).getKey();
+                wrongAnswersList = subjects.get(str).getValue();
                 break;
             case BACK:
                 str = "";
                 break;
             case STOP:
-                statistic.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
-                countRightAnswer = 0;
-                countWrongAnswer = 0;
+                //statistics.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
+                //countRightAnswer = 0;
+                //countWrongAnswer = 0;
                 break;
         }
         condition = str;
@@ -74,7 +74,7 @@ public class User {
         this.chatId = chatId;
         condition = "";
         reminder = new TimerBehavior(chatId);
-        statistic = new UserStatistic();
+        statistics = new UserStatistic();
         reminder.setIsAgreeReceiveNotification(true);
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
@@ -89,29 +89,29 @@ public class User {
      * Функция получения общей статистики по предметам
      * @return статистика по всем предметам, включающая только последнюю попытку по каждому предмету
      */
-    public String generalStatistic() {
-        statistic.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
-        return statistic.makeStatGeneral();
-    }
+    /*public String generalStatistic() {
+        statistics.createLastTestResult(countRightAnswer, countWrongAnswer, currentSubject);
+        return statistics.makeStatGeneral();
+    }*/
 
     /**
      * Функция получения статистики по отдельному предмету
      * @return статистика с попытками по текущему предмету
      */
-    public String subjectStatistic() {
-        return statistic.makeStatSubject(currentSubject);
-    }
+    /*public String subjectStatistic() {
+        return statistics.makeStatSubject(currentSubject);
+    }*/
 
     /**
      * Функция для сохранения результата после ответа на вопрос теста
      * @param answer true - если ответ правильный, в противном случае false
      */
-    public void isAnswerRight(Boolean answer){
+    /*public void isAnswerRight(Boolean answer){
         if (answer)
             countRightAnswer += 1;
         else
             countWrongAnswer += 1;
-    }
+    }*/
 
     /**
      * Функция сопоставления пользователей
@@ -147,9 +147,9 @@ public class User {
      * Функция получения доступа к полю {@link User#currentSubject}
      * @return название предмета
      */
-    public String getCurrentSubject() {
+    /*public String getCurrentSubject() {
         return currentSubject;
-    }
+    }*/
     /**
      * Функция получения доступа к полю {@link User#reminder}
      */
