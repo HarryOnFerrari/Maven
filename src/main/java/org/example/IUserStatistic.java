@@ -13,7 +13,7 @@ public interface IUserStatistic {
      * @param wrong - количество неверных ответов
      * @param subject - название учебного предмета
      */
-    void createLastTestResult(int right, int wrong, String subject);
+    //void createLastTestResult(int right, int wrong, String subject);
 
     /**
      * Метод приведения статистики по попыткам конкретного предмета
@@ -21,11 +21,23 @@ public interface IUserStatistic {
      * @param subject - название учебного предмета
      * @return статистика по предмету с указанием попыток
      */
-    String makeStatSubject(String subject);
+    //String makeStatSubject(String subject);
 
     /**
      * Метод создания общей сводки по всем предметам
      * @return статистика по предметам
      */
-    String makeStatGeneral();
+    //String makeStatGeneral();
+
+    /**
+     * Получение статистики конкретного предмета по пользователю
+     * @param user - пользователь, по которому необходимо вернуть статистику
+     */
+    String getSubjectStat(User user);
+
+    /**
+     * Получение статистики по последней попытке конкретного предмета по пользователю
+     * @param user - пользователь, по которому необходимо вернуть статистику
+     */
+    String getLastAttemptSubjectStat(User user);
 }
