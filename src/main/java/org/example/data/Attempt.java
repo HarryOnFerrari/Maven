@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Класс, содержащий ответы пользователя в данной попытке
+ * @author Пономарева Дарья
  */
 public class Attempt {
 

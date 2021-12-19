@@ -1,6 +1,5 @@
 package org.example;
 
-import org.example.data.Attempt;
 import org.example.data.SubjectResult;
 
 import java.util.HashMap;
@@ -31,8 +30,7 @@ public class User {
     /** Поле статистика пользователя */
     private IUserStatistic statistics;
     /** Список всех результатов по предметам */
-    private Map<String, List<Attempt>> userResults;
-    //private List<SubjectResult> userResults;
+    private List<SubjectResult> userResults;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}

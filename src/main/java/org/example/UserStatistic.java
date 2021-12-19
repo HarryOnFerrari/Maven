@@ -1,33 +1,33 @@
 package org.example;
 
+import org.example.data.SubjectResult;
+
 import java.util.*;
 
 /**
- * Класс бота для обработки данных статистики, переданных пользователем
- * Данные: предмет и кол-во верных/неверных ответов по тесту этого предмета
- * Обработка: заполнение попредметной и сведение общей статистики
+ * Класс для формирования вывода статистики прохождения тестов по предметам пользователем
  *
  * @author Бабакова Анастасия(немножко), Пономарева Дарья(множко).
  */
 public class UserStatistic implements IUserStatistic {
 
     /**
-     * Получение статистики конкретного предмета по пользователю
-     *
-     * @param user - пользователь, по которому необходимо вернуть статистику
+     * Получение статистики  прохождения тестов по конкретному предмету
+     * @param subjectResult - результаты прохождения теста по одному из предметов
+     * @return
      */
     @Override
-    public String getSubjectStat(User user) {
+    public String getSubjectStat(SubjectResult subjectResult) {
         return null;
     }
 
     /**
-     * Получение статистики по последней попытке конкретного предмета по пользователю
-     *
-     * @param user - пользователь, по которому необходимо вернуть статистику
+     * Получение статистики по последней попытке каждого предмета
+     * @param allResults - список с попытками всех предметов
+     * @return
      */
     @Override
-    public String getLastAttemptSubjectStat(User user) {
+    public String getLastAttemptSubjectStat(List<SubjectResult> allResults) {
         return null;
     }
 }

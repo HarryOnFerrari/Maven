@@ -5,6 +5,7 @@ import java.util.List;
 
 /**
  * Класс, содержащий список попыток по данному предмету
+ * @author Пономарева Дарья, Бабакова настасия
  */
 public class SubjectResult {
 
@@ -18,8 +19,14 @@ public class SubjectResult {
 
     }
 
+    /** Конструктор класса */
     public SubjectResult(String subjectName, List<Attempt> attempts) {
         this.subjectName = subjectName;
         this.attempts = attempts;
+    }
+
+    /** Функция добавления новой попытки в список попыток по конкетному предмету */
+    public void add(Attempt newAttempt){
+        attempts.add(newAttempt);
     }
 }
