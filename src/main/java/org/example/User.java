@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.data.SubjectResult;
+import org.example.data.Attempt;
 
 import java.util.HashMap;
 import java.util.List;
@@ -28,12 +28,27 @@ public class User {
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
 
-    public List<SubjectResult> getUserResults() {
+    public String getStatistic(String subject) {
+        return statistic.getSubjectStat(userResults.get(subject));
+    }
+    public String getStatistic() {
+        return statistic.getLastAttemptSubjectStat(userResults);
+    }
+
+    private IUserStatistic statistic = new UserStatistic();
+
+    public String getCurrentSubject() {
+        return currentSubject;
+    }
+
+    private String currentSubject;
+
+    public Map<String, List<Attempt>> getUserResults() {
         return userResults;
     }
 
     /** Список всех результатов по предметам */
-    private List<SubjectResult> userResults;
+    private Map<String, List<Attempt>> userResults;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -51,8 +66,9 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
-                link = subjects.get(str).getKey();
-                wrongAnswersList = subjects.get(str).getValue();
+                currentSubject = str;
+                link = subjects.get(currentSubject).getKey();
+                wrongAnswersList = subjects.get(currentSubject).getValue();
                 break;
             case BACK:
                 str = "";

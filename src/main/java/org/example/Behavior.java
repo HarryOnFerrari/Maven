@@ -98,10 +98,11 @@ public class Behavior{
                 bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case STATISTIC_GENERAL:
-                bot.sendMessage(user.getChatId(), new UserStatistic().getLastAttemptSubjectStat(user.getUserResults()));
+                bot.sendMessage(user.getChatId(), user.getStatistic());
                 break;
             case STATISTIC_SUBJECT:
-                bot.sendMessage(user.getChatId(), new UserStatistic().getSubjectStat(user.getUserResults()));
+                String subject = user.getCurrentSubject();
+                bot.sendMessage(user.getChatId(), user.getStatistic(subject));
                 break;
             default:
                 checkFalseCommand(user, command);

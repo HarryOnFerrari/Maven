@@ -1,6 +1,6 @@
 package org.example;
 
-import org.example.data.SubjectResult;
+import org.example.data.Attempt;
 
 import java.util.*;
 
@@ -13,11 +13,11 @@ public class UserStatistic implements IUserStatistic {
 
     /**
      * Получение статистики  прохождения тестов по конкретному предмету
-     * @param subjectResult - результаты прохождения теста по одному из предметов
+     * @param attempts - результаты прохождения теста по одному из предметов
      * @return
      */
     @Override
-    public String getSubjectStat(SubjectResult subjectResult) {
+    public String getSubjectStat(List<Attempt> attempts) {
         return null;
     }
 
@@ -27,7 +27,7 @@ public class UserStatistic implements IUserStatistic {
      * @return
      */
     @Override
-    public String getLastAttemptSubjectStat(List<SubjectResult> allResults) {
+    public String getLastAttemptSubjectStat(Map<String, List<Attempt>> allResults) {
         return null;
     }
 }
