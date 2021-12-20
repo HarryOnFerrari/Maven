@@ -1,8 +1,10 @@
 package org.example;
 
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
+import org.example.data.Answer;
 import org.example.utils.FileHTMLUtils;
 
 import static org.example.constants.CommandConstants.TEST_END;
@@ -22,7 +24,6 @@ public class Testing {
     private String answer;
     /** Поле последнего заданного вопроса */
     private String question;
-
     /**
      * Функция получения значения поля {@link Testing#answer}
      * @return возвращает ответ на текущий вопрос теста
@@ -33,6 +34,9 @@ public class Testing {
 
     /** Поле формулировки задания */
     String key;
+
+    private List<Answer> answers = new LinkedList<>();
+    public List<Answer> getAnswers(){return answers;}
 
     /**
      * Конструктор - создание нового теста
@@ -76,7 +80,9 @@ public class Testing {
     /**
      * Функция для сохранения вопроса и ответа на него
      */
-    public void saveQuestion(){
-        wrongUsersList.put(question, answer);
+    public void isAnswerRight(boolean bool){
+        if (!bool)
+            wrongUsersList.put(question, answer);
+        answers.add(new Answer(question, answer, bool));
     }
 }

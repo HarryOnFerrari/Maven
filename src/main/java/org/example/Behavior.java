@@ -131,13 +131,12 @@ public class Behavior{
      * @param command - сообщение от пользователя
      */
     private void checkTestAnswer(User user, String command){
-        if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
+        boolean isAnswerTrue = command.equalsIgnoreCase(user.getTestes().getAnswer());
+        if (isAnswerTrue)
             bot.sendMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
-        }
-        else {
-            user.getTestes().saveQuestion();
+        else
             bot.sendMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
-        }
+        user.getTestes().isAnswerRight(isAnswerTrue);
     }
 
 }

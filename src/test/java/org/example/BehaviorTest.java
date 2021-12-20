@@ -134,6 +134,19 @@ public class BehaviorTest
     }
 
     /**
+     * Тест на корректный ответ по команде /repeat, если пользователь не проходил тесты
+     */
+    @Test
+    public void emptyRepeatListTest(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        behavior.processCommand(user,"MATHS");
+        behavior.processCommand(user, "/repeat");
+        Assert.assertEquals("Вопросов нет. \nДля продолжения отправьте /start",
+                fakeBot.getMessages().get(1));
+    }
+
+    /**
      * Тестирование на верное завершение режима повторения, когда вопросы закончились или не был пройден тест
      */
     @Test
