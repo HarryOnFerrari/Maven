@@ -3,6 +3,7 @@ package org.example;
 import org.example.data.Attempt;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,9 +32,8 @@ public class User {
     private String currentSubject;
     /** Список всех результатов по предметам */
     private Map<String, List<Attempt>> userResults;
-    /***/
+    /** Составитель статистики пользователя */
     private IUserStatistic statistic = new UserStatistic();
-
     public String getStatistic(String subject) {
         return statistic.getSubjectStat(userResults.get(subject), subject);
     }
@@ -49,6 +49,9 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
+                int attemptNumber = userResults.get(currentSubject).size() + 1;
+                userResults.get(currentSubject).add(
+                        new Attempt(String.valueOf(attemptNumber), testes.getAnswers()));
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -79,12 +82,14 @@ public class User {
         condition = "";
         reminder = new TimerBehavior(chatId);
         reminder.setIsAgreeReceiveNotification(true);
+        userResults = new HashMap<>();
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(),  Map.entry(
                     sub.value(),
                     new HashMap<>()
             ));
+            userResults.put(sub.toString(), new LinkedList<>());
         }
     }
 

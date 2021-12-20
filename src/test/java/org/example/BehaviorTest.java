@@ -140,6 +140,7 @@ public class BehaviorTest
     public void emptyRepeatListTest(){
         FakeBot fakeBot = new FakeBot();
         Behavior behavior = new Behavior(fakeBot);
+        user = new User(0L);
         behavior.processCommand(user,"MATHS");
         behavior.processCommand(user, "/repeat");
         Assert.assertEquals("Вопросов нет. \nДля продолжения отправьте /start",
@@ -223,7 +224,7 @@ public class BehaviorTest
         for (String command : commands){
             behavior.processCommand(user, command);
         }
-        Assert.assertEquals("ENGLISH: Информации нет. Пройдите тест.",
+        Assert.assertEquals("ENGLISH: нет информации, пройдите тест.\n",
                 fakeBot.getMessages().get(fakeBot.getMessages().size()-1));
     }
 

@@ -21,7 +21,7 @@ public class UserStatistic implements IUserStatistic {
     @Override
     public String getSubjectStat(List<Attempt> attempts, String subject) {
         if (attempts.size() == 0) {
-            return subject + ": Информации нет. Пройдите тест.";
+            return subject + ": нет информации, пройдите тест.\n";
         }
         StringBuilder statSubject = new StringBuilder();
         int right = 0;
@@ -37,9 +37,12 @@ public class UserStatistic implements IUserStatistic {
             statSubject.append(subject)
                     .append(": попытка №")
                     .append(attempt.getAttempt())
-                    .append(": ")
-                    .append(right).append(" - правильных, ")
-                    .append(wrong).append(" - неправильных\n");
+                    .append(": ");
+            if (right == 0 && wrong == 0)
+                statSubject.append("Вы не дали ни одного ответа\n");
+            else
+                statSubject.append(right).append(" - правильных, ")
+                        .append(wrong).append(" - неправильных\n");
             right = 0;
             wrong = 0;
         }
@@ -71,9 +74,12 @@ public class UserStatistic implements IUserStatistic {
                     }
                 }
                 statAllSubject .append(subject)
-                        .append(": ")
-                        .append(right).append(" - правильных, ")
-                        .append(wrong).append(" - неправильных\n");
+                        .append(": ");
+                if (right == 0 && wrong == 0)
+                    statAllSubject.append("Вы не дали ни одного ответа\n");
+                else
+                    statAllSubject.append(right).append(" - правильных, ")
+                            .append(wrong).append(" - неправильных\n");
             }
         }
         return statAllSubject.toString();
