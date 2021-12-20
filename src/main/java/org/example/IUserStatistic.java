@@ -14,8 +14,9 @@ public interface IUserStatistic {
     /**
      * Получение статистики конкретного предмета
      * @param attempts - результаты прохождения теста по одному из предметов
+     * @param subject - название предмета
      */
-    String getSubjectStat(List<Attempt> attempts);
+    String getSubjectStat(List<Attempt> attempts, String subject);
 
     /**
      * Получение статистики по последней попытке каждого предмета

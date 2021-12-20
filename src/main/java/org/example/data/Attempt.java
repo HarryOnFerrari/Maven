@@ -9,6 +9,22 @@ import java.util.List;
  */
 public class Attempt {
 
+    public String getAttempt() {
+        return attempt;
+    }
+
+    public void setAttempt(String attempt) {
+        this.attempt = attempt;
+    }
+
+    public List<Answer> getAnswers() {
+        return answers;
+    }
+
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
+    }
+
     /** Номер попытки */
     private String attempt;
 

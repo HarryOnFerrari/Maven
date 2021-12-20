@@ -27,28 +27,19 @@ public class User {
     private Map<String, Map.Entry<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
+    /** Поле названия текущего учебного предмета */
+    private String currentSubject;
+    /** Список всех результатов по предметам */
+    private Map<String, List<Attempt>> userResults;
+    /***/
+    private IUserStatistic statistic = new UserStatistic();
 
     public String getStatistic(String subject) {
-        return statistic.getSubjectStat(userResults.get(subject));
+        return statistic.getSubjectStat(userResults.get(subject), subject);
     }
     public String getStatistic() {
         return statistic.getLastAttemptSubjectStat(userResults);
     }
-
-    private IUserStatistic statistic = new UserStatistic();
-
-    public String getCurrentSubject() {
-        return currentSubject;
-    }
-
-    private String currentSubject;
-
-    public Map<String, List<Attempt>> getUserResults() {
-        return userResults;
-    }
-
-    /** Список всех результатов по предметам */
-    private Map<String, List<Attempt>> userResults;
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -148,5 +139,19 @@ public class User {
      */
     public Testing getTestes() {
         return testes;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#currentSubject}
+     */
+    public String getCurrentSubject() {
+        return currentSubject;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#userResults}
+     */
+    public Map<String, List<Attempt>> getUserResults() {
+        return userResults;
     }
 }

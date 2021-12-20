@@ -1,13 +1,10 @@
 package org.example;
 
 import org.example.data.Attempt;
-import org.example.data.SubjectResult;
 import org.junit.Assert;
 import org.junit.Test;
 
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 
 /**
  * Класс тестов для задачи 5
@@ -20,11 +17,10 @@ public class Task5Test {
     /**
      * Функция инициализации аналога поля {@link User#userResults}
      */
-    public List<SubjectResult> initMap(){
-        List<SubjectResult> statistic = new LinkedList<>();
+    public Map<String, List<Attempt>> initMap(){
+        Map<String, List<Attempt>> statistic = new LinkedHashMap<>();
         for (Subjects subject : Subjects.values()){
-            SubjectResult result = new SubjectResult(subject.toString(), new LinkedList<>());
-            statistic.add(result);
+            statistic.put(subject.toString(), new LinkedList<>());
         }
         return statistic;
     }
@@ -83,15 +79,16 @@ public class Task5Test {
      */
     @Test
     public void testGeneralStatistic(){
-        List<SubjectResult> information = initMap();
+        Map<String, List<Attempt>> information = initMap();
         Testing testMath = new Testing(true, new HashMap<>(), Subjects.MATHS.value());
         testMath.newLine();
         testMath.isAnswerRight(false);
-        SubjectResult maths = new SubjectResult("MATHS",
+        Map.Entry maths = Map.entry("MATHS",
                 List.of(new Attempt("1", testMath.getAnswers())));
-        SubjectResult rus = new SubjectResult("RUSSIAN", null);
-        SubjectResult eng = new SubjectResult("ENGLISH", null);
-        information.addAll(List.of(maths, rus, eng));
+        Map.Entry rus = Map.entry("RUSSIAN", null);
+        Map.Entry eng = Map.entry("ENGLISH", null);
+        //information.put(List.of(maths, rus, eng));
+        information.put(maths.getKey().toString(), List.of(maths.getValue()));
         Assert.assertEquals("MATHS: 0 - правильных, 1 - неправильных\n" +
                 "RUSSIAN: нет информации, пройдите тест.\n" +
                 "ENGLISH: нет информации, пройдите тест.\n",
