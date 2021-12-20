@@ -38,8 +38,8 @@ public class UserStatistic implements IUserStatistic {
                     .append(": попытка №")
                     .append(attempt.getAttempt())
                     .append(": ")
-                    .append(right).append(" - правильных; ")
-                    .append(wrong).append(" - неправильных; ");
+                    .append(right).append(" - правильных, ")
+                    .append(wrong).append(" - неправильных\n");
             right = 0;
             wrong = 0;
         }
@@ -57,12 +57,12 @@ public class UserStatistic implements IUserStatistic {
         StringBuilder statAllSubject = new StringBuilder();
         for (String subject : allResults.keySet()) {
             if (allResults.get(subject).size() == 0) {
-                statAllSubject.append(subject).append(": Информации нет. Пройдите тест.");
+                statAllSubject.append(subject).append(": нет информации, пройдите тест.\n");
             } else {
                 int right = 0;
                 int wrong = 0;
                 int countAttempt = allResults.get(subject).size();
-                Attempt lastAttempt = allResults.get(subject).get(countAttempt);
+                Attempt lastAttempt = allResults.get(subject).get(countAttempt-1);
                 for (Answer answer : lastAttempt.getAnswers()) {
                     if (answer.isCorrect()) {
                         right++;
@@ -72,8 +72,8 @@ public class UserStatistic implements IUserStatistic {
                 }
                 statAllSubject .append(subject)
                         .append(": ")
-                        .append(right).append(" - правильных; ")
-                        .append(wrong).append(" - неправильных; ");
+                        .append(right).append(" - правильных, ")
+                        .append(wrong).append(" - неправильных\n");
             }
         }
         return statAllSubject.toString();
