@@ -85,7 +85,8 @@ public class Task5Test {
     public void testGeneralStatistic(){
         List<SubjectResult> information = initMap();
         Testing testMath = new Testing(true, new HashMap<>(), Subjects.MATHS.value());
-        testMath.newLine(); testMath.isAnswerRight(false);
+        testMath.newLine();
+        testMath.isAnswerRight(false);
         SubjectResult maths = new SubjectResult("MATHS",
                 List.of(new Attempt("1", testMath.getAnswers())));
         SubjectResult rus = new SubjectResult("RUSSIAN", null);
