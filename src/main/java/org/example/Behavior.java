@@ -98,10 +98,11 @@ public class Behavior{
                 bot.sendMessageWithButtons(user.getChatId(), MENU_MODE, "MENU_BOARD");
                 break;
             case STATISTIC_GENERAL:
-                bot.sendMessage(user.getChatId(), new UserStatistic().getLastAttemptSubjectStat(user.getUserResults()));
+                bot.sendMessage(user.getChatId(), user.getStatistic());
                 break;
             case STATISTIC_SUBJECT:
-                bot.sendMessage(user.getChatId(), new UserStatistic().getSubjectStat(user.getUserResults()));
+                String subject = user.getCurrentSubject();
+                bot.sendMessage(user.getChatId(), user.getStatistic(subject));
                 break;
             default:
                 checkFalseCommand(user, command);
@@ -130,13 +131,12 @@ public class Behavior{
      * @param command - сообщение от пользователя
      */
     private void checkTestAnswer(User user, String command){
-        if (command.equalsIgnoreCase(user.getTestes().getAnswer())) {
+        boolean isAnswerTrue = command.equalsIgnoreCase(user.getTestes().getAnswer());
+        if (isAnswerTrue)
             bot.sendMessageWithButtons(user.getChatId(), RIGHT_ANSWER, "TEST_BOARD");
-        }
-        else {
-            user.getTestes().saveQuestion();
+        else
             bot.sendMessageWithButtons(user.getChatId(),WRONG_ANSWER + user.getTestes().getAnswer(), "TEST_BOARD");
-        }
+        user.getTestes().isAnswerRight(isAnswerTrue);
     }
 
 }

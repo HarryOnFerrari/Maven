@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -134,6 +133,20 @@ public class BehaviorTest
     }
 
     /**
+     * Тест на корректный ответ по команде /repeat, если пользователь не проходил тесты
+     */
+    @Test
+    public void emptyRepeatListTest(){
+        FakeBot fakeBot = new FakeBot();
+        Behavior behavior = new Behavior(fakeBot);
+        user = new User(0L);
+        behavior.processCommand(user,"MATHS");
+        behavior.processCommand(user, "/repeat");
+        Assert.assertEquals("Вопросов нет. \nДля продолжения отправьте /start",
+                fakeBot.getMessages().get(1));
+    }
+
+    /**
      * Тестирование на верное завершение режима повторения, когда вопросы закончились или не был пройден тест
      */
     @Test
@@ -210,7 +223,7 @@ public class BehaviorTest
         for (String command : commands){
             behavior.processCommand(user, command);
         }
-        Assert.assertEquals("ENGLISH: Информации нет. Пройдите тест.",
+        Assert.assertEquals("ENGLISH: нет информации, пройдите тест.\n",
                 fakeBot.getMessages().get(fakeBot.getMessages().size()-1));
     }
 

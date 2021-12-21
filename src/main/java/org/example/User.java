@@ -1,8 +1,9 @@
 package org.example;
 
-import org.example.data.SubjectResult;
+import org.example.data.Attempt;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,13 +28,29 @@ public class User {
     private Map<String, Map.Entry<String, Map<String, String>>> subjects;
     /** Поле поведения таймера напоминаний */
     private TimerBehavior reminder;
+    /** Поле названия текущего учебного предмета */
+    private String currentSubject;
+    /** Список всех результатов по предметам */
+    private Map<String, List<Attempt>> userResults;
+    /** Составитель статистики пользователя */
+    private IUserStatistic statistic = new UserStatistic();
 
-    public List<SubjectResult> getUserResults() {
-        return userResults;
+    /**
+     * Функция запрашивающая статистику по предмету
+     * @param subject - название учебного предмета
+     * @return статистика по попыткам в рамках одного учебного предмета
+     */
+    public String getStatistic(String subject) {
+        return statistic.getSubjectStat(userResults.get(subject), subject);
     }
 
-    /** Список всех результатов по предметам */
-    private List<SubjectResult> userResults;
+    /**
+     * Функция запрашивающая общую статистику по всем предметам
+     * @return статистика по всем предметам, включающая только последнюю попытку
+     */
+    public String getStatistic() {
+        return statistic.getLastAttemptSubjectStat(userResults);
+    }
 
     /**
      * Процедура определения состояния пользователя {@link User#condition}
@@ -43,6 +60,9 @@ public class User {
         switch (str) {
             case TEST:
                 testes = new Testing(true, wrongAnswersList, link);
+                int attemptNumber = userResults.get(currentSubject).size() + 1;
+                userResults.get(currentSubject).add(
+                        new Attempt(String.valueOf(attemptNumber), testes.getAnswers()));
                 break;
             case REPEAT:
                 testes = new Testing(false, wrongAnswersList, link);
@@ -51,8 +71,9 @@ public class User {
             case "MATHS":
             case "RUSSIAN":
             case "ENGLISH":
-                link = subjects.get(str).getKey();
-                wrongAnswersList = subjects.get(str).getValue();
+                currentSubject = str;
+                link = subjects.get(currentSubject).getKey();
+                wrongAnswersList = subjects.get(currentSubject).getValue();
                 break;
             case BACK:
                 str = "";
@@ -72,12 +93,14 @@ public class User {
         condition = "";
         reminder = new TimerBehavior(chatId);
         reminder.setIsAgreeReceiveNotification(true);
+        userResults = new HashMap<>();
         subjects = new HashMap<>();
         for (Subjects sub: Subjects.values()) {
             subjects.put(sub.toString(),  Map.entry(
                     sub.value(),
                     new HashMap<>()
             ));
+            userResults.put(sub.toString(), new LinkedList<>());
         }
     }
 
@@ -132,5 +155,19 @@ public class User {
      */
     public Testing getTestes() {
         return testes;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#currentSubject}
+     */
+    public String getCurrentSubject() {
+        return currentSubject;
+    }
+
+    /**
+     * Функция получения доступа к полю {@link User#userResults}
+     */
+    public Map<String, List<Attempt>> getUserResults() {
+        return userResults;
     }
 }

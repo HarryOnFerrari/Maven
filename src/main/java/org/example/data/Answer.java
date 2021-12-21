@@ -2,6 +2,7 @@ package org.example.data;
 
 /**
  * Класс, содержащий ответ пользователя на вопрос в текущей попытке
+ * @author Пономарева Дарья, Бабакова Анастасия
  */
 public class Answer {
 
@@ -23,4 +24,16 @@ public class Answer {
         this.answer = answer;
         this.isCorrect = isCorrect;
     }
+
+    public String getQuestion() { return question; }
+
+    public void setQuestion(String question) { this.question = question; }
+
+    public String getAnswer() { return answer; }
+
+    public void setAnswer(String answer) { this.answer = answer; }
+
+    public boolean isCorrect() { return isCorrect; }
+
+    public void setCorrect(boolean correct) { isCorrect = correct; }
 }
