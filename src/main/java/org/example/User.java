@@ -34,9 +34,20 @@ public class User {
     private Map<String, List<Attempt>> userResults;
     /** Составитель статистики пользователя */
     private IUserStatistic statistic = new UserStatistic();
+
+    /**
+     * Функция запрашивающая статистику по предмету
+     * @param subject - название учебного предмета
+     * @return статистика по попыткам в рамках одного учебного предмета
+     */
     public String getStatistic(String subject) {
         return statistic.getSubjectStat(userResults.get(subject), subject);
     }
+
+    /**
+     * Функция запрашивающая общую статистику по всем предметам
+     * @return статистика по всем предметам, включающая только последнюю попытку
+     */
     public String getStatistic() {
         return statistic.getLastAttemptSubjectStat(userResults);
     }

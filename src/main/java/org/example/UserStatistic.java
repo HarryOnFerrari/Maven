@@ -16,7 +16,7 @@ public class UserStatistic implements IUserStatistic {
      * Получение статистики  прохождения тестов по конкретному предмету
      * @param attempts - результаты прохождения теста по одному из предметов
      * @param subject - название предмета
-     * @return
+     * @return статистика с попытками по предмету "предмет - № попытки- результат"
      */
     @Override
     public String getSubjectStat(List<Attempt> attempts, String subject) {
@@ -24,9 +24,10 @@ public class UserStatistic implements IUserStatistic {
             return subject + ": нет информации, пройдите тест.\n";
         }
         StringBuilder statSubject = new StringBuilder();
-        int right = 0;
-        int wrong = 0;
+
         for (Attempt attempt : attempts) {
+            int right = 0;
+            int wrong = 0;
             for (Answer answer : attempt.getAnswers()) {
                 if (answer.isCorrect()) {
                     right++;
@@ -35,16 +36,14 @@ public class UserStatistic implements IUserStatistic {
                 }
             }
             statSubject.append(subject)
-                    .append(": попытка №")
-                    .append(attempt.getAttempt())
-                    .append(": ");
+                       .append(": попытка №")
+                       .append(attempt.getAttempt())
+                       .append(": ");
             if (right == 0 && wrong == 0)
                 statSubject.append("Вы не дали ни одного ответа\n");
             else
                 statSubject.append(right).append(" - правильных, ")
-                        .append(wrong).append(" - неправильных\n");
-            right = 0;
-            wrong = 0;
+                           .append(wrong).append(" - неправильных\n");
         }
         return statSubject.toString();
     }
@@ -53,7 +52,7 @@ public class UserStatistic implements IUserStatistic {
     /**
      * Получение статистики по последней попытке каждого предмета
      * @param allResults - список с попытками всех предметов
-     * @return
+     * @return общая статистика "предмет - последний результат"
      */
     @Override
     public String getLastAttemptSubjectStat(Map<String, List<Attempt>> allResults) {
@@ -79,7 +78,7 @@ public class UserStatistic implements IUserStatistic {
                     statAllSubject.append("Вы не дали ни одного ответа\n");
                 else
                     statAllSubject.append(right).append(" - правильных, ")
-                            .append(wrong).append(" - неправильных\n");
+                                  .append(wrong).append(" - неправильных\n");
             }
         }
         return statAllSubject.toString();

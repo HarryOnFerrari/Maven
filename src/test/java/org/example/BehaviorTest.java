@@ -2,7 +2,6 @@ package org.example;
 
 import java.util.List;
 
-import org.checkerframework.checker.units.qual.A;
 import org.junit.Assert;
 import org.junit.BeforeClass;
 import org.junit.Test;
